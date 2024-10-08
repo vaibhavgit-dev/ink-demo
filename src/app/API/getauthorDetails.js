@@ -737,19 +737,4 @@
 //       "twitter.com/yourprofile",
 //     ],
 //   },
-//   {
-//     id: 50,
-//     slug: "pariksith-singh",
-//     authorName: "Pariksith Singh", 
-//     authorImage: "https://bluone.ink/wp-content/uploads/2023/06/Dr.-Pariksith-Singh-300x400.jpg",
-//     authorDescription:
-//       "Lucas Lee is a bestselling author of thrillers that keep readers on the edge of their seats...",
-//     authorSocial: [
-//       "linkedin.com/in/yourprofile",
-//       "facebook.com/yourprofile",
-//       "instagram.com/yourprofile",
-//       "youtube.com/c/yourchannel",
-//       "twitter.com/yourprofile",
-//     ],
-//   },
 // ]
