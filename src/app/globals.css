@@ -61,9 +61,7 @@ html {
   .text-3xl, /* Hides the main heading */
   .flex.flex-wrap.space-x-4.md\:space-x-6.justify-center.text-sm.md\:text-xl.pt-5.pb-6.font-light,
   .flex.flex-wrap.gap-2.justify-center.text-sm.md\:text-2xl.space-x-4.md\:space-x-8.pt-5.font-normal,
-  .flex.flex-wrap.justify-center.text-xs.md\:text-base.font-light.pt-4.space-x-4.md\:space-x-6 {
-      display: none; /* Hide the specified elements */
-  }
+  .flex.flex-wrap.justify-center.text-xs.md\:text-base.font-light.pt-4.space-x-4.md\:space-x-6 {display: none;}
 }
   /* Show only the essential elements */
   .relative.z-10.flex.flex-col.items-center {
@@ -78,7 +76,8 @@ html {
   background-image: url('../app/assests/image/bg_design.png'); 
   background-repeat: no-repeat;
   background-size: 70%;
-  background-position: 100% 60%; /* Position the image */
+  background-position: 100% 100%; /* Position the image */
+  background-attachment: fixed;
 }
 .navmain{
   background-image: url('../app/assests/image/bg_navbar.png'); 

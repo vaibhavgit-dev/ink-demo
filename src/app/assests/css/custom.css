@@ -9,16 +9,27 @@ html
 
 body {
     font-family: 'IBM Plex Serif', serif;
+    color: #0D1928;
+}
+p {
+  margin-top: 0 !important;
+  margin-bottom: 1rem !important;
+  font-size: 20px;
 }
 
 ul, li, span {
   font-family: "Barlow", sans-serif;
 }
+
 .font-barlow{
   font-family: "Barlow", sans-serif;
 }
 .font-ibm{
   font-family: 'IBM Plex Serif', serif;
+}
+.shadow-lg {
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.25) !important;
+  border: 1px solid rgba(186, 186, 186, 1) !important;
 }
 /* .container {
     height: 100%;
@@ -178,24 +189,32 @@ input[type="checkbox"]:checked::after {
   height: 100%;
 }
 
-
+/* Home Page */
+/* .slide_1{background: url('../image/author.png');     background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center; width: 100%;} */
+/* Home Page End */
 
 /* Single Book Page */
-.banner .item img {
-  height: 400px;
-  width: 100%;
-}
+.banner .item img {height: 400px; width: 100%;}
+.about-book{position: relative; padding-bottom: 13% !important;}
+.about-book .curve_img{position: absolute; bottom: 0px; left: 0px; width: 100%;}
+.about-book .curve_img img{width: 100%;}
+
+.about-author {position: relative;}
+.about-author .curve_img {position: absolute; left: 0; top: 0; width: 100%;}
 /* End */
+
+/* Fixed Aside */
+.aside_fixed{position: fixed !important; top: 50% !important; left: 90px !important; transform: translate(-50%, -50%);
+  z-index: 999; padding: 20px; width: 180px; border-radius: 0px 10px 10px 0px; background: #fff;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.25); border: 1px solid #BABABA; border-left: 0px;}
 
 .custom-clip {
   clip-path: path("M876.801 88.3424C895.86 87.8641 912 102.896 912 121.962V907C912 929.091 894.091 947 872 947H40C17.9086 947 0 929.091 0 907V76.0798C0 61.3457 8.04571 47.6894 21.3207 41.2966C28.6518 37.7662 36.1808 34.3485 43.932 31.0624C63.957 23.219 85.3042 16.3729 108.044 10.9483C130.276 6.37244 153.376 3.1969 176.951 1.25904C210.63 -0.700035 244.585 -0.268616 278.215 1.83191C331.6 6.04003 383.325 14.2724 433.854 24.1951C529.361 42.9371 621.531 67.3937 721.218 79.6998C771.825 85.9448 824.751 89.6508 876.801 88.3424Z");
   background-color: #FF81001A;
 }
-p {
-  margin-top: 0 !important;
-  margin-bottom: 1rem !important;
-  font-size: 20px;
-}
+
 
 
 @media (min-width: 1536px) {

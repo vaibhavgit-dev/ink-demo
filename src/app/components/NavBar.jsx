@@ -17,7 +17,7 @@ function NavBar() {
   const isActive = (path) => pathname === path ? 'text-[#FFDE7C]' : 'text-white';
 
   return (
-    <div className="navmain w-full fixed h-[60px] z-[1111]  bg-[#241b6d] bg-no-repeat bg-right bg-contain mx-auto flex justify-between items-center">
+    <div id="navbar" className="navmain w-full fixed h-[60px] z-[1111]  bg-[#241b6d] bg-no-repeat bg-right bg-contain mx-auto flex justify-between items-center">
       <div className="lg:hidden md:hidden p-5">
         <Link href="/">
           <Image src={navbarLogo} alt="Logo" width={0} height={40} />
@@ -33,8 +33,8 @@ function NavBar() {
         <li>
           <Link href="/"><Image src={navbarLogo} alt="Logo" width={0} height={40} className="hidden md:block lg:block" /></Link>
         </li>
-        <li className={`hover:text-[#FFDE7C] ${isActive('/comingsoonblogs')} `}>
-          <Link href="/comingsoon"><i className="ifont">Blogs</i ></Link>
+        <li className={`hover:text-[#FFDE7C] ${isActive('/resources')} `}>
+          <Link href="/resources"><i className="ifont">Resources</i ></Link>
         </li>
         <li className={`hover:text-[#FFDE7C] ${isActive('/contact')} `}>
           <Link href="/contact"><i className="ifont">Contact</i ></Link>
@@ -56,10 +56,10 @@ function NavBar() {
               <Link href="/books"><em>Books</em></Link>
             </li>
             <li className={isActive('/comingsoonblogs')}>
-              <Link href="/comingsoon"><em>Blogs</em></Link>
+              <Link href="/comingsoon"><em>Resources</em></Link>
             </li>
             <li className={isActive('/comingsooncontactus')}>
-              <Link href="/comingsoon"><em>Contact</em></Link>
+              <Link href="/contact"><em>Contact</em></Link>
             </li>
           </ul>
         </div>

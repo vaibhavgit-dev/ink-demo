@@ -1,8 +1,6 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import NavBar from "./components/NavBar";
-import { BooksDetails } from "./API/getbookDetails";
 import FictionImg from "@/app/assests/image/Fiction.png";
 import NonFictionImg from "@/app/assests/image/Non-fiction.png";
 import ChildrenImg from "@/app/assests/image/children.png";
@@ -16,6 +14,7 @@ import BannerSlider from "./components/BannerSlider";
 import inkdouble1 from "@/app/assests/image/inkdouble1.svg";
 import inkdouble2 from "@/app/assests/image/inkdouble2.svg";
 import Loader from "./components/Loader";
+import { BooksDetails } from "./API/getbookDetails";
 
 export default function Home() {
   // Helper function to group books by publishYear
@@ -174,7 +173,7 @@ export default function Home() {
                     height={0}
                     className=""
                   />
-                  <Link href="/comingsoon">
+                  <Link href="/books">
                     <div className="absolute inset-0 flex justify-center items-center">
                       <span className="text-white font-medium text-lg md:text-[40px] ">
                         FICTION
@@ -192,7 +191,7 @@ export default function Home() {
                     height={0}
                     className=""
                   />
-                  <Link href="/comingsoon">
+                  <Link href="/books">
                     <div className="absolute inset-0 flex justify-center items-center">
                       <span className="text-white font-medium text-lg md:text-[40px]">
                         NON-FICTION
@@ -210,7 +209,7 @@ export default function Home() {
                     height={0}
                     className=""
                   />
-                  <Link href="/comingsoon">
+                  <Link href="/books">
                     <div className="absolute inset-0 flex justify-center items-center">
                       <span className="text-white font-medium text-lg md:text-[40px]">
                         CHILDREN
@@ -221,7 +220,7 @@ export default function Home() {
               </div>
             </section>
             <section className="container event mt-[80px] pb-[60px]">
-              <div className="flex items-center justify-center gap-2 pb-[18px] ">
+              <div className="flex items-center justify-center gap-2 pb-6 ">
                 <Image
                   src={inkdouble1}
                   width={55}
@@ -229,7 +228,7 @@ export default function Home() {
                   className=""
                 ></Image>
                 <i>
-                  <h3 className="text-center font-medium ">
+                  <h3 className="text-center font-semibold">
                     Events We’ve Been A Part Of
                   </h3>
                 </i>
@@ -241,9 +240,9 @@ export default function Home() {
                 ></Image>
               </div>
               <div className="w-full max-w-[650px] mx-auto">
-                <div className="flex items-center gap-10 self-center justify-center">
+                <div className="flex items-center gap-24 justify-center">
                   {/* JLF */}
-                  <div className="relative overflow-hidden w-full h-[200px] flex justify-center">
+                  <div className="relative overflow-hidden w-full flex justify-center">
                     <Link
                       href="https://jaipurliteraturefestival.org/"
                       target="blank"

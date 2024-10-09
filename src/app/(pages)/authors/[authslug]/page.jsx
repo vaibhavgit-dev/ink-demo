@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { AuthorsList } from "@/app/API/allAuthorList";
-import { BooksDetails } from "@/app/API/getbookDetails";
+import { BooksList } from "@/app/API/allBookList";
 import inkdouble1 from "@/app/assests/image/inkdouble1.svg";
 import inkdouble2 from "@/app/assests/image/inkdouble2.svg";
 import Image from "next/image";
@@ -9,6 +9,7 @@ import BooksCards from "../../books/BooksCards";
 import bgauthor from "@/app/assests/image/authors-back.svg";
 import Loader from "@/app/components/Loader";
 import Link from "next/link";
+import { BooksDetails } from "@/app/API/getbookDetails";
 
 const Page = ({ params }) => {
   const { authslug } = params;
@@ -20,7 +21,7 @@ const Page = ({ params }) => {
     return <div>Loading...</div>;
   }
 
-  // author's books by filtering BooksDetails
+  // author's books by filtering BooksList
   const authorBooks = BooksDetails.filter((book) => {
     const bookAuthorsArray = Array.isArray(book.author)
       ? book.author
@@ -88,8 +89,13 @@ const Page = ({ params }) => {
                 objectPosition="top"
                 borderRadius="30px"
               />
-              <div className="text-center" style={{ position: "relative", zIndex: 1 }}>
-                <h4 className="mt-20 pt-10 text-4xl mb-5">{authorInfo.author_name}</h4>
+              <div
+                className="text-center"
+                style={{ position: "relative", zIndex: 1 }}
+              >
+                <h4 className="mt-20 pt-10 text-4xl mb-5">
+                  {authorInfo.author_name}
+                </h4>
 
                 {/* Conditionally render description */}
                 <p className="pt-4 pb-4 ">
@@ -107,47 +113,73 @@ const Page = ({ params }) => {
 
                 {/* Author's Social Media Links */}
                 <ul className="list-disc flex flex-wrap justify-center gap-6 pb-6">
-                  {authorInfo.authorSocial.map((social, index) => (
-                    <li key={index} className="list-none hover:text-[#007DD7]">
-                      <a
-                        href={`https://${social}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                  {authorInfo.authorSocial.map((social, index) => {
+                    let platformName = "";
+                    if (social.includes("linkedin")) platformName = "LinkedIn";
+                    else if (social.includes("facebook"))
+                      platformName = "Facebook";
+                    else if (social.includes("instagram"))
+                      platformName = "Instagram";
+                    else if (social.includes("youtube"))
+                      platformName = "YouTube";
+                    else if (
+                      social.includes("twitter") ||
+                      social.includes("x.com")
+                    )
+                      platformName = "X (Twitter)";
+                    else platformName = social.split(".")[0];
+
+                    return (
+                      <li
+                        key={index}
+                        className="list-none hover:text-[#007DD7]"
                       >
-                        {social.split(".")[0]}
-                      </a>
-                    </li>
-                  ))}
+                        <a
+                          href={`${social}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {platformName}
+                        </a>
+                      </li>
+                    );
+                  })}
                 </ul>
 
                 {/* Copy Link Button */}
-                <p className="text-center text-blue-600 mt-6 mb-12">
-                  <em>Send a message to the Author</em>
-                  <button
-                    onClick={copyLink}
-                    className="md:ml-2 text-blue-500 hover:text-blue-700 focus:outline-none"
-                    aria-label="Copy link"
-                  >
-                    {copied ? <span>📋 Copied!</span> : <span>📩</span>}
-                  </button>
-                </p>
+                {/* Copy Link Button */}
+              <i><p className="text-center text-[lg] cursor-pointer underline text-[#007DD7]" onClick={copyLink}> Send a message to the Author
+                </p></i>
               </div>
             </div>
 
             {/* Author's Books Section */}
             <div className="books-section w-full pt-20">
               <div className="flex items-center gap-2 justify-center pb-6 pt-6">
-                <Image src={inkdouble1} width={55} height={55} alt="inkdouble1" />
-                <h3 className="font-bold text-base md:text-4xl text-center">
+                <Image
+                  src={inkdouble1}
+                  width={55}
+                  height={55}
+                  alt="inkdouble1"
+                />
+                <i><h3 className="font-semibold text-base md:text-3xl text-center">
                   {authorInfo.author_name}’s books published by BluOne Ink
-                </h3>
-                <Image src={inkdouble2} width={55} height={55} alt="inkdouble2" />
+                </h3></i>
+                <Image
+                  src={inkdouble2}
+                  width={55}
+                  height={55}
+                  alt="inkdouble2"
+                />
               </div>
               <div className="wrapper mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {authorBooks.length > 0 ? (
                   authorBooks.map((book, i) => (
                     <div key={i} className="p-4">
-                      <Link href={`/books/${book.slug}`} style={{ textDecoration: "none" }}>
+                      <Link
+                        href={`/books/${book.slug}`}
+                        style={{ textDecoration: "none" }}
+                      >
                         <BooksCards
                           title={book.title}
                           coverImage={book.book_image}

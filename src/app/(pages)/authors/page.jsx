@@ -61,7 +61,7 @@ export default function Home() {
     >
       <div className="container px-8 mx-auto">
         <div className="w-full flex justify-center pb-4 pt-6">
-          <h1 className="text-[42px]">All Authors</h1>
+          <h1 className="text-[42px] font-medium">All Authors</h1>
         </div>
 
         <div className="w-full flex justify-between items-center pt-6 pb-2">
@@ -77,7 +77,7 @@ export default function Home() {
               <input
                 type="text"
                 placeholder="Which Book or Author interests you today?"
-                className="p-3 bg-transparent border-2 shadow-sm rounded-3xl w-full mb-4 text-black pl-12"
+                className="p-3 bg-transparent border-2 shadow-sm rounded-3xl w-full mb-4 text-black pl-12 placeholder:italic"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />

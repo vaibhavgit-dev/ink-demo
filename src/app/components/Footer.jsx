@@ -27,11 +27,11 @@ export default function Footer() {
     return (
         <>
             <div className='bg-[#ECEFFE] px-4 z-[111]'>
-                <div className='container pb-10'>
-                    <i><p className='text-3xl md:text-5xl pt-8 md:pt-16 font-medium text-center'>
+                <div className='container py-16 '>
+                    <i><p className='text-3xl md:text-5xl font-medium text-center'>
                         Ink in your Inbox
                     </p></i>
-                    <p className='w-full lg:w-[55%]  mx-auto text-center pt-5 md:pt-10 pb-6 md:pb-10 text-lg md:text-lg'>
+                    <p className='w-full lg:w-[55%]  mx-auto text-center  text-lg md:text-lg'>
                         Would you be interested in updates about upcoming books, events, and other news
                         from us? We are a lean startup and don’t have the bandwidth to spam your inbox.
                         And you can always easily unsubscribe.
@@ -65,24 +65,24 @@ export default function Footer() {
                         Publishing, <i className="font-light">with a difference.</i>
                     </h3>
 
-                    <ul className="flex flex-wrap space-x-4 md:space-x-6 justify-center text-sm md:text-xl pt-5 pb-6 font-light">
+                    <ul className="flex flex-wrap space-x-4 md:space-x-6 justify-center text-sm md:text-xl font-light">
                         <li><a href="https://www.instagram.com/bluone.ink/" target="blank">INSTAGRAM</a></li>
                         <li><a href="https://x.com/BluOneInk" target="blank">X (TWITTER)</a></li>
                         <li><a href="https://www.linkedin.com/company/bluoneink/" target="blank">LINKEDIN</a></li>
                         <li><a href="https://www.youtube.com/channel/UC2hOgss9-N9Yx5c3DuyIU0Q" target="blank">YOUTUBE</a></li>
                     </ul>
 
-                    <ul className="flex flex-wrap gap-2 justify-center text-sm md:text-2xl space-x-4 md:space-x-8 pt-1 font-normal">
+                    <ul className="hidden flex flex-wrap gap-2 justify-center text-sm md:text-2xl space-x-4 md:space-x-8 pt-1 font-normal">
                         <li className="hover:underline"><Link href="/comingsoon">ABOUT</Link></li>
                         <li className="hover:underline list-disc"><Link href="/comingsoon">EVENTS</Link></li>
-                        <li className="hover:underline list-disc"><Link href="/comingsoon">BLOGS</Link></li>
+                        <li className="hover:underline list-disc"><Link href="/comingsoon">RESOURCES</Link></li>
                         <li className="hover:underline list-disc"><Link href="/comingsoon">GALLERY</Link></li>
                         <li className="hover:underline list-disc"><Link href="/comingsoon">MEDIA KIT</Link></li>
                         <li className="hover:underline list-disc"><Link href="/comingsoon">CATALOGUE</Link></li>
                         <li className="hover:underline list-disc"><Link href="/comingsoon">CONTACT</Link></li>
                     </ul>
 
-                    <ul className="  flex flex-wrap justify-center text-xs md:text-base font-light pt-8 mb-3 space-x-4 md:space-x-6">
+                    <ul className="  flex flex-wrap justify-center text-xs md:text-base font-light pt-6 mb-3 space-x-4 md:space-x-6">
                         <li className={`hover:text-[#FFDE7C] ${isActive('#')} text-xs`}><Link href="/comingsoon">SITEMAP</Link></li>
                         <li className={`hover:text-[#FFDE7C] ${isActive('/termsandcondition')} text-xs`}><Link href="/termsandcondition">TERMS & CONDITIONS</Link></li>
                         <li className={`hover:text-[#FFDE7C] ${isActive('/privacypolicy')} text-xs`}><Link href="/privacypolicy">PRIVACY POLICY</Link></li>

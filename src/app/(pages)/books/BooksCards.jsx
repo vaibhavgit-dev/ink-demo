@@ -21,7 +21,7 @@ function BooksCards({ title, bookPrice, authorName, coverImage, publishYear }) {
           )}
           {authorName && (
             <h4 className="uppercase font-light font-barlow pt-2 text-base leading-5 text-[#0D1928]">
-              {authorName}
+              {Array.isArray(authorName) ? authorName.join(', ') : authorName}
             </h4>
           )}
           {bookPrice && (
