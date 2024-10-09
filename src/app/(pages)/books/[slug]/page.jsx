@@ -209,7 +209,7 @@ const Page = ({ params }) => {
                 </div>
               </div>
 
-              <div className="flex w-[50%] md:gap-6 gap-6 justify-center mx-auto pt-6">
+              <div className="flex w-full lg:w-[50%] md:gap-6 gap-6 justify-center mx-auto pt-6">
                 {bookInfo.amazonlink && (
                   <Link href={`${bookInfo.amazonlink}`} target="_blank">
                     <button className="bg-black rounded-full px-10 py-3 text-[#fff]">
