@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { BooksList } from "@/app/API/allBookList";
 import { AuthorsList } from "@/app/API/allAuthorList";
 import BooksCards from "./BooksCards";
@@ -10,6 +10,8 @@ import {
   FiChevronRight,
 } from "react-icons/fi";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { MdOutlineArrowLeft, MdOutlineArrowRight } from "react-icons/md";
+import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import Link from "next/link";
 import Loader from "@/app/components/Loader";
 import { BooksDetails } from "@/app/API/getbookDetails";
@@ -19,15 +21,36 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOption, setSortOption] = useState("");
   const [categoryFilter, setCategoryFilter] = useState([]);
+  const [genreFilter, setGenreFilter] = useState([]);
   const [languageFilter, setLanguageFilter] = useState([]);
   const [formatFilter, setFormatFilter] = useState([]);
-  const [priceRange, setPriceRange] = useState([0, 10000]);
+  const [priceRange, setPriceRange] = useState([]);
   const [showFilters, setShowFilters] = useState(false);
+  const filterRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (filterRef.current && !filterRef.current.contains(event.target)) {
+        setShowFilters(false);
+      }
+    };
+
+    if (showFilters) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showFilters]);
 
   const booksPerPage = 15;
-  const category = ["Fiction", "Education", "Non-Fiction"];
-  const language = ["English", "Hindi", "Marathi", "Telugu", "Bangali"];
-  const format = ["Hardcover", "Paperback"];
+  const category = [...new Set(BooksDetails.map((book) => book.category))];
+  const language = [...new Set(BooksDetails.map((book) => book.language))];
+  const format = [...new Set(BooksDetails.map((book) => book.book_format))];
+  const genre = [...new Set(BooksDetails.map((book) => book.genre))];
   const prices = [
     { label: "Under 399", range: [0, 399] },
     { label: "Between 400-599", range: [400, 599] },
@@ -49,21 +72,38 @@ export default function Home() {
   const resetFilters = () => {
     setSortOption("");
     setCategoryFilter([]);
+    setGenreFilter([]);
     setLanguageFilter([]);
     setFormatFilter([]);
-    setPriceRange([0, 10000]);
+    setPriceRange([]);
     setSearchQuery("");
+  };
+
+  // Handle multi-select price range
+  const handlePriceRangeChange = (range) => {
+    if (priceRange.some((r) => r[0] === range[0] && r[1] === range[1])) {
+      setPriceRange(
+        priceRange.filter((r) => r[0] !== range[0] || r[1] !== range[1])
+      );
+    } else {
+      setPriceRange([...priceRange, range]);
+    }
   };
 
   const filteredBooks = BooksDetails.filter((book) => {
     const searchCondition =
-      book.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      "" ||
-      (typeof book.author === "string" &&
-        book.author.toLowerCase().includes(searchQuery.toLowerCase()));
+    (book.title?.toLowerCase().includes(searchQuery.toLowerCase()) || "" ||
+      book.author?.some((author) => author.toLowerCase().includes(searchQuery.toLowerCase())));
 
     const categoryCondition =
       categoryFilter.length === 0 || categoryFilter.includes(book.category);
+
+    const genreCondition =
+      genreFilter.length === 0 ||
+      genreFilter.some((genre) => {
+        const [category, subgenre] = genre.split(": ");
+        return book.category === category && book.genre.includes(subgenre);
+      });
 
     const formatCondition =
       formatFilter.length === 0 || formatFilter.includes(book.book_format);
@@ -72,11 +112,13 @@ export default function Home() {
       languageFilter.length === 0 || languageFilter.includes(book.language);
 
     const priceCondition =
-      book.price >= priceRange[0] && book.price <= priceRange[1];
+      priceRange.length === 0 ||
+      priceRange.some(([min, max]) => book.price >= min && book.price <= max);
 
     return (
       searchCondition &&
       categoryCondition &&
+      genreCondition &&
       formatCondition &&
       languageCondition &&
       priceCondition
@@ -84,14 +126,14 @@ export default function Home() {
   }).sort((a, b) => {
     if (sortOption === "Title: A to Z") return a.title.localeCompare(b.title);
     if (sortOption === "Title: Z to A") return b.title.localeCompare(a.title);
-    if (sortOption === "Price: Lowest First") return a.price - b.price; // Corrected
-    if (sortOption === "Price: Highest First") return b.price - a.price; // Corrected
+    if (sortOption === "Price: Lowest First") return a.price - b.price;
+    if (sortOption === "Price: Highest First") return b.price - a.price;
     if (sortOption === "Publish Year: Newest First")
       return b.publish_year - a.publish_year;
     if (sortOption === "Publish Year: Oldest First")
       return a.publish_year - b.publish_year;
 
-    return 0; // Default return if no sorting condition matches
+    return 0;
   });
 
   const totalPages = Math.ceil(filteredBooks.length / booksPerPage);
@@ -105,48 +147,67 @@ export default function Home() {
     setTimeout(() => setLoading(false), 500);
   }, []);
 
+  const getCountByCategory = (category) => {
+    return BooksDetails.filter((book) => book.category === category).length;
+  };
+
+  const getCountByLanguage = (language) => {
+    return BooksDetails.filter((book) => book.language === language).length;
+  };
+
+  const getCountByFormat = (format) => {
+    return BooksDetails.filter((book) => book.book_format === format).length;
+  };
+
+  const getCountByPriceRange = (range) => {
+    return BooksDetails.filter(
+      (book) => book.price >= range[0] && book.price <= range[1]
+    ).length;
+  };
+
   return (
     <>
       {loading ? (
         <Loader />
       ) : (
-        <main
-          className="flex flex-col h-full pt-28 pb-20 mx-auto bg-gradient-to-b"
-          style={{
-            background:
-              "linear-gradient(to bottom, #ffc3000f 10%, #FFFFFF33 90%)",
-          }}
-        >
-          <div className="container px-8 mx-auto">
-            <div className="w-full flex justify-center pb-4 pt-6">
-              <h1 className="text-[42px] font-medium">All Books</h1>
+        <main className="flex flex-col h-full pb-20 mx-auto top_bg_gradient">
+          <div className="container px-8  mx-auto">
+            <div className="w-full flex justify-center">
+              <h1 className="text-[42px] font-medium pt-20 pb-20">All Books</h1>
             </div>
-            <div className="w-full flex-wrap md:flex gap-4 pt-6 relative">
-              <div className="w-[50%] md:w-[15%]">
+            <div className="w-full flex-wrap md:flex gap-4 relative">
+              <div className="w-[50%] md:px-4 md:w-[18%]">
                 <button
-                  className="border-2 flex justify-center rounded-3xl text-[#8A8A8A] p-3 mb-4 w-full"
+                  className="input-border flex justify-center rounded-3xl text-[#8A8A8A] p-3 mb-4 w-full"
                   onClick={() => setShowFilters(!showFilters)}
                 >
-                  <span className="flex gap-4 items-center">
-                    {showFilters ? "Sort & Filters" : "Sort & Filters"}
-                    {showFilters ? <FaChevronUp /> : <FaChevronDown />}
-                  </span>
+                  <i>
+                    <span className="flex gap-6 font-ibm items-center">
+                      {showFilters ? "Sort & Filter" : "Sort & Filter"}
+                      {showFilters ? (
+                        <IoMdArrowDropup className="w-5 h-5" />
+                      ) : (
+                        <IoMdArrowDropdown className="w-5 h-5" />
+                      )}
+                    </span>
+                  </i>
                 </button>
 
                 {showFilters && (
-                  <div className="w-[100%] absolute gap-4 mb-4 z-[1111]">
-                    <div
-                      className="border-[#8A8A8A] p-6 rounded-2xl shadow-xl bg-white hover:shadow-2xl"
-                      style={{ padding: "50px" }}
-                    >
-                      <div className="flex">
-                        <div className="w-full">
+                  <div
+                    className="w-full absolute gap-4 mb-4 z-[111]"
+                    ref={filterRef}
+                  >
+                    <div className="border-[#8A8A8A] p-6 rounded-2xl shadow-xl bg-white hover:shadow-2xl sm:p-6 md:p-8 book_filter">
+                      <div className="flex flex-col md:flex-row">
+                        {/* Sort Section */}
+                        <div className="w-full md:w-1/3 md:mb-0">
                           <i>
-                            <h4 className="font-normal mb-3 text-[#007DD7] text-2xl">
+                            <h4 className="font-semibold mb-2 text-[#007DD7] text-2xl">
                               Sort
                             </h4>
                           </i>
-                          <div className="flex flex-col mb-4 gap-3">
+                          <div className="flex flex-col ">
                             {[
                               "Title: A to Z",
                               "Title: Z to A",
@@ -157,8 +218,10 @@ export default function Home() {
                             ].map((option) => (
                               <label
                                 key={option}
-                                className={`text-lg text-[#0D1928] font-light pt-2 flex items-center cursor-pointer ${
-                                  sortOption === option ? "text-blue-500" : ""
+                                className={`text-md text-[#0D1928] font-normal pt-1 flex items-center cursor-pointer ${
+                                  sortOption === option
+                                    ? "text-[#0D1928] font-semibold"
+                                    : "font-normal"
                                 }`}
                               >
                                 <input
@@ -170,23 +233,31 @@ export default function Home() {
                                   }
                                   className="hidden"
                                 />
-                                <span>{option}</span>
+                                <span className="font-ibm">{option}</span>
                               </label>
                             ))}
                           </div>
                         </div>
 
-                        <div className="border-l-2 border-gray-300 mx-8"></div>
+                        {/* Divider */}
+                        <div className="hidden md:block border-l border-gray-300 mx-4"></div>
 
-                        <div className="w-full flex flex-col">
+                        {/* Genre & Category Section */}
+                        <div className="w-full md:w-1/3 mb-6 md:mb-0">
                           <i>
-                            <h4 className="font-normal mb-3 text-[#007DD7] text-2xl">
+                            <h4 className="font-semibold mb-3 text-[#007DD7] text-2xl">
                               Genre & Category
                             </h4>
                           </i>
                           {category.map((g) => (
-                            <div key={g}>
-                              <label className="text-lg pt-2 block text-[#0D1928] font-light">
+                            <div className="category_filter" key={g}>
+                              <label
+                                className={`text-md pt-2 flex place-items-center text-[#0D1928] cat_label font-normal ${
+                                  categoryFilter.includes(g)
+                                    ? "font-semibold"
+                                    : "font-normal"
+                                }`}
+                              >
                                 <input
                                   type="checkbox"
                                   value={g}
@@ -199,143 +270,269 @@ export default function Home() {
                                     )
                                   }
                                 />{" "}
-                                <span className="ml-2">{g}</span>
+                                <span className="ml-2 cat_span font-ibm">
+                                  {g} ({getCountByCategory(g)})
+                                </span>
                               </label>
 
-                              {/* Add new checkboxes if the genre is Non-Fiction */}
-                              {g === "Non-Fiction" && (
-                                <div className="ml-4">
-                                  {/* {[
-                                "Biography",
-                                "Memoir",
-                                "History",
-                                "Self-Help",
-                              ].map((subcategory) => (
-                                <label
-                                  key={subcategory}
-                                  className="text-lg pt-2 block text-[#0D1928] font-light"
-                                >
-                                  <input
-                                    type="checkbox"
-                                    value={subcategory}
-                                    checked={categoryFilter.includes(subcategory)}
-                                    onChange={() =>
-                                      handleFilterChange(
-                                        categoryFilter,
-                                        setCategoryFilter,
-                                        subcategory
-                                      )
-                                    }
-                                  />{" "}
-                                  <span className="ml-2">{subcategory}</span>
-                                </label>
-                              ))} */}
+                              {/* Subcategories (Genres) */}
+                              {["Fiction", "Non-Fiction", "Children"].includes(
+                                g
+                              ) && (
+                                <div className="sub_cat_label" style={{marginLeft: "30px"}}>
+                                  {g === "Fiction" &&
+                                    [
+                                      // "Historial & Mythological Fiction",
+                                      "Religion & Spirituality",
+                                      "Action & Adventure",
+                                      "Poetry",
+                                      "Indian Languages",
+                                      "Short Stories & Anthologies",
+                                      "Society & Social Sciences",
+                                      "Fantasy & Science Fiction",
+                                      "Crime, Thriller & Mystery",
+                                      "Arts, Film & Photography",
+                                    ].map((subcategory) => (
+                                      <label
+                                        key={`${g}: ${subcategory}`} // Unique key using category and subcategory
+                                        className="text-md pt-1 block text-[#0D1928] font-normal font-ibm subcat_label"
+                                      >
+                                        <input
+                                          type="checkbox"
+                                          value={`${g}: ${subcategory}`} // Value combines category and subcategory
+                                          checked={genreFilter.includes(
+                                            `${g}: ${subcategory}`
+                                          )}
+                                          onChange={() =>
+                                            handleFilterChange(
+                                              genreFilter,
+                                              setGenreFilter,
+                                              `${g}: ${subcategory}` // Use combined value
+                                            )
+                                          }
+                                        />{" "}
+                                        <span className="ml-2 flex-1 subcat_span font-ibm">
+                                          {subcategory}
+                                        </span>
+                                      </label>
+                                    ))}
+
+                                  {g === "Non-Fiction" &&
+                                    [
+                                      // "Action & Adventure",
+                                      // "Crime, Thriller & Mystery",
+                                      // "Historical & Mythological Fiction",
+                                      // "Classics",
+                                      "Religion & Spirituality",
+                                      // "Arts, Film & Photography",
+                                      "Biography, Autobiography, & True Accounts",
+                                      "Economics, Finance, Business & Management",
+                                      "Politics & Governance",
+                                      "Military & Defence",
+                                      "Health & Wellness",
+                                      "Science & Technology",
+                                      "Society & Social Sciences",
+                                      "Indian Languages",
+                                      "Self-Help & Development",
+                                      "Law & Public Policy",
+                                      // "Fantasy & Science Fiction",
+                                      "Essays & Anthologies",
+                                      "Educational Books & References",
+                                    ].map((subcategory) => (
+                                      <label
+                                        key={`${g}: ${subcategory}`}
+                                        className="text-md pt-1 block text-[#0D1928] font-normal font-ibm subcat_label"
+                                      >
+                                        <input
+                                          type="checkbox"
+                                          value={`${g}: ${subcategory}`}
+                                          checked={genreFilter.includes(
+                                            `${g}: ${subcategory}`
+                                          )}
+                                          onChange={() =>
+                                            handleFilterChange(
+                                              genreFilter,
+                                              setGenreFilter,
+                                              `${g}: ${subcategory}` // Use combined value
+                                            )
+                                          }
+                                        />{" "}
+                                        <span className="ml-2 flex-1 subcat_span font-ibm">
+                                          {subcategory}
+                                        </span>
+                                      </label>
+                                    ))}
+
+                                  {g === "Children" &&
+                                    [
+                                      "Action & Adventure",
+                                      "Self-Help & Development",
+                                    ].map((subcategory) => (
+                                      <label
+                                        key={`${g}: ${subcategory}`}
+                                        className="text-md pt-1 block text-[#0D1928] font-normal font-ibm subcat_label"
+                                      >
+                                        <input
+                                          type="checkbox"
+                                          value={`${g}: ${subcategory}`}
+                                          checked={genreFilter.includes(
+                                            `${g}: ${subcategory}`
+                                          )}
+                                          onChange={() =>
+                                            handleFilterChange(
+                                              genreFilter,
+                                              setGenreFilter,
+                                              `${g}: ${subcategory}`
+                                            )
+                                          }
+                                        />{" "}
+                                        <span className="ml-2 flex-1 subcat_span font-ibm">
+                                          {subcategory}
+                                        </span>
+                                      </label>
+                                    ))}
                                 </div>
                               )}
                             </div>
                           ))}
                         </div>
 
-                        <div className="border-l-2 border-[#D9D9D9] mx-8"></div>
+                        {/* Divider */}
+                        <div className="hidden md:block border-l border-gray-300 mx-4"></div>
 
-                        <div className="w-full flex flex-col">
+                        {/* Language & Format Section */}
+                        <div className="w-full md:w-1/3 mb-6 md:mb-0">
                           <i>
-                            <h4 className="font-normal mb-3 text-[#007DD7] text-2xl">
+                            <h4 className="font-semibold mb-3 text-[#007DD7] text-2xl">
                               Language
                             </h4>
                           </i>
                           {language.map((lang) => (
-                            <label
-                              key={lang}
-                              className="text-lg pt-2 text-[#0D1928] font-light"
-                            >
-                              <input
-                                type="checkbox"
-                                value={lang}
-                                checked={languageFilter.includes(lang)}
-                                onChange={() =>
-                                  handleFilterChange(
-                                    languageFilter,
-                                    setLanguageFilter,
-                                    lang
-                                  )
-                                }
-                              />{" "}
-                              <span className="ml-2">{lang}</span>
-                            </label>
+                            <div className="w-full ">
+                              <label
+                                key={lang}
+                                className={`text-md pt-1 flex place-items-center text-[#0D1928] font-normal ${
+                                  languageFilter.includes(lang)
+                                    ? "font-semibold"
+                                    : "font-normal"
+                                }`}
+                              >
+                                <input
+                                  type="checkbox"
+                                  value={lang}
+                                  checked={languageFilter.includes(lang)}
+                                  onChange={() =>
+                                    handleFilterChange(
+                                      languageFilter,
+                                      setLanguageFilter,
+                                      lang
+                                    )
+                                  }
+                                />{" "}
+                                <span className="ml-2 font-ibm">
+                                  {lang} ({getCountByLanguage(lang)})
+                                </span>
+                              </label>
+                            </div>
                           ))}
 
-                          <div className="border-b-2 border-gray-300 mx-8 pt-3"></div>
+                          {/* Divider */}
+                          <div className="border-b border-gray-300 mx-2 pb-3 pt-3"></div>
 
                           <i>
-                            <h4 className="font-normal pt-3 mb-3 text-[#007DD7] text-2xl">
+                            <h4 className="font-semibold pt-3 mb-3 text-[#007DD7] text-2xl">
                               Format
                             </h4>
                           </i>
                           {format.map((lang) => (
-                            <label
-                              key={lang}
-                              className="text-lg pt-2 text-[#0D1928] font-light"
-                            >
-                              <input
-                                type="checkbox"
-                                value={lang}
-                                checked={formatFilter.includes(lang)}
-                                onChange={() =>
-                                  handleFilterChange(
-                                    formatFilter,
-                                    setFormatFilter,
-                                    lang
-                                  )
-                                }
-                              />{" "}
-                              <span className="ml-2">{lang}</span>
-                            </label>
+                            <div className="w-full">
+                              <label
+                                key={lang}
+                                className={`text-md pt-1 flex place-items-center text-[#0D1928] font-normal ${
+                                  formatFilter.includes(lang)
+                                    ? "font-semibold"
+                                    : "font-normal"
+                                }`}
+                              >
+                                <input
+                                  type="checkbox"
+                                  value={lang}
+                                  checked={formatFilter.includes(lang)}
+                                  onChange={() =>
+                                    handleFilterChange(
+                                      formatFilter,
+                                      setFormatFilter,
+                                      lang
+                                    )
+                                  }
+                                />{" "}
+                                <span className="ml-2 font-ibm">
+                                  {lang} ({getCountByFormat(lang)})
+                                </span>
+                              </label>
+                            </div>
                           ))}
                         </div>
 
-                        <div className="border-l-2 border-gray-300 mx-8"></div>
+                        {/* Divider */}
+                        <div className="hidden md:block border-l border-gray-300 pb-3 mx-4"></div>
 
-                        <div className="w-full flex flex-col justify-between">
-                          <div className="w-full flex flex-col">
+                        {/* Price Section */}
+                        <div className="w-full md:w-1/3 flex flex-col justify-between">
+                          <div className="w-full mb-6 md:mb-0">
                             <i>
-                              <h4 className="font-normal mb-3 text-[#007DD7] text-2xl">
+                              <h4 className="font-semibold mb-3 text-[#007DD7] text-2xl">
                                 Price
                               </h4>
                             </i>
                             {prices.map(({ label, range }) => (
-                              <label
-                                key={label}
-                                className="text-lg pt-2 text-[#0D1928] font-light"
-                              >
-                                <input
-                                  type="checkbox"
-                                  value={label}
-                                  onChange={() => {
-                                    const newPriceRange = range;
-                                    setPriceRange(newPriceRange);
-                                  }}
-                                />{" "}
-                                <span className="ml-2">{label}</span>
-                              </label>
+                              <div key={label} className="w-full ">
+                                <label
+                                  className={`text-md pt-1 flex place-items-center text-[#0D1928] font-normal ${
+                                    priceRange.some(
+                                      (r) =>
+                                        r[0] === range[0] && r[1] === range[1]
+                                    )
+                                      ? "font-semibold"
+                                      : "font-normal"
+                                  }`}
+                                >
+                                  <input
+                                    type="checkbox"
+                                    name="price"
+                                    value={label}
+                                    checked={priceRange.some(
+                                      (r) =>
+                                        r[0] === range[0] && r[1] === range[1]
+                                    )}
+                                    onChange={() =>
+                                      handlePriceRangeChange(range)
+                                    }
+                                  />{" "}
+                                  <span className="ml-2 font-ibm">
+                                    {label} ({getCountByPriceRange(range)})
+                                  </span>
+                                </label>
+                              </div>
                             ))}
                           </div>
-                          <div className="w-full">
+
+                          <div className="w-full font-barlow">
                             <div className="flex gap-4">
-                              <div className="w-full">
+                              <div className="w-full ">
                                 <button
-                                  className="mt-4 border-2 text-black py-2 px-4 rounded-3xl hover:bg-[#241b6d] hover:text-white w-full"
+                                  className="mt-4  font-normal border-2 text-black py-2 px-4 rounded-3xl hover:bg-[#241b6d] hover:text-white w-full"
                                   onClick={() => setShowFilters(!showFilters)}
                                 >
-                                  Close
+                                  CLOSE
                                 </button>
                               </div>
                               <div className="w-full">
                                 <button
-                                  className="mt-4 text-black py-2 px-4 rounded-3xl hover:bg-[#241b6d] hover:text-white w-full"
+                                  className="mt-4 font-normal text-black py-2 px-4 rounded-3xl hover:bg-[#241b6d] hover:text-white w-full"
                                   onClick={resetFilters}
                                 >
-                                  Reset
+                                  RESET
                                 </button>
                               </div>
                             </div>
@@ -348,18 +545,18 @@ export default function Home() {
               </div>
 
               <div className="w-full flex-1">
-                <div className="relative">
-                  <FiSearch className="absolute left-4 top-3 w-6 h-6 text-gray-500" />
+                <div className="relative flex h-[52px]">
+                  <FiSearch className="absolute searchicon left-4 w-6 h-6 text-[#8A8A8A]" />
                   {searchQuery && (
                     <FiXCircle
-                      className="absolute right-4 top-3 w-6 h-6 text-gray-500 cursor-pointer"
+                      className="absolute right-4 top-3.5 w-6 h-6 text-gray-500 cursor-pointer"
                       onClick={() => setSearchQuery("")}
                     />
                   )}
                   <input
                     type="text"
                     placeholder="Which Book or Author interests you today?"
-                    className="p-3 bg-transparent border-2 shadow-sm rounded-3xl w-full mb-4 text-black pl-12 placeholder:italic"
+                    className="p-3 h-[52px] bg-transparent input-border shadow-sm rounded-3xl w-full mb-4 text-black pl-12 placeholder:italic"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
@@ -368,80 +565,100 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 pt-8 pb-6">
-              {currentBooks.map((book) => {
-                const author = getAuthorById(book.author);
-                return (
-                  <div
-                    key={book.id}
-                    className="p-4 mb-4 hover:shadow-md border-2 border-[#ffffff00] hover:border-[#BABABA] rounded-md"
-                  >
-                    <Link
-                      href={`./books/${book.slug}`}
-                      style={{ textDecoration: "none" }}
+              {currentBooks.length > 0 ? (
+                currentBooks.map((book) => {
+                  const author = getAuthorById(book.author);
+                  return (
+                    <div
+                      key={book.id}
+                      className="p-4 mb-4 hover:shadow-md input-border border-[#ffffff00] hover:border-[#BABABA] rounded-md"
                     >
-                      <BooksCards
-                        title={book.title}
-                        coverImage={book.book_image}
-                        bookPrice={`₹${book.price}`}
-                        authorName={book.author ? book.author : "No Author"}
-                      />
-                    </Link>
+                      <Link
+                        href={`./books/${book.slug}`}
+                        style={{ textDecoration: "none" }}
+                      >
+                        <BooksCards
+                          title={book.title}
+                          coverImage={book.book_image}
+                          bookPrice={`₹${book.price}`}
+                          authorName={book.author ? book.author : "No Author"}
+                        />
+                      </Link>
+                    </div>
+                  );
+                })
+              ) : (
+                <p className="text-center col-span-full mt-4">
+                  No results found
+                </p>
+              )}
+            </div>
+
+            {currentBooks.length > 0 && (
+              <div className="w-full flex-wrap md:flex justify-center md:justify-between pt-4">
+                <div className="flex justify-center md:justify-between">
+                  <i>
+                    <p>
+                      Showing {indexOfFirstBook + 1}-{""}
+                      {Math.min(indexOfLastBook, filteredBooks.length)} of{" "}
+                      {filteredBooks.length} Books
+                    </p>
+                  </i>
+                </div>
+
+                {totalPages > 1 && (
+                  <div className="flex justify-center gap-2 items-center">
+                    {currentPage > 1 && (
+                      <button
+                        onClick={() => setCurrentPage((prev) => prev - 1)}
+                        className={`p-2 mx-2 flex items-center ${
+                          currentPage === 1
+                            ? "cursor-not-allowed text-[#241b6d]"
+                            : "hover:rounded-md text-[#241b6d] hover:text-[#241b6d]"
+                        }`}
+                      >
+                        <MdOutlineArrowLeft className="w-6 h-6" />
+                      </button>
+                    )}
+
+                    {Array.from({ length: totalPages }).map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setCurrentPage(i + 1)}
+                        className={`p-1 px-2.5 py-0 text-lg font-medium font-barlow text-[#8A8A8A] rounded-full ${
+                          currentPage === i + 1
+                            ? "bg-[#8A8A8A66] text-black"
+                            : "bg-white hover:bg-[#241b6d] hover:text-white"
+                        }`}
+                      >
+                        {i + 1}
+                      </button>
+                    ))}
+
+                    <button
+                      disabled={currentPage === totalPages}
+                      onClick={() =>
+                        setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                      }
+                      className={`p-2 mx-2 flex items-center ${
+                        currentPage === totalPages
+                          ? "cursor-not-allowed text-[#241b6d]"
+                          : "hover:rounded-md text-[#241b6d] hover:text-[#241b6d]"
+                      }`}
+                    >
+                      <MdOutlineArrowRight className="text-[#241b6d] w-6 h-6" />
+                    </button>
                   </div>
-                );
-              })}
-            </div>
-
-            <div className="w-full flex-wrap md:flex justify-center md:justify-between pt-6">
-              <div className="flex justify-center md:justify-between">
-                <i>
-                  <p>
-                    Showing {indexOfFirstBook + 1} -{" "}
-                    {Math.min(indexOfLastBook, filteredBooks.length)} of{" "}
-                    {filteredBooks.length} total
-                  </p>
-                </i>
+                )}
               </div>
+            )}
 
-              <div className="flex justify-center gap-2 items-center">
-                <button
-                  disabled={currentPage === 1}
-                  onClick={() => setCurrentPage((prev) => prev - 1)}
-                  className={`p-2 mx-2 flex items-center ${
-                    currentPage === 1
-                      ? "cursor-not-allowed text-[#241b6d]"
-                      : "hover:rounded-md text-[#241b6d] hover:text-[#241b6d]"
-                  }`}
-                >
-                  <FiChevronLeft className="w-5 h-5" />
-                </button>
-
-                {Array.from({ length: totalPages }).map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setCurrentPage(i + 1)}
-                    className={`p-1 px-3 border rounded-full ${
-                      currentPage === i + 1
-                        ? "bg-[#8A8A8A66] text-black"
-                        : "bg-white hover:bg-[#241b6d] hover:text-white"
-                    }`}
-                  >
-                    {i + 1}
-                  </button>
-                ))}
-
-                <button
-                  disabled={currentPage === totalPages}
-                  onClick={() => setCurrentPage((prev) => prev + 1)}
-                  className={`p-2 mx-2 flex items-center ${
-                    currentPage === totalPages
-                      ? "cursor-not-allowed text-[#241b6d]"
-                      : "hover:rounded-md text-[#241b6d] hover:text-[#241b6d]"
-                  }`}
-                >
-                  <FiChevronRight className="w-5 h-5" />
-                </button>
+            {currentBooks.length === 0 && currentPage > 1 && (
+              <div className="pt-4">
+                <p>Redirecting to page 1...</p>
+                {setCurrentPage(1)}
               </div>
-            </div>
+            )}
           </div>
         </main>
       )}

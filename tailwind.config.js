@@ -15,6 +15,13 @@ module.exports = {
         // Add a custom 15-column grid
         '15': 'repeat(15, minmax(0, 1fr))',
       },
+      lineHeight: {
+        'extra-loose': '3rem !important',
+        'medium-loose': '2.5rem !important',
+      },
+      border: {
+          'border-l-1': '1px solid #D9D9D9',
+      }
     },
   },
   plugins: [],

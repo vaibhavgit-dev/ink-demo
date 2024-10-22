@@ -56,6 +56,7 @@ html {
 
   /* Responsive styles for mobile Footer*/
 @media (max-width: 768px) {
+ 
   /* Hide unnecessary elements */
   .footer-bg, /* Hides the wave background */
   .text-3xl, /* Hides the main heading */
@@ -75,7 +76,7 @@ html {
 .footer-bg-image {
   background-image: url('../app/assests/image/bg_design.png'); 
   background-repeat: no-repeat;
-  background-size: 70%;
+  background-size: 55%;
   background-position: 100% 100%; /* Position the image */
   background-attachment: fixed;
 }
@@ -95,6 +96,13 @@ html {
 @media (max-width: 768px) { /* Adjust the max-width as needed for tablet and mobile */
   .navmain {
     background-image: none; /* Hide the background image */
+  }
+  .footer-bg-image {
+    background-image: url('../app/assests/image/bg_design.png'); 
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: 100% 100%; /* Position the image */
+    background-attachment: fixed;
   }
 }
 /* Responsive adjustments */

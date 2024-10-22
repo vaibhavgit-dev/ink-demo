@@ -10,6 +10,8 @@ import bgauthor from "@/app/assests/image/authors-back.svg";
 import Loader from "@/app/components/Loader";
 import Link from "next/link";
 import { BooksDetails } from "@/app/API/getbookDetails";
+import AuthorBooksCards from "../authorBooksCards";
+import { Helmet } from "react-helmet";
 
 const Page = ({ params }) => {
   const { authslug } = params;
@@ -21,13 +23,14 @@ const Page = ({ params }) => {
     return <div>Loading...</div>;
   }
 
-  // author's books by filtering BooksList
+  // list of book authors
   const authorBooks = BooksDetails.filter((book) => {
     const bookAuthorsArray = Array.isArray(book.author)
       ? book.author
       : [book.author];
+
     return (
-      bookAuthorsArray.join(", ") === authorInfo.author_name &&
+      bookAuthorsArray.includes(authorInfo.author_name) &&
       book.slug !== authorInfo.slug
     );
   });
@@ -43,11 +46,15 @@ const Page = ({ params }) => {
     });
   };
 
-  // Short and full description logic
+  // Meta title and description
+  const pageTitle = `${authorInfo.author_name} | BluOne Ink Author`;
+  const pageDescription = `Ink Author`;
+
+  // Short and full description logic with a check for 80 words
   const descriptionWords = authorInfo.authorDescription.split(" ");
   const shortDescription =
-    descriptionWords.slice(0, 100).join(" ") +
-    (descriptionWords.length > 100 ? "..." : "");
+    descriptionWords.slice(0, 80).join(" ") +
+    (descriptionWords.length > 80 ? "" : "");
   const fullDescription = authorInfo.authorDescription;
 
   // Loading
@@ -56,19 +63,25 @@ const Page = ({ params }) => {
     setTimeout(() => setLoading(false), 500);
   }, []);
 
+  const defaultImage = "/author-defaultimages.png";
+
   return (
     <>
       {loading ? (
         <Loader />
       ) : (
-        <main className="wrapper pt-20 pb-10">
+        <main className="wrapper pt-0 pb-10">
+        <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        </Helmet>
           {/* Page Container */}
           <div className="container pt-20">
             <div className="relative pb-20">
               <div className="absolute top-0 left-0 right-0 pb-20 z-[10]">
                 <img
-                  className="m-auto p-1 aspect-square object-cover border-2 border-dotted border-[#241B6D] rounded-full"
-                  src={authorInfo.image}
+                  className="m-auto p-1 aspect-square object-cover border-2 border-dashed border-[#241B6D] rounded-full"
+                  src={authorInfo.image || defaultImage}
                   alt="Author"
                   width={300}
                   height={250}
@@ -98,13 +111,13 @@ const Page = ({ params }) => {
                 </h4>
 
                 {/* Conditionally render description */}
-                <p className="pt-4 pb-4 ">
+                <p className="text-start pt-4 pb-4 ">
                   {isExpanded ? fullDescription : shortDescription}
                   &nbsp;
-                  {descriptionWords.length > 50 && (
+                  {descriptionWords.length > 80 && (
                     <button
                       onClick={() => setIsExpanded(!isExpanded)}
-                      className="text-blue-500 mt-2 focus:outline-none"
+                      className="text-[#0D1928] underline font-medium focus:outline-none"
                     >
                       {isExpanded ? "Read Less" : "Read More"}
                     </button>
@@ -132,7 +145,7 @@ const Page = ({ params }) => {
                     return (
                       <li
                         key={index}
-                        className="list-none hover:text-[#007DD7]"
+                        className="list-none hover:underline hover:text-[#007DD7]"
                       >
                         <a
                           href={`${social}`}
@@ -147,9 +160,15 @@ const Page = ({ params }) => {
                 </ul>
 
                 {/* Copy Link Button */}
-                {/* Copy Link Button */}
-              <i><p className="text-center text-[lg] cursor-pointer underline text-[#007DD7]" onClick={copyLink}> Send a message to the Author
-                </p></i>
+                {/* <i>
+                  <p
+                    className="text-center text-[lg] cursor-pointer underline text-[#007DD7]"
+                    onClick={//copyLink}
+                  >
+                    {" "}
+                    Send a message to the Author
+                  </p>
+                </i> */}
               </div>
             </div>
 
@@ -162,9 +181,13 @@ const Page = ({ params }) => {
                   height={55}
                   alt="inkdouble1"
                 />
-                <i><h3 className="font-semibold text-base md:text-3xl text-center">
-                  {authorInfo.author_name}’s books published by BluOne Ink
-                </h3></i>
+                <i>
+                  <h3 className="font-semibold text-base md:text-3xl text-center">
+                  {authorBooks.length >= 2
+                  ? `${authorInfo.author_name}’s books published by BluOne Ink`
+                  : `${authorInfo.author_name}’s book published by BluOne Ink`}
+                  </h3>
+                </i>
                 <Image
                   src={inkdouble2}
                   width={55}
@@ -172,15 +195,26 @@ const Page = ({ params }) => {
                   alt="inkdouble2"
                 />
               </div>
-              <div className="wrapper mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              <div
+                className={`wrapper mt-12 flex flex-wrap ${
+                  authorBooks.length < 4 ? "justify-center" : ""
+                }`}
+              >
                 {authorBooks.length > 0 ? (
-                  authorBooks.map((book, i) => (
-                    <div key={i} className="p-4">
+                  authorBooks.slice(0, 4).map((book, i) => (
+                    <div
+                      key={i}
+                      className={`p-4 flex-none mb-4 hover:shadow-md input-border border-[#ffffff00] hover:border-[#BABABA] rounded-md ${
+                        authorBooks.length < 4
+                          ? "md:w-1/2 lg:w-1/4"
+                          : "md:w-1/2 lg:w-1/4"
+                      } `}
+                    >
                       <Link
                         href={`/books/${book.slug}`}
                         style={{ textDecoration: "none" }}
                       >
-                        <BooksCards
+                        <AuthorBooksCards
                           title={book.title}
                           coverImage={book.book_image}
                           publishYear={book.publish_year}

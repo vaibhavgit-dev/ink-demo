@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useState } from "react";
 import { usePathname } from 'next/navigation';
 import navbarLogo from "../assests/image/navbarLogo.png";
+import { IoCloseSharp } from "react-icons/io5";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 
 function NavBar() {
@@ -17,48 +19,48 @@ function NavBar() {
   const isActive = (path) => pathname === path ? 'text-[#FFDE7C]' : 'text-white';
 
   return (
-    <div id="navbar" className="navmain w-full fixed h-[60px] z-[1111]  bg-[#241b6d] bg-no-repeat bg-right bg-contain mx-auto flex justify-between items-center">
+    <div id="navbar" className="navmain w-full fixed h-[60px] z-[11111]  bg-[#241b6d] bg-no-repeat bg-right bg-contain mx-auto flex justify-between items-center">
       <div className="lg:hidden md:hidden p-5">
-        <Link href="/">
+        <a href="/">
           <Image src={navbarLogo} alt="Logo" width={0} height={40} />
-        </Link>
+        </a>
       </div>
       <ul className="hidden mx-auto text-center md:flex space-x-20 navbar items-center">
         <li className={`hover:text-[#FFDE7C] ${isActive('/authors')} `}>
-          <Link href="/authors"><i className="ifont">Authors</i></Link>
+          <a href="/authors"><i className="ifont">Authors</i></a>
         </li>
         <li className={`hover:text-[#FFDE7C] ${isActive('/books')} `}>
-          <Link href="/books"><i className="ifont">Books</i></Link>
+          <a href="/books"><i className="ifont">Books</i></a>
         </li>
         <li>
-          <Link href="/"><Image src={navbarLogo} alt="Logo" width={0} height={40} className="hidden md:block lg:block" /></Link>
+          <a href="/"><Image src={navbarLogo} alt="Logo" width={0} height={40} className="hidden md:block lg:block" /></a>
         </li>
         <li className={`hover:text-[#FFDE7C] ${isActive('/resources')} `}>
-          <Link href="/resources"><i className="ifont">Resources</i ></Link>
+          <a href="/resources"><i className="ifont">Resources</i ></a>
         </li>
         <li className={`hover:text-[#FFDE7C] ${isActive('/contact')} `}>
-          <Link href="/contact"><i className="ifont">Contact</i ></Link>
+          <a href="/contact"><i className="ifont">Contact</i ></a>
         </li>
       </ul>
       <button
         onClick={toggleMenu}
         className="md:hidden p-5 text-white focus:outline-none"
       >
-        {isOpen ? '✖' : '☰'}
+        {isOpen ? <IoCloseSharp /> : <RxHamburgerMenu />}
       </button>
       {isOpen && (
-        <div className="fixed top-16 left-0 w-full bg-[#241b6d] text-white md:hidden">
-          <ul className="p-10">
+        <div className="fixed border-t-2 top-14 left-0 w-full bg-[#241b6d] text-white md:hidden">
+          <ul className="p-6">
             <li className={isActive('/authors')}>
               <Link href="/authors"><em>Authors</em></Link>
             </li>
             <li className={isActive('/books')}>
               <Link href="/books"><em>Books</em></Link>
             </li>
-            <li className={isActive('/comingsoonblogs')}>
-              <Link href="/comingsoon"><em>Resources</em></Link>
+            <li className={isActive('/resources')}>
+              <Link href="/resources"><em>Resources</em></Link>
             </li>
-            <li className={isActive('/comingsooncontactus')}>
+            <li className={isActive('/contact')}>
               <Link href="/contact"><em>Contact</em></Link>
             </li>
           </ul>

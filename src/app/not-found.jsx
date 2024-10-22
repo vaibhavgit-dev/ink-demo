@@ -2,20 +2,22 @@ import React from 'react'
 import Link from 'next/link'
 function notfound() {
     return (
-        <div className='w-full bg[gradient-to-b #FFFFFF33,#FFC30033] p-4'>
-            <div className="grid place-content-center place-items-center pt-40 ">
-                <div>
-                    <h2 className='font-semibold pb-10'>What you seek is seeking you…</h2>
-                    <h2 className='font-semibold ml-24 pb-24'>… but you’re off by a small margin.</h2>
+        <div className='w-full grid place-content-center place-items-center pb-30 h-screen top_bg_gradient'>
+            <div className="grid place-content-center place-items-center p-5 sm:pt-[40px] sm:pb-[230px] ">
+                <div className=' sm:pt-[250px] '>
+                    <h2 className='font-medium pb-10 text-lg sm:text-4xl'>What you seek is seeking you…</h2>
+                    <h2 className='font-medium ml-24 pb-[60px] sm:pb-[100px] text-lg sm:text-4xl'>… but you’re off by a small margin.</h2>
                 </div>
                 <Link href="/">
-                    <button className='bg-[#FF8100] p-2 text-white rounded-3xl w-36 flex justify-center mb-5'>
+                    <button className='btn-primary mb-[20px]'>
                         Take a Step Back
                     </button>
                 </Link>
-                <p className='pb-36 text-[#007DD7]'><em>(or use the links in the Footer) </em></p>
+                <p className=' hover:u text-[#007DD7] font-medium'><a href="#bottom"><em>(or use the links in the Footer) </em></a></p>
             </div>
         </div>
+
+
     )
 }
 

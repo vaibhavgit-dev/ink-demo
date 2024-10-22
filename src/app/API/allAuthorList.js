@@ -5,9 +5,12 @@ export const AuthorsList = [
     author_name: "Abhijit Majumder", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/abhijit_majumdar.jpg",
     authorDescription:
-    "Abhijit Majumder is a journalist, editor, and media entrepreneur with nearly 30 years of experience at India’s topmost media houses. He is the co-founder and editor- in-chief of India’s first Dolby Atmos–enabled audio, podcast, and video production platform Earshot. He is also the consulting editor of CNN-News18. Abhijit was the editor of Mid-Day, Mail Today, and Asianet News (English and Hindi), and the resident editor of Hindustan Times (Delhi and NCR editions, and previously Bhopal and Indore editions). Abhijit has interviewed leading politicians such as Amit Shah, Shivraj Singh Chouhan, Sachin Pilot, and Smriti Irani; spiritual leaders such as Sri Sri Ravi Shankar and Sister Shivani; film personalities such as Amitabh Bachchan, Salman Khan, and Aamir Khan; prominent media persons such as Tim Sebastian and Riz Khan; and former Chief of Defence Staff Bipin Rawat. He has also written columns and op-eds for a range of national and international media outlets. He writes on politics, social media, books, travel, and culture. He closely tracks and analyses political changes, especially the rise of the Right and nationalism in India and across the world.",
+    "Abhijit Majumder is a journalist, editor, and media entrepreneur with nearly 30 years of experience at India’s topmost media houses. He is the cofounder and editor inchief of India’s first Dolby Atmos–enabled audio, podcast, and video production platform Earshot. He is also the consulting editor of CNNNews18. Abhijit was the editor of MidDay, Mail Today, and Asianet News (English and Hindi), and the resident editor of Hindustan Times (Delhi and NCR editions, and previously Bhopal and Indore editions). Abhijit has interviewed leading politicians such as Amit Shah, Shivraj Singh Chouhan, Sachin Pilot, and Smriti Irani; spiritual leaders such as Sri Sri Ravi Shankar and Sister Shivani; film personalities such as Amitabh Bachchan, Salman Khan, and Aamir Khan; prominent media persons such as Tim Sebastian and Riz Khan; and former Chief of Defence Staff Bipin Rawat. He has also written columns and opeds for a range of national and international media outlets. He writes on politics, social media, books, travel, and culture. He closely tracks and analyses political changes, especially the rise of the Right and nationalism in India and across the world.",
     authorSocial: [
-      
+      "https://x.com/abhijitmajumder",
+      "https://www.instagram.com/abhijit_majumder?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      "https://www.linkedin.com/in/abhijit-majumder-474a3663?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BIZAvOCA%2FT6uGtPhvjogEmA%3D%3D",
+      "https://www.facebook.com/AbhijitWrites/",
     ],
   },
   {
@@ -18,8 +21,9 @@ export const AuthorsList = [
     authorDescription:
     "Abhinav Agarwal lives in Bangalore with his wife and two children. He holds a bachelor’s degree in computer engineering from Mumbai University and is a gold medallist from the Indian Institute of Management, Bangalore. He is the author of a fiction thriller, Predators and Prey. Completing the Vyasa Mahabharata is his second book.",
     authorSocial: [
-      "https://www.instagram.com/writeabhinav/?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D",
+      "https://www.instagram.com/writeabhinav/",
       "https://x.com/AbhinavAgarwal",
+      "https://www.facebook.com/AbhinavAuthor/",
     ],
   },
   {
@@ -28,10 +32,10 @@ export const AuthorsList = [
     author_name: "Abhishek Kumar", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/abhishek_kumar.jpg",
     authorDescription:
-    "He is the Principal at the Army Institute of Management, Kolkata. He teaches courses on leadership, brand management, philosophy of language and philosophy of cities. In his writings he generally explores the fertile spaces between personalities and disciplines, as can be seen in his articles on Gaston Bachelard, Roland Barthes and Herbert Marcuse. His doctoral thesis on the in-betweenness of Human Resources (HR) and marketing helped him in developing a scale to measure brand personality.",
+    "He is the Principal at the Army Institute of Management, Kolkata. He teaches courses on leadership, brand management, philosophy of language and philosophy of cities. In his writings he generally explores the fertile spaces between personalities and disciplines, as can be seen in his articles on Gaston Bachelard, Roland Barthes and Herbert Marcuse. His doctoral thesis on the inbetweenness of Human Resources (HR) and marketing helped him in developing a scale to measure brand personality.",
 
     authorSocial: [
-      "twitter.com/yourprofile",
+
     ],
   },
   {
@@ -62,19 +66,20 @@ export const AuthorsList = [
     author_name: "Aditi Banerjee", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/aditi_banerjee.jpg",
     authorDescription:
-    "Aditi Banerjee is a bestselling author based in the US. Her debut novel, The Curse of Gandhari, was published by Bloomsbury India in 2019 and her second, The Vow of Parvati, came out in 2022. Her third book, Hindu Love Stories: Dharmically Ever After, is a collection of stories from Hindu literature and history. She co-edited Invading the Sacred: An Analysis of Hinduism Studies in America in collaboration with Rajiv Malhotra and has authored several essays in publications such as The Columbia Documentary History of Religion in America Since 1945 and Buddhists, Hindus, and Sikhs in America: A Short History. Her articles have appeared in Outlook magazine and other publications. Aditi is a devout practitioner of Hinduism and frequently writes about Hinduism and the Hindu-American experience. Aditi is a practicing attorney at a Fortune 500 financial services company in the US and a member of the Indic Academy. She completed her executive MBA programme from Columbia University, New York, and earned a juris doctor from Yale Law School. She is a magna cum laude graduate in international relations from Tufts University, Massachusetts.",
+    "Aditi Banerjee is a bestselling author based in the US. Her debut novel, The Curse of Gandhari, was published by Bloomsbury India in 2019 and her second, The Vow of Parvati, came out in 2022. Her third book, Hindu Love Stories: Dharmically Ever After, is a collection of stories from Hindu literature and history. She coedited Invading the Sacred: An Analysis of Hinduism Studies in America in collaboration with Rajiv Malhotra and has authored several essays in publications such as The Columbia Documentary History of Religion in America Since 1945 and Buddhists, Hindus, and Sikhs in America: A Short History. Her articles have appeared in Outlook magazine and other publications. Aditi is a devout practitioner of Hinduism and frequently writes about Hinduism and the HinduAmerican experience. Aditi is a practicing attorney at a Fortune 500 financial services company in the US and a member of the Indic Academy. She completed her executive MBA programme from Columbia University, New York, and earned a juris doctor from Yale Law School. She is a magna cum laude graduate in international relations from Tufts University, Massachusetts.",
     authorSocial: [
-      "https://www.instagram.com/abaner01?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      "https://www.instagram.com/abaner01",
       "https://x.com/Abaner01",
+      "https://www.facebook.com/aditibanerjee01/",
     ],
   },
   {
     id: 7,
-    authslug: "ahilesh-srivastava",
+    authslug: "akhilesh-srivastava",
     author_name: "Akhilesh Srivastava", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/ahilesh_srivastava.jpg",
     authorDescription:
-    "Akhilesh Srivastava Akhilesh Srivastava is globally renowned as a Digital Technology leader and Mobility Expert. He has been rated as one of the 51 most impactful global leaders of smart cities for his path-breaking citizen-centric digital initiatives and e-governance reforms. He headed the implementation one of most successful digital programs of India, FASTag, the electronic toll collection system that has revolutionized the Indian highway and logistic sector. After the successful implementation of FASTag, he is now working with the world's leading organizations, the World Economic Forum, International Road Federation, and McKinsey & Co solving more considerable social challenges using technology such as 'Technology-driven Road Safety 2.0', Greener Mobility, Electric Vehicles, Digitalisation of Construction Industry and Intelligent Transportation Systems. An eloquent speaker, prolific reader, and writer, he is popular on social media and loves to share his knowledge through his books, articles, and talks on various forums. His earlier books on integrating IR-4.0 technology in construction were among the bestselling books.",
+    "Akhilesh Srivastava is globally renowned as a Digital Technology leader and Mobility Expert. He has been rated as one of the 51 most impactful global leaders of smart cities for his pathbreaking citizencentric digital initiatives and egovernance reforms. He headed the implementation one of most successful digital programs of India, FASTag, the electronic toll collection system that has revolutionized the Indian highway and logistic sector. After the successful implementation of FASTag, he is now working with the world's leading organizations, the World Economic Forum, International Road Federation, and McKinsey & Co solving more considerable social challenges using technology such as 'Technologydriven Road Safety 2.0', Greener Mobility, Electric Vehicles, Digitalisation of Construction Industry and Intelligent Transportation Systems. An eloquent speaker, prolific reader, and writer, he is popular on social media and loves to share his knowledge through his books, articles, and talks on various forums. His earlier books on integrating IR4.0 technology in construction were among the bestselling books.",
     authorSocial: [
       
     ],
@@ -82,7 +87,7 @@ export const AuthorsList = [
   {
     id: 8,
     authslug: "dr-alok-pandey",
-    author_name: "Alok Pandey", 
+    author_name: "Dr. Alok Pandey", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/dr-alok-pandey.jpg",
     authorDescription:
     "Dr Alok Pandey grew up in a family with rich spiritual values surrounded by myths and legends. Subsequent to his MD in Psychiatry from the Armed Forces Medical College, Pune and his service in the Indian Air Force, his childhood fascination with myths and legends needed a sound footing. It was through his spiritual journey through the Integral Yoga of Sri Aurobindo that he understood his deeper calling. Though he has written and spoken extensively on various subjects, the myths and legends of India, especially the worship of the Divine Mother, Shakti, remains closest to his heart.",
@@ -96,9 +101,10 @@ export const AuthorsList = [
     author_name: "Amit Agarwal", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/amit-agarwal.jpg",
     authorDescription:
-    "Amit Agarwal has an engineering degree from the University of Roorkee (now IIT Roorkee). Currently, he is on a sabbatical, taking out time for a subject he is passionate about—history. His first book, Swift Horses, Sharp Swords, deals with medieval Islamic invasions. It’s been translated into Hindi. In 2022, he published his second book, A Never-ending Conflict, focussing on Indian history again. His next, Temple Treasure: A Journey through Time, which explores the history of temples, is set to be published soon. He is an avid marathoner and mountaineer. He is also passionate about teaching and once taught history at Amrita Vishwa Vidyapeetham. In his spare time, he teaches maths to underprivileged children.",
+    "Amit Agarwal has an engineering degree from the University of Roorkee (now IIT Roorkee). Currently, he is on a sabbatical, taking out time for a subject he is passionate about—history. His first book, Swift Horses, Sharp Swords, deals with medieval Islamic invasions. It’s been translated into Hindi. In 2022, he published his second book, A Neverending Conflict, focussing on Indian history again. His next, Temple Treasure: A Journey through Time, which explores the history of temples, is set to be published soon. He is an avid marathoner and mountaineer. He is also passionate about teaching and once taught history at Amrita Vishwa Vidyapeetham. In his spare time, he teaches maths to underprivileged children.",
     authorSocial: [
-      
+      "https://x.com/amit1119",
+      "https://www.facebook.com/amitAuthor/",
     ],
   },
   {
@@ -118,7 +124,7 @@ export const AuthorsList = [
     author_name: "Anil Maheshwari", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/anil-maheshwari.jpg",
     authorDescription:
-    "The septuagenarian Anil Maheshwari segued through the rough and tumble of journalism for five decades before superannuating from Hindustan Times as a special correspondent. He has twice been a short-term fellow at Aligarh Muslim University. He has written about a dozen books and is proficient in English and Hindi with a smattering of Urdu. He has contributed to various magazines and newspapers, including the Economic and Political Weekly and Frontier.",
+    "The septuagenarian Anil Maheshwari segued through the rough and tumble of journalism for five decades before superannuating from Hindustan Times as a special correspondent. He has twice been a shortterm fellow at Aligarh Muslim University. He has written about a dozen books and is proficient in English and Hindi with a smattering of Urdu. He has contributed to various magazines and newspapers, including the Economic and Political Weekly and Frontier.",
     authorSocial: [
       
     ],
@@ -129,9 +135,11 @@ export const AuthorsList = [
     author_name: "Anirban Ganguly", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/anirban-ganguly.jpg",
     authorDescription:
-    "After the partition of Bengal in 1947, the influx of refugees from across the border created one of the world’s largest migration crises. In the early years after independence, Prime Minister Nehru imposed the Nehru–Liaquat Pact, an agreement with Pakistan’s Prime Minister Liaquat Ali Khan, which did not serve India’s interests but instead helped Pakistan. In 2019, Prime Minister Narendra Modi enacted the Citizenship Amendment Act (CAA). The objective of the law is to confer citizenship to persecuted minorities, including Bengali Hindus. However, the Congress and communist parties opposed it. From Nehru to Modi sheds light on the struggles faced by Bengali Hindus in post-independent Pakistan. It exposes how the Congress under Nehru’s leadership failed these persecuted refugees. The book also highlights the role of Syama Prasad Mookerjee in advocating for a homeland for Bengali Hindus in West Bengal. The tenacious efforts of organizations such as the RSS, Bharatiya Jana Sangh, and later the BJP in demanding dignity, rehabilitation, and citizenship for these refugees are also explored in some detail.",
+    "After the partition of Bengal in 1947, the influx of refugees from across the border created one of the world’s largest migration crises. In the early years after independence, Prime Minister Nehru imposed the Nehru–Liaquat Pact, an agreement with Pakistan’s Prime Minister Liaquat Ali Khan, which did not serve India’s interests but instead helped Pakistan. In 2019, Prime Minister Narendra Modi enacted the Citizenship Amendment Act (CAA). The objective of the law is to confer citizenship to persecuted minorities, including Bengali Hindus. However, the Congress and communist parties opposed it. From Nehru to Modi sheds light on the struggles faced by Bengali Hindus in postindependent Pakistan. It exposes how the Congress under Nehru’s leadership failed these persecuted refugees. The book also highlights the role of Syama Prasad Mookerjee in advocating for a homeland for Bengali Hindus in West Bengal. The tenacious efforts of organizations such as the RSS, Bharatiya Jana Sangh, and later the BJP in demanding dignity, rehabilitation, and citizenship for these refugees are also explored in some detail.",
     authorSocial: [
-      
+      "https://x.com/anirbanganguly",
+      "https://www.instagram.com/anirban.ganguly.71?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      "https://www.facebook.com/DrAnirbanGanguly/",
     ],
   },
   {
@@ -143,6 +151,7 @@ export const AuthorsList = [
     "डॉ अनिरुद्ध रावत का जन्म बुंदेलखंड के झाँसी जनपद में हुआ। झाँसी से ही अपनी शिक्षा पूर्ण करने के बाद बुंदेलखंड विश्वविद्यालय से उन्होंने डॉक्टर की उपाधि प्राप्त की। बहुमुखी प्रतिभा के धनी लेखक की अध्ययन व लेखन के प्रति लगनशीलता बाल्यकाल से ही थी। आपकी अंग्रेजी में एक शोध पुस्तक ‘Episteme of Desire’ व दो प्रेरक हिंदी उपन्यास ‘सपनों का सारथी’ व ‘स्वप्न रथ’ प्रकाशित हो चुके हैं।",
     authorSocial: [
       "https://x.com/AniruddhRawat10",
+      "https://www.facebook.com/aniruddh.rawat.52/",
     ],
   },
   {
@@ -151,7 +160,7 @@ export const AuthorsList = [
     author_name: "Ankush Sam Thorpe", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/ankush-sam-thorpe.jpg",
     authorDescription:
-    "Ankush Sam Thorpe grew up in Punjab, a northern province in India in the 90s. A graduate in Anthropology and a postgraduate in Genetics, his fascination for science began early in life. In his early teens, he was obsessed with 90s Hollywood science fiction films, especially The Terminator and Jurassic Park. His love affair with science fiction began with the Sidney Sheldon novel The Doomsday Conspiracy and solidified with Dan Brown’s The Lost Symbol and George Orwell’s 1984. However, his passion for storytelling grew with Isaac Asimov’s short story Nightfall, which inspired him to create his own tales. In 2011, at the age of twenty, Ankush wrote his first short story, ‘A Stitch in Time’, exhibiting his fascination with science and history. During the Covid pandemic he found the time to create characters, dialogues, and storylines based on the scientific concepts that keep him enthralled to this date. Presently living in the city of Toronto, he continues to pen more stories with science as the central theme. In addition, he is an Instagram junkie as well as a die-hard Test Cricket fan.",
+    "Ankush Sam Thorpe grew up in Punjab, a northern province in India in the 90s. A graduate in Anthropology and a postgraduate in Genetics, his fascination for science began early in life. In his early teens, he was obsessed with 90s Hollywood science fiction films, especially The Terminator and Jurassic Park. His love affair with science fiction began with the Sidney Sheldon novel The Doomsday Conspiracy and solidified with Dan Brown’s The Lost Symbol and George Orwell’s 1984. However, his passion for storytelling grew with Isaac Asimov’s short story Nightfall, which inspired him to create his own tales. In 2011, at the age of twenty, Ankush wrote his first short story, ‘A Stitch in Time’, exhibiting his fascination with science and history. During the Covid pandemic he found the time to create characters, dialogues, and storylines based on the scientific concepts that keep him enthralled to this date. Presently living in the city of Toronto, he continues to pen more stories with science as the central theme. In addition, he is an Instagram junkie as well as a diehard Test Cricket fan.",
     authorSocial: [
       
     ],
@@ -162,7 +171,7 @@ export const AuthorsList = [
     author_name: "Aravindan Neelakandan", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/aravindan-neelakandan.jpg",
     authorDescription:
-    "Aravindan Neelakandan is currently a contributing editor for Swarajya magazine. He has worked for more than a decade with the Natural Resources Development Project of Vivekananda Kendra (VK- nardep). He has authored books on sustainable agricultural technologies and traditional knowledge systems in Tamizh. He has co-authored Breaking India with Rajiv Malhotra.",
+    "Aravindan Neelakandan is currently a contributing editor for Swarajya magazine. He has worked for more than a decade with the Natural Resources Development Project of Vivekananda Kendra (VK nardep). He has authored books on sustainable agricultural technologies and traditional knowledge systems in Tamizh. He has coauthored Breaking India with Rajiv Malhotra.",
     authorSocial: [
       
     ],
@@ -173,7 +182,7 @@ export const AuthorsList = [
     author_name: "Arvind Chaturvedi", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/arvind-chaturvedi.jpg",
     authorDescription:
-    "अरविन्द चतुर्वेदी वरिष्ठ पत्रकार हैं। विंध्याचल धाम के लिए प्रसिद्ध मिर्ज़ापुर जिले में जन्म लेने वाले अरविंद का शुरुआती समय विश्वनाथ की नगरी काशी की गलियों में बीता । बनारस हिंदू विश्वविद्यालय से मास्टर ऑफ सोशियोलॉजी की डिग्री हासिल करने के बाद अरविंद ने पत्रकारिता को अपना लिया दिल्ली पहुंचे। कई बड़े न्यूज चैनलों में काम कर चुके अरविंद इन दिनों एक प्रतिष्ठित न्यूज चैनल में काम कर रहे हैं। प्रधानमंत्री नरेंद्र मोदी पर केंद्रित 'द रियल मोदी' उनकी पहली प्रकाशित पुस्तक है, जिसे अंतरराष्ट्रीय प्रकाशक ब्लूम्सबरी ने प्रकाशित किया। 'द रियल मोदी' अब तक तीन भाषाओं - हिंदी, अंग्रेजी और गुजराती में प्रकाशित हो चुकी है। यह पुस्तक पूरे देश और दुनिया में बेस्ट सेलर रही। इस पुस्तक ने लेखक को अलग पहचान दी। हमेशा कुछ हटकर करने वाले अरविन्द की नरेंद्र मोदी पर लिखी यह दूसरी किताब है।",
+    "अरविन्द चतुर्वेदी वरिष्ठ पत्रकार हैं। विंध्याचल धाम के लिए प्रसिद्ध मिर्ज़ापुर जिले में जन्म लेने वाले अरविंद का शुरुआती समय विश्वनाथ की नगरी काशी की गलियों में बीता । बनारस हिंदू विश्वविद्यालय से मास्टर ऑफ सोशियोलॉजी की डिग्री हासिल करने के बाद अरविंद ने पत्रकारिता को अपना लिया दिल्ली पहुंचे। कई बड़े न्यूज चैनलों में काम कर चुके अरविंद इन दिनों एक प्रतिष्ठित न्यूज चैनल में काम कर रहे हैं। प्रधानमंत्री नरेंद्र मोदी पर केंद्रित 'द रियल मोदी' उनकी पहली प्रकाशित पुस्तक है, जिसे अंतरराष्ट्रीय प्रकाशक ब्लूम्सबरी ने प्रकाशित किया। 'द रियल मोदी' अब तक तीन भाषाओं हिंदी, अंग्रेजी और गुजराती में प्रकाशित हो चुकी है। यह पुस्तक पूरे देश और दुनिया में बेस्ट सेलर रही। इस पुस्तक ने लेखक को अलग पहचान दी। हमेशा कुछ हटकर करने वाले अरविन्द की नरेंद्र मोदी पर लिखी यह दूसरी किताब है।",
     authorSocial: [
       
     ],
@@ -184,18 +193,19 @@ export const AuthorsList = [
     author_name: "Bhushan Patwardhan", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/bhushan-patwardhan.jpg",
     authorDescription:
-    "Dr Bhushan Patwardhan, National Research Professor— Ayush, is an accomplished and highly cited biomedical researcher ranked among the top scientists globally with over a three-decade stint in health research cutting across trans-disciplinary fields. He is an elected fellow of the National Academies of Sciences and Medicine in India. Dr Patwardhan is a distinguished professor at the Savitribai Phule Pune University, India, and an adjunct professor at Western Sydney University, Australia. He is a member of the Lancet Citizen’s Commission on reimagining India’s health system and an advisor to the WHO’s Global Traditional Medicine Centre. Indu Ramchandani has spent most of her working years as an editor, transcriber, compiler, and book publisher. After five years as the South Asia editor-in-chief at Encyclopaedia Britannica, she moved on to being a freelance editorial consultant. The passion for writing developed with the studies of the ancient scriptures and the epics. Indu Ramchandani has transcribed and published 14 handbooks in the Understanding Vedanta Lecture Series, written several articles on Vedic philosophy, and co-authored Life Is as Is: Teachings from the Mahabharata.",
+    "Dr Bhushan Patwardhan, National Research Professor— Ayush, is an accomplished and highly cited biomedical researcher ranked among the top scientists globally with over a threedecade stint in health research cutting across transdisciplinary fields. He is an elected fellow of the National Academies of Sciences and Medicine in India. Dr Patwardhan is a distinguished professor at the Savitribai Phule Pune University, India, and an adjunct professor at Western Sydney University, Australia. He is a member of the Lancet Citizen’s Commission on reimagining India’s health system and an advisor to the WHO’s Global Traditional Medicine Centre.",
     authorSocial: [
-      
+      "https://x.com/DrBhushanPatwa1",
+      "https://www.linkedin.com/in/bhushanpatwardhan?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3B4rNnPs7%2BSWiBO0ugw1XnCw%3D%3D",
     ],
   },
   {
     id: 18,
-    authslug: "bimal-chakravartty",
-    author_name: "Bimal Chakravartty", 
+    authslug: "bimal-chakravarty",
+    author_name: "Bimal Chakravarty", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/bimal-chakravartty.jpg",
     authorDescription:
-      "The author, Bimal Chakravartty, was born in Kashi, where he spent his adolescent years. However, since his father was with the Indian Railways, he has lived in many parts of India as well. He lost his father at a very young age, and thus, his career took up a greater part of his youth. He never gave up what he liked, though - reading. Reading books written by Bankim Chandra Chattopadhyay, Rabindra Nath Tagore, Bibutibhushan Bandyopadhyay, and others has always fascinated and intrigued him. Currently, he resides in Noida, where he spends time both reading classics and writing some himself as well. He is, what many would say, a probashi Bengali - one who is not from Kolkata. But, his command over the language and his expressions and thoughts are all very much a reflection of the 'City of Joy'. Probashir Golpo Shongroho, his second book, the first being his autobiography, Jana Awjanar Majhe, is as, if not more, poetic, soulful, and warm as his first novel was.",
+      "The author, Bimal Chakravartty, was born in Kashi, where he spent his adolescent years. However, since his father was with the Indian Railways, he has lived in many parts of India as well. He lost his father at a very young age, and thus, his career took up a greater part of his youth. He never gave up what he liked, though reading. Reading books written by Bankim Chandra Chattopadhyay, Rabindra Nath Tagore, Bibutibhushan Bandyopadhyay, and others has always fascinated and intrigued him. Currently, he resides in Noida, where he spends time both reading classics and writing some himself as well. He is, what many would say, a probashi Bengali one who is not from Kolkata. But, his command over the language and his expressions and thoughts are all very much a reflection of the 'City of Joy'. Probashir Golpo Shongroho, his second book, the first being his autobiography, Jana Awjanar Majhe, is as, if not more, poetic, soulful, and warm as his first novel was.",
     authorSocial: [
       
     ],
@@ -209,6 +219,8 @@ export const AuthorsList = [
     "Bishnupada Sethi is an IAS officer of the 1995 batch. Currently, he is the principal secretary to the Odisha government. He has served in one of most backward regions of the country such as Kandhamal, Gajapati, Sonepur, Nuapada and Rayagada. His role in improving the lives of people in the region earned him much appreciation from the National Human Rights Commission. Bishnupada is a recipient of distinguished alumnus awards from National Institute of Technology, Rourkela, and National Institute of Industrial Engineering (now IIM), Mumbai. He was awarded the President of India Silver Medal for his contribution to Census 2011. Sethi’s performance as a special relief commissioner during the 2019 super cyclone Fani was recognized as an exemplary model throughout the world, including by the United Nations. He is also the recipient of the Bhima Bhoi Award for his contribution to popularizing Mahima philosophy. He is a published author and writes articles for various publications. His books on poetry, namely Where Shall I go, My World of Words, Beyond Feelings and Beyond Here and Other Poems, have been received well and translated into multiple languages. Sarala Sahitya Sansad felicitated him for his contribution to mystic poetry.",
     authorSocial: [
       "https://x.com/BPSethi",
+      "https://www.instagram.com/sethibishnupada?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      "https://www.linkedin.com/in/bishnupadaa-setthi-43b23026?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BKSbkfJLsS76LptOy%2FAxnew%3D%3D",
     ],
   },
   {
@@ -217,7 +229,7 @@ export const AuthorsList = [
     author_name: "Biswaroop Mukherjee", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/biswaroop-mukherjee.jpg",
     authorDescription:
-    "Biswaroop Mukherjee is an experienced HR leader. He has handled multiple high- impact roles in the domain of HR in various organisations of repute across industries and geographies. Biswaroop’s journey in HR began with a passion for understanding the intricacies of human behaviour in the workplace and a drive to create positive organisational cultures that foster growth and development. His interests and expertise are wide ranging, encompassing such eclectic fields as organisation development, change management, executive coaching, and building high-performing teams. Biswaroop completed his management education from SIBM, Pune, and bachelor’s degree in science from Fergusson College, Pune. He has been associated with Tata Motors for over a decade now and is currently employed as the HR head of the commercial vehicles (business) unit. Biswaroop has handled various roles at Tata Motors prior to his current role. He has also worked at GE, Deloitte, Dr. Reddy’s, and ABP Group. An ICF certified coach and a Hogan certified assessor, he has developed a keen interest in human resource development and management. His diverse background equips him with a unique perspective on the challenges and opportunities facing HR practitioners in today’s fast-paced and ever-changing business environment. Driven by a commitment to continuous learning and professional development, Biswaroop has earned certifications in executive coaching and assessment and regularly participates in industry conferences and workshops.",
+    "Biswaroop Mukherjee is an experienced HR leader. He has handled multiple high impact roles in the domain of HR in various organisations of repute across industries and geographies. Biswaroop’s journey in HR began with a passion for understanding the intricacies of human behaviour in the workplace and a drive to create positive organisational cultures that foster growth and development. His interests and expertise are wide ranging, encompassing such eclectic fields as organisation development, change management, executive coaching, and building highperforming teams. Biswaroop completed his management education from SIBM, Pune, and bachelor’s degree in science from Fergusson College, Pune. He has been associated with Tata Motors for over a decade now and is currently employed as the HR head of the commercial vehicles (business) unit. Biswaroop has handled various roles at Tata Motors prior to his current role. He has also worked at GE, Deloitte, Dr. Reddy’s, and ABP Group. An ICF certified coach and a Hogan certified assessor, he has developed a keen interest in human resource development and management. His diverse background equips him with a unique perspective on the challenges and opportunities facing HR practitioners in today’s fastpaced and everchanging business environment. Driven by a commitment to continuous learning and professional development, Biswaroop has earned certifications in executive coaching and assessment and regularly participates in industry conferences and workshops.",
     authorSocial: [
       
     ],
@@ -225,10 +237,10 @@ export const AuthorsList = [
   {
     id: 21,
     authslug: "brigadier-b-s-mehta",
-    author_name: "Brigadier B.S. Mehta", 
+    author_name: "Brig B.S. Mehta", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/brigadier-b.s.-mehta.jpg",
     authorDescription:
-    "Brigadier B.S. Mehta comes from an illustrious military family, with four brothers having fought in the War of 1971. Commissioned into 45 CAVALRY in 1966, he later raised the 13 Armoured Regiment. He has served in all the Strike Corps and also an Infantry and Mountain Division with distinction. He has worked on deputation with the Cabinet Secretariat. He took premature retirement in 1998 to serve as Director with the Government of Gujarat. He ran the first course for retiring defence personnel at the Entrepreneurship Development Institute, Ahmedabad in 2000, which became the forerunner for similar courses run by Indian Institutes of Management. He spent the next 16 years in Higher Education to finally demit as Vice Chancellor of Maharishi University of Management and Technology in 2016. Post retirement, he works as an advisor to Gujarat-based NGOs helping families and dependents of martyrs.",
+    "Brigadier B.S. Mehta comes from an illustrious military family, with four brothers having fought in the War of 1971. Commissioned into 45 CAVALRY in 1966, he later raised the 13 Armoured Regiment. He has served in all the Strike Corps and also an Infantry and Mountain Division with distinction. He has worked on deputation with the Cabinet Secretariat. He took premature retirement in 1998 to serve as Director with the Government of Gujarat. He ran the first course for retiring defence personnel at the Entrepreneurship Development Institute, Ahmedabad in 2000, which became the forerunner for similar courses run by Indian Institutes of Management. He spent the next 16 years in Higher Education to finally demit as Vice Chancellor of Maharishi University of Management and Technology in 2016. Post retirement, he works as an advisor to Gujaratbased NGOs helping families and dependents of martyrs.",
     authorSocial: [
       
     ],
@@ -236,7 +248,7 @@ export const AuthorsList = [
   {
     id: 22,
     authslug: "brigadier-jasbir-singh-sm",
-    author_name: "Brigadier Jasbir Singh, SM", 
+    author_name: "Brig Jasbir Singh, SM", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/brigadier-jasbir-singh-sm.jpg",
     authorDescription:
     "A Rimcollian who studied at RIMC from 1962 to 1966, Brigadier Jasbir underwent training at NDA Khadakwasla followed by IMA Dehradun, where he was commissioned in the 4th Battalion, The Kumaon Regiment. He was wounded during operations behind enemy lines in East Pakistan in the 1971 war and decorated twice for gallantry during operations. After serving for 34 years in the Army, he now leads a retired life in the hills of Ranikhet and spends his time painting and writing on military subjects.",
@@ -250,7 +262,7 @@ export const AuthorsList = [
     author_name: "Brigitte Borja de Mozota", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/brigitte-borja-de-mozota.jpg",
     authorDescription:
-    "Brigitte Borja de Mozota is one of the world's most prominent scholars in design management and author of the reference book Design Management - Using Design to Build Brand Value and Corporate Innovation. Currently, a consultant as well as professor and supervisor of MBA 'managing by design' theses, she concentrates on mission-driven projects and to develop tools to help understanding the value of the design industry and design-driven innovation, as well as on leadership challenges in economics.",
+    "Brigitte Borja de Mozota is one of the world's most prominent scholars in design management and author of the reference book Design Management Using Design to Build Brand Value and Corporate Innovation. Currently, a consultant as well as professor and supervisor of MBA 'managing by design' theses, she concentrates on missiondriven projects and to develop tools to help understanding the value of the design industry and designdriven innovation, as well as on leadership challenges in economics.",
     authorSocial: [
       
     ],
@@ -283,16 +295,17 @@ export const AuthorsList = [
     author_name: "Dhaval Patel", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/dhaval-patel-1.jpg",
     authorDescription:
-    "श्री धवल पटेल ढोडिया-पटेल जनजाति से आने वाले युवा नेता है। उनका पैतृक गांव चीखली, नवसारी है और वर्तमान मैं सूरत शहर में उनका निवास स्थान है। उन्होंने इंजीनियरिंग का अभ्यास एसवीएनआईटी (SVNIT), सूरत कॉलेज से किया है। पुणे शहर की सिम्बायोसिस इांस्टीट्यूट ऑफ बिजनेस मैनेजमेंट कॉलेज से उन्होंने MBA की डिग्री प्राप्त की है।उन्हें इन्फॉमेशन टेक्नोलॉजी (IT) और कंसल्टेंसी क्षेत्र में 12 साल का अनुभव प्राप्त है। इस दौरान उन्होंने देश व विदेश मैं भी काम किया है। इसके आलावा वह एक कॉलमीनेस्ट भी है और वह पब्लिक पॉलिसी, अर्थव्यवस्था विषय पर 100 से अधिक आर्टिकल्स लिख चुके है। इसके अलावा धवल टेलीविजन और चर्चा मैं हिस्सा लेते रहते हैं। वर्तमान में धवल पटेल भारतीय जनता पार्टी की इकाई अनुसूचित जनजातीय मोर्चा से जुडे हुए हैं। वह पिछले 15 माह से भाजपा अनुसूचित जनजातीय मोर्चा के राष्ट्रीय सोशल मीडिया प्रभारी के रूप में अपना दायित्व निभा रहे हैं।वह जनजाति समाज की समस्या और उनके मुद्दों को प्रमुखता से उठाते हैं । वह जनजाति समाज की सांस्कृतिक विरासत और उनके इतिहास को जिवंत रखने का और लोगोां को अवगत कराने की दिशा में भी कार्य कर रहे हैं। जनजाति समाज का भारतीय स्वतंत्रता मैं दिए गए योगदान को सबके समक्ष रखने हेतु उन्होंने यह पुस्तक भी लिखी है।",
+    "श्री धवल पटेल ढोडियापटेल जनजाति से आने वाले युवा नेता है। उनका पैतृक गांव चीखली, नवसारी है और वर्तमान मैं सूरत शहर में उनका निवास स्थान है। उन्होंने इंजीनियरिंग का अभ्यास एसवीएनआईटी (SVNIT), सूरत कॉलेज से किया है। पुणे शहर की सिम्बायोसिस इांस्टीट्यूट ऑफ बिजनेस मैनेजमेंट कॉलेज से उन्होंने MBA की डिग्री प्राप्त की है।उन्हें इन्फॉमेशन टेक्नोलॉजी (IT) और कंसल्टेंसी क्षेत्र में 12 साल का अनुभव प्राप्त है। इस दौरान उन्होंने देश व विदेश मैं भी काम किया है। इसके आलावा वह एक कॉलमीनेस्ट भी है और वह पब्लिक पॉलिसी, अर्थव्यवस्था विषय पर 100 से अधिक आर्टिकल्स लिख चुके है। इसके अलावा धवल टेलीविजन और चर्चा मैं हिस्सा लेते रहते हैं। वर्तमान में धवल पटेल भारतीय जनता पार्टी की इकाई अनुसूचित जनजातीय मोर्चा से जुडे हुए हैं। वह पिछले 15 माह से भाजपा अनुसूचित जनजातीय मोर्चा के राष्ट्रीय सोशल मीडिया प्रभारी के रूप में अपना दायित्व निभा रहे हैं।वह जनजाति समाज की समस्या और उनके मुद्दों को प्रमुखता से उठाते हैं । वह जनजाति समाज की सांस्कृतिक विरासत और उनके इतिहास को जिवंत रखने का और लोगोां को अवगत कराने की दिशा में भी कार्य कर रहे हैं। जनजाति समाज का भारतीय स्वतंत्रता मैं दिए गए योगदान को सबके समक्ष रखने हेतु उन्होंने यह पुस्तक भी लिखी है।",
     authorSocial: [
-      "https://www.instagram.com/dhavalpatel241086?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      "https://www.instagram.com/dhavalpatel241086",
       "https://x.com/DhavalP16545882",
+      "https://www.facebook.com/dhaval241086/",
     ],
   },
   {
     id: 27,
-    authslug: "hriday-paul-singh",
-    author_name: "Hriday Paul Singh", 
+    authslug: "hirday-paul-singh",
+    author_name: "Hirday Paul Singh", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/hriday-paul-singh.jpg",
     authorDescription:
     "Hirday Paul Singh is a communication professional with more than 36 years of diverse experience in Public Relations, Journalism and Communication. His mission is to preserve and propagate art, life, and philosophy of his grandfather Sobha Singh Artist. This book is his humble effort to present a simple biography of the eminent artist with some glimpses of his art and philosophy. Dr Singh also has an abiding interest in preserving and popularizing Kangra folk art and culture.",
@@ -317,9 +330,11 @@ export const AuthorsList = [
     author_name: "Indu Ramchandani", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/indu-ramchandani.jpg",
     authorDescription:
-      "Indu Ramchandani has spent most of her working years as an editor, transcriber, compiler, and book publisher. After five years as the South Asia editor-in-chief at Encyclopaedia Britannica, she moved on to being a freelance editorial consultant. The passion for writing developed with the studies of the ancient scriptures and the epics. Indu Ramchandani has transcribed and published 14 handbooks in the Understanding Vedanta Lecture Series, written several articles on Vedic philosophy, and co-authored Life Is as Is: Teachings from the Mahabharata.",
+      "Indu Ramchandani has spent most of her working years as an editor, transcriber, compiler, and book publisher. After five years as the South Asia editorinchief at Encyclopaedia Britannica, she moved on to being a freelance editorial consultant. The passion for writing developed with the studies of the ancient scriptures and the epics. Indu Ramchandani has transcribed and published 14 handbooks in the Understanding Vedanta Lecture Series, written several articles on Vedic philosophy, and coauthored Life Is as Is: Teachings from the Mahabharata.",
     authorSocial: [
-      
+      "https://x.com/induvr",
+      "https://www.instagram.com/indu_ramchandani/?utm_source=ig_web_button_share_sheet",
+      "https://www.linkedin.com/in/indu-ramchandani-1406499?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BLF%2BiOUNkS3Wiu%2FRE%2BxsO0w%3D%3D",
     ],
   },
   {
@@ -328,7 +343,7 @@ export const AuthorsList = [
     author_name: "Jay Jina", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/jay-jina.jpg",
     authorDescription:
-    "Jay Jina is the director of Chitraayana, a vertical within INDICA. He has edited and co-authored a series of three books on India’s cultural heritage. This volume is the fourth in the series (the most recent being Anveshana). Before this project, Jay mentored young writers on a creative writing programme. Being from an applied mathematics background, most of Jay’s professional career has been in industries such as automotive, aerospace, and instrumentation where he held several senior-level positions predominantly in the areas of manufacturing, logistics, strategy, and information systems. This industry career was interspersed with periods in academia and consultancy with the Big Four. For several years, Jay taught executive MBA programmes. Apart from his role within INDICA, he teaches mathematics at a UK university. Jay was born in Africa to Indian descent parents. He now lives in the UK.",
+    "Jay Jina is the director of Chitraayana, a vertical within INDICA. He has edited and coauthored a series of three books on India’s cultural heritage. This volume is the fourth in the series (the most recent being Anveshana). Before this project, Jay mentored young writers on a creative writing programme. Being from an applied mathematics background, most of Jay’s professional career has been in industries such as automotive, aerospace, and instrumentation where he held several seniorlevel positions predominantly in the areas of manufacturing, logistics, strategy, and information systems. This industry career was interspersed with periods in academia and consultancy with the Big Four. For several years, Jay taught executive MBA programmes. Apart from his role within INDICA, he teaches mathematics at a UK university. Jay was born in Africa to Indian descent parents. He now lives in the UK.",
     authorSocial: [
       
     ],
@@ -339,7 +354,7 @@ export const AuthorsList = [
     author_name: "Jinan K. B.", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/jinan-k-b.jpg",
     authorDescription:
-    "Jinan believes, the cognitive right as the most fundamental right which modernity—society and school—brutally takes away right from childhood. He considers himself to be someone who was able to recover from the damage of schooling and modernity when he got an opportunity to be with indigenous people. His experience with the illiterate artisans helped him to understand the process of creation of life-sustaining knowledge, its holistic nature and also how children learn autonomously. He is engaged in an ongoing research on the true nature of learning—why, what and how. He has been working on natural learning, children and cognitive damages inflicted by Modernity and Modern Schooling for almost three decades now. Currently, Jinan is involved in enabling people to explore and experientially recover their natural cognitive system damaged by schooling. He aims to sensitize adults to provide a truly conducive environment for their children. He has co-founded Existential Knowledge Foundation, Thanima, Being Academy, and Initiating Inquiry.",
+    "Jinan believes, the cognitive right as the most fundamental right which modernity—society and school—brutally takes away right from childhood. He considers himself to be someone who was able to recover from the damage of schooling and modernity when he got an opportunity to be with indigenous people. His experience with the illiterate artisans helped him to understand the process of creation of lifesustaining knowledge, its holistic nature and also how children learn autonomously. He is engaged in an ongoing research on the true nature of learning—why, what and how. He has been working on natural learning, children and cognitive damages inflicted by Modernity and Modern Schooling for almost three decades now. Currently, Jinan is involved in enabling people to explore and experientially recover their natural cognitive system damaged by schooling. He aims to sensitize adults to provide a truly conducive environment for their children. He has cofounded Existential Knowledge Foundation, Thanima, Being Academy, and Initiating Inquiry.",
     authorSocial: [
       
     ],
@@ -350,9 +365,9 @@ export const AuthorsList = [
     author_name: "Karan Mehrishi", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/karan-mehrishi.jpg",
     authorDescription:
-    "Karan Mehrishi is a journalist by day and an economist by night. For almost two decades, he has been passionately covering the Indian economy, investing his life, energy and time to the understanding of the concept of India as a society and a nation-state. In his current avatar, he is an economics columnist and writes on whatever he deems fit for public deliberation. He takes keen interest in the workings of central banks.",
+    "Karan Mehrishi is a journalist by day and an economist by night. For almost two decades, he has been passionately covering the Indian economy, investing his life, energy and time to the understanding of the concept of India as a society and a nationstate. In his current avatar, he is an economics columnist and writes on whatever he deems fit for public deliberation. He takes keen interest in the workings of central banks.",
     authorSocial: [
-      
+      "https://www.linkedin.com/in/karan-mehrishi-6b330117?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BEnkvitaoQt2QGy8FMGwxIg%3D%3D",
     ],
   },
   {
@@ -383,10 +398,11 @@ export const AuthorsList = [
     author_name: "Kushagra Aniket", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/kushagra-aniket.jpg",
     authorDescription:
-      "Kushagra Aniket is an economic and management consultant based in New York. He graduated with highest honours from Cornell University as a Tata scholar with degrees in economics, mathematics, and statistics. He completed his MBA in finance with Dean’s Honours as a fellow from Columbia University. Born and raised in Bihar, Kushagra has received multiple awards in both India and the U.S. for his writings in poetry as well as prose that span three languages: English, Hindi, and Sanskrit. He is known as an āśukavi (extempore poet) in Sanskrit and has presented his compositions at several institutions in India and abroad. Kushagra is a scholar-in-residence at Indic Academy, where he focuses his efforts on showcasing Sanskrit poetry as a living tradition on the international stage.",
+      "Kushagra Aniket is an economic and management consultant based in New York. He graduated with highest honours from Cornell University as a Tata scholar with degrees in economics, mathematics, and statistics. He completed his MBA in finance with Dean’s Honours as a fellow from Columbia University. Born and raised in Bihar, Kushagra has received multiple awards in both India and the U.S. for his writings in poetry as well as prose that span three languages: English, Hindi, and Sanskrit. He is known as an āśukavi (extempore poet) in Sanskrit and has presented his compositions at several institutions in India and abroad. Kushagra is a scholarinresidence at Indic Academy, where he focuses his efforts on showcasing Sanskrit poetry as a living tradition on the international stage.",
     authorSocial: [
-      "https://www.instagram.com/kushagraaniket?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      "https://www.instagram.com/kushagraaniket",
       "https://x.com/KushagraAniket",
+      "https://www.linkedin.com/in/kushagra-aniket-51a07458?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BmJfx2mF7T7mA%2BRtn8Fj1Cg%3D%3D",
     ],
   },
   {
@@ -395,16 +411,18 @@ export const AuthorsList = [
     author_name: "Kushal Mehra", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/kushal-mehra.jpg",
     authorDescription:
-    "Kushal Mehra is a former textile- entrepreneur-turned-podcaster based in Mumbai. He is a dharmic sceptic and believes that scepticism is elevating. His principal interest lies in articulating Indian scepticism using Indian epistemological frameworks. Kushal is the host of the hugely popular Cārvāka Podcast, where he discusses sports, philosophy, public policy, current affairs, history, economics, etc., with his guests. Kushal holds a master’s degree in philosophy and draws heavily from it for his podcast, where he engages an eclectic list of guests on a wide range of topics. Today, when society is deeply polarised and discussions cantankerous, Kushal brings a breath of fresh air by conducting debates in a civilised manner. Through his podcast and writing, Kushal attempts to answer some of contemporary’s most vexing topics in a freewheeling chat.",
+    "Kushal Mehra is a former textile entrepreneurturnedpodcaster based in Mumbai. He is a dharmic sceptic and believes that scepticism is elevating. His principal interest lies in articulating Indian scepticism using Indian epistemological frameworks. Kushal is the host of the hugely popular Cārvāka Podcast, where he discusses sports, philosophy, public policy, current affairs, history, economics, etc., with his guests. Kushal holds a master’s degree in philosophy and draws heavily from it for his podcast, where he engages an eclectic list of guests on a wide range of topics. Today, when society is deeply polarised and discussions cantankerous, Kushal brings a breath of fresh air by conducting debates in a civilised manner. Through his podcast and writing, Kushal attempts to answer some of contemporary’s most vexing topics in a freewheeling chat.",
     authorSocial: [
-      "https://www.instagram.com/thecarvakapodcast?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      "https://www.instagram.com/thecarvakapodcast",
       "https://x.com/kushal_mehra",
+      "https://www.linkedin.com/in/kushal-mehra-2403b8a3?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BbfIYX0NhRECFrMTcbZ2NcQ%3D%3D",
+      "https://www.facebook.com/KushalMehraOfficial/",
     ],
   },
   {
     id: 37,
     authslug: "lt-gen-s-b-sehajpal",
-    author_name: "Lt Gen. S. B. Sehajpal", 
+    author_name: "Lt.Gen.S.B.Sehajpal", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/lt-gen-s-b-sehajpal.jpg",
     authorDescription:
       "Lieutenant General S.B. Sehajpal has formerly served as the Director General, Dental Services in the Indian Army. He is an MDS in Prosthodontics and has been awarded the Colonel A. G. Rangaraj Challenge Trophy in 1979 and Lt Gen. K. S. Memorial Medal in 1985. A recipient of the Army Commander Western Command Commendation in 1993, Chief of Army Staff Commendation in 1997 and Army Commander Southern Command Commendation in 2001, Lt Gen. S. B. Sehajpal has been decorated by the President of India with the Vishisht Seva Medal in 2002, Ati Vishisht Seva Medal in 2007 and Param Vishisht Seva Medal––the highest military award for distinguished service––in 2011.",
@@ -429,15 +447,15 @@ export const AuthorsList = [
     author_name: "M.G. Devasahayam", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/m-g-devasahayam.jpg",
     authorDescription:
-    "M.G. Devasahayam is a soldier, administrator and economist with a distinguished career spanning over several decades. He has direct and first-hand experience in the working and ethos of the Indian Army, Indian Administrative Service (IAS), public and private sector, political system as well as NGOs. He fought the India–Pakistan War of 1965, participated in the counter-insurgency operations in Nagaland (1967-68) and entered the IAS in 1968. As an IAS officer, he has held key assignments in the governments of Haryana and the union territory of Chandigarh. He was a member of the Government of India High-Powered Committee on Agricultural Policy set up in 1990. He has worked in corporate, academic and voluntary sectors. Devasahayam is a prolific writer; he has written op-eds, articles and columns for several publications. He writes on democracy, governance, civil services, urban development, the economy, environment and politics. His books include India's Second Freedom: An Untold Saga (2003), JP in Jail: An Uncensored Account (2006), JP Movement, Emergency and India's Second Freedom (2011) and A Drop of Love: Memoir of Saint Teresa (2016). He has also contributed chapters in two edited volumes: Indian Democracy: Contradictions and Reconciliations (2020) and Saint Devasahayam: Sacrifice and Crown of Glory (2022). He is the editor of the book Electoral Democracy: An Inquiry into the Fairness and Integrity of Elections in India (2022). He was closely associated with Lok Nayak Jayaprakash Narayan (JP) and St Mother Teresa.",
+    "M.G. Devasahayam is a soldier, administrator and economist with a distinguished career spanning over several decades. He has direct and firsthand experience in the working and ethos of the Indian Army, Indian Administrative Service (IAS), public and private sector, political system as well as NGOs. He fought the India–Pakistan War of 1965, participated in the counterinsurgency operations in Nagaland (196768) and entered the IAS in 1968. As an IAS officer, he has held key assignments in the governments of Haryana and the union territory of Chandigarh. He was a member of the Government of India HighPowered Committee on Agricultural Policy set up in 1990. He has worked in corporate, academic and voluntary sectors. Devasahayam is a prolific writer; he has written opeds, articles and columns for several publications. He writes on democracy, governance, civil services, urban development, the economy, environment and politics. His books include India's Second Freedom: An Untold Saga (2003), JP in Jail: An Uncensored Account (2006), JP Movement, Emergency and India's Second Freedom (2011) and A Drop of Love: Memoir of Saint Teresa (2016). He has also contributed chapters in two edited volumes: Indian Democracy: Contradictions and Reconciliations (2020) and Saint Devasahayam: Sacrifice and Crown of Glory (2022). He is the editor of the book Electoral Democracy: An Inquiry into the Fairness and Integrity of Elections in India (2022). He was closely associated with Lok Nayak Jayaprakash Narayan (JP) and St Mother Teresa.",
     authorSocial: [
       
     ],
   },
   {
     id: 40,
-    authslug: "major-navdeep-singh",
-    author_name: "Major Navdeep Singh", 
+    authslug: "navdeep-singh",
+    author_name: "Navdeep Singh", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/major-navdeep-singh.jpg",
     authorDescription:
       "Major Navdeep Singh is a lawyer at the Punjab & Haryana High Court, Chandigarh. He was a Member (gratis) of a High-Level Committee of Experts constituted by the then Defence Minister on a sentiment expressed by the Prime Minister for reducing litigation initiated by the Ministry of Defence in service and pension-related matters and to strengthen the system of redressal of grievances. He is a strong supporter of judicial independence.",
@@ -447,11 +465,11 @@ export const AuthorsList = [
   },
   {
     id: 41,
-    authslug: "professor-dr-makarand-paranjape",
-    author_name: "Makarand R Paranjape", 
+    authslug: "dr-makarand-r-paranjape",
+    author_name: "Dr. Makarand R. Paranjape", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/professor-dr-makarand-paranjape.jpg",
     authorDescription:
-    "Professor Dr Paranjape is a famous Indian novelist and poet. He is hugely respected in the Indian academia. He was a professor at the Jawaharlal Nehru University for 19 years before becoming the Director of the Indian Institute of Advanced Study, Shimla, since August 2018. His much-celebrated collection of published works include 120 academic papers, a novel, several poems, short stories, and essays. He has also done book reviews and also writes as a columnist for various renowned publications.",
+    "Professor Dr Paranjape is a famous Indian novelist and poet. He is hugely respected in the Indian academia. He was a professor at the Jawaharlal Nehru University for 19 years before becoming the Director of the Indian Institute of Advanced Study, Shimla, since August 2018. His muchcelebrated collection of published works include 120 academic papers, a novel, several poems, short stories, and essays. He has also done book reviews and also writes as a columnist for various renowned publications.",
     authorSocial: [
       
     ],
@@ -462,15 +480,18 @@ export const AuthorsList = [
     author_name: "Manogna Sastry", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/manogna-sastry.jpg",
     authorDescription:
-      "She is a Master of Science from the Indian Institute of Astrophysics, with a strong background in theoretical physics and mathematics. Her research interests span major domains including astrophysics, Indology, civilizational studies, consciousness studies, work on Sri Aurobindo, sustainability, and education. She has presented at several conferences and published papers in peer-reviewed journals. Manogna is also a passionate sustainability practitioner and environmentalist.",
+      "Manogna Sastry is a M.Sc. from the Indian Institute of Astrophysics with a strong background in theoretical physics and mathematics. She is currently the research team leader at Infinity Foundation. Her research spans astrophysics, Indology focused on chronology and desacralization, civilizational studies, consciousness studies focused on Sri Aurobindo, sustainability, and education. She brings scientific rigor to analyses of civilizational studies and rethinking of historical constructs from nondominant viewpoints. Her work has been published in several peerreviewed journals and presented at conferences. Manogna is a passionate sustainability practitioner, and in her previous role, focused on pedagogies of learning and inquiry.",
     authorSocial: [
-      
+      "https://x.com/ManognaSastry",
+      "https://www.instagram.com/manogna_sastry/?utm_source=ig_web_button_share_sheet",
+      "https://www.linkedin.com/in/manogna-sastry-50659325?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BsQYqxevPQduONWMZgKjfmQ%3D%3D",
+      "https://www.facebook.com/manogna.sastry",
     ],
   },
   {
     id: 43,
-    authslug: "mrs-kiran-sehajpal",
-    author_name: "Mrs Kiran Sehajpal", 
+    authslug: "kiran-sehajpal",
+    author_name: "Mrs. Kiran Sehajpal", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/mrs-kiran-sehajpal.jpg",
     authorDescription:
       "Mrs Kiran Sehajpal is an educationist with an MSc in Zoology and MEd. She has been awarded an Appreciation Certificate by International Association of Lions Club in 2004 and Roll of Honour by Rotary Club Lucknow in 2007. She is also the recipient of Dr S. Radhakrishnan Memorial National Teachers Award, Bhagirathi Samman Award in 2013 and IMA Distinguished Services Award in 2017.",
@@ -480,25 +501,29 @@ export const AuthorsList = [
   },
   {
     id: 44,
-    authslug: "nityanand-misra",
-    author_name: "Nityanand Misra", 
+    authslug: "nityananda-misra",
+    author_name: "Nityananda Misra", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/nityanand-misra.jpg",
     authorDescription:
-      "Nityananda Misra is a Mumbai-based finance professional in the investment banking industry. He specialises in quantitative finance, equity market microstructure, algorithmic trading, and execution consulting. He is an alumnus of IIM Bangalore (2007) and a gold medalist from Gujarat University (2004). Nityananda has a multifaceted personality—a Sanskrit scholar, a polyglot, a grammarian, a litterateur, an instrumentalist, a musicologist, a researcher, an editor, an author, and a book designer. He has authored twelve books, including several bestsellers. He is also a professional onomastician specialising in Sanskrit names. Nityananda is passionate about Indic culture, literature, music, and arts. He runs a popular YouTube channel, which produces content on these topics.",
+      "Nityananda Misra is a Mumbaibased finance professional in the investment banking industry. He specialises in quantitative finance, equity market microstructure, algorithmic trading, and execution consulting. He is an alumnus of IIM Bangalore (2007) and a gold medalist from Gujarat University (2004). Nityananda has a multifaceted personality—a Sanskrit scholar, a polyglot, a grammarian, a litterateur, an instrumentalist, a musicologist, a researcher, an editor, an author, and a book designer. He has authored twelve books, including several bestsellers. He is also a professional onomastician specialising in Sanskrit names. Nityananda is passionate about Indic culture, literature, music, and arts. He runs a popular YouTube channel, which produces content on these topics.",
     authorSocial: [
-      "https://www.instagram.com/nityananda.misra?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      "https://www.instagram.com/nityananda.misra",
       "https://x.com/MisraNityanand",
+      "https://www.linkedin.com/in/nityanand-misra-7000a83?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BfPw5vmAkQzKmc1Ser%2FYuhw%3D%3D",
+      "https://www.facebook.com/nityanand.misra/",
     ],
   },
   {
     id: 45,
-    authslug: "dr-pariksith-singh",
-    author_name: "Pariksith Singh, MD", 
+    authslug: "pariksith-singh",
+    author_name: "Pariksith Singh", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/dr-pariksith-singh.jpg",
     authorDescription:
-    "Pariksith Singh, MD, is a practicing physician of 30 years. Board Certified in Internal Medicine, he believes unsettling changes in the healthcare industry can also be transformative. “For me it is a time for remarkable opportunity, growth, and innovation,” he says. “I can look back at what I have accomplished, but also look forward in eager anticipation at what is possible.” Dr. Singh watched his organization, Access Health Care Physicians, LLC, grow from a simple, multi-service provider in 2001 to one that has multiplied in size and is now respected throughout the state of Florida. In addition to heading up this leading IPA, he has started a healthcare HMO, an ACO, and created one of the best healthcare corporate infrastructures in the business. Dr. Singh also finds time to be a published poet, philosopher, and author. His medical contributions include The Florida Guide to Prescription, Controlled Substance and Pain Medicine Laws (coauthored by Rachel Barlow, Alan Gassman, and Lester Perling), The Essential Planning Guide to 2013 Income & Estate Taxes, and Excerpts From Creditor Protection From Florida Physicians, a Comprehensive Handbook for Physicians and Their Advisors. Add to this the fictional works of Dr. Singh - The Shoreless River, Chutti Ke Din, and his favorite, Riddles for Pesky Teenagers. This is Dr. Singh’s fifth edition of A Primer in Health Care. In addition to publishing books on cutting-edge topics of interest to physicians and administrators, his organization is now a learning organization involving Graduate Medical Education residents.",
+    "Pariksith Singh, MD, is a passionate and acutely intelligent student and exponent of Hindu Dharma, and one who has been deeply engaged spiritually and intellectually with Sri Aurobindo and his Yoga for almost all his adult life. Singh is also the author of two other remarkably enlightening books on the Master and his works—Sri Aurobindo and the Literary Renaissance of India (2021) and Sri Aurobindo and Philosophy (2022). Singh's approach and writings are uniquely personal, and not academic at all: his works, though of a commendable intellectual calibre, are permeated with bhaktipsychic devotion for the subject that he has chosen as his oeuvre: Sri Aurobindo himself.",
     authorSocial: [
-      "https://www.instagram.com/dr.pariksith?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      "https://www.instagram.com/dr.pariksith",
+      "https://www.linkedin.com/in/pariksith-singh-7b71322a",
+      "https://www.facebook.com/PariksithSinghMD/",
     ],
   },
   {
@@ -536,8 +561,8 @@ export const AuthorsList = [
   },
   {
     id: 49,
-    authslug: "rajarshi-nandy",
-    author_name: "Rajarshi Nandy", 
+    authslug: "rajarshi-ranjan-nandy",
+    author_name: "Rajarshi Ranjan Nandy", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/rajarshi-nandy.jpg",
     authorDescription:
     "Rajarshi Ranjan Nandy is an upasaka, speaker, and columnist, who also guides people interested in the practice of sadhana.",
@@ -547,13 +572,15 @@ export const AuthorsList = [
   },
   {
     id: 50,
-    authslug: "rajiv-banerjee",
-    author_name: "Rajiv Banerjee", 
+    authslug: "rajeev-banerjee",
+    author_name: "Rajeev Banerjee", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/rajiv-banerjee.jpg",
     authorDescription:
-    "Rajiv Banerjee is a self-taught cartoonist, an ex-journalist and a successful corporate communications leader. Rajiv’s love for cartooning began at the tender age of six while watching his father create witty cartoons in a little black diary. The primary source of learning the craft, thereafter, has been to observe the works of renowned cartoonists such as R.K. Laxman, Mario Miranda and Ajit Ninan. Rajiv currently works as the head of corporate communications at a leading business conglomerate. Prior to that, he spent a decade at one of the largest private sector banks in a similar role. Before changing over to the corporate side, Rajiv was a journalist and served as the editor of Brand Equity, the advertising and marketing supplement of the Economic Times, where he worked for close to a decade, writing, editing and conceptualizing news and features stories. Before print media, Rajiv also dabbled in television and online media.",
+    "Rajiv Banerjeeis a selftaught cartoonist, an exjournalist and a successful corporate communications leader. Rajiv’s love for cartooning began at the tender age of six while watching his father create witty cartoons in a little black diary. The primary source of learning the craft, thereafter, has been to observe the works of renowned cartoonists such as R.K. Laxman, Mario Miranda and Ajit Ninan. Rajiv currently works as the head of corporate communications at a leading business conglomerate. Prior to that, he spent a decade at one of the largest private sector banks in a similar role. Before changing over to the corporate side, Rajiv was a journalist and served as the editor of Brand Equity, the advertising and marketing supplement of the Economic Times, where he worked for close to a decade, writing, editing and conceptualizing news and features stories. Before print media, Rajiv also dabbled in television and online media.",
     authorSocial: [
-      "https://www.instagram.com/rajivbanerjee?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      "https://www.instagram.com/rajivbanerjee",
+      "https://www.linkedin.com/in/rajivshivbanerjee?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3B2ye6Mhn4Rj%2BEPjPFugeT%2Fg%3D%3D",
+      "https://www.facebook.com/p/Rajiv-Banerjee-100008858355067/?_rdr",
     ],
   },
   {
@@ -562,10 +589,11 @@ export const AuthorsList = [
     author_name: "Rajiv Malhotra", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/rajiv-malhotra.jpg",
     authorDescription:
-      "Rajiv Malhotra is a researcher and public intellectual on civilizational studies, world religions, and cross-cultural encounters. He was trained initially as a physicist, and then as a computer scientist specializing in Artificial Intelligence in the 1970s. After a successful corporate career in the USA, he became an entrepreneur and founded and ran several IT companies across twenty countries. Since the early 1990s, as the founder of his non-profit Infinity Foundation (Princeton, USA), he has been researching civilizations from a historical, social sciences, and mind sciences perspective. He has authored several best-selling books that have impacted many leading intellectuals worldwide. Rajiv also serves as chairman of the board of governors of the Center for Indic Studies at the University of Massachusetts, Dartmouth, and is on the advisory board of the Indian Institute of Advanced Studies, Shimla.",
+      "Rajiv Malhotra is a researcher and public intellectual on civilizational studies, world religions, and crosscultural encounters. He was trained initially as a physicist and then as a computer scientist specializing in artificial intelligence in the 1970s. After a successful corporate career in the USA, he became an entrepreneur and founded and ran several IT companies across twenty countries. Since the early 1990s, as the founder of his nonprofit Infinity Foundation (Princeton, USA), he has been researching civilizations from a historical, social sciences, and mind sciences perspectives. He has authored several bestselling books, which have impacted leading intellectuals worldwide. Rajiv also serves as the chairman of the board of governors of the Center for Indic Studies at the University of Massachusetts, Dartmouth, and is on the advisory board of the Indian Institute of Advanced Studies, Shimla.",
     authorSocial: [
-      "https://www.instagram.com/rajivmalhotra_if?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      "https://www.instagram.com/rajivmalhotra_if",
       "https://x.com/RajivMessage",
+      "https://www.linkedin.com/in/rajivmalhotra2007?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BZdMz6UpnRbe6Kf9DY%2FHhDg%3D%3D",
     ],
   },
   {
@@ -574,10 +602,12 @@ export const AuthorsList = [
     author_name: "Rashmi Samant", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/rashmi-samant.jpg",
     authorDescription:
-    "Rashmi Samant is an emerging young leader with fire and drive. She scripted history by becoming the first Bharatiya female president of the Oxford University Student Union. She often appears on national television debates, occasionally writes columns for prominent national dailies, and is a vocal human rights advocate for marginalised indigenous communities. Her impactful work involves collaborating with the media, think tanks, and governments. Samant’s most notable contributions to global peace include presenting in the British Parliament a comprehensive report on human rights violation against majorities. She runs a non-profit foundation called ATMAH. Her debut book, A Hindu in Oxford, became a bestseller within hours of its release. Rashmi wears many hats. Besides being a thought leader, she is an entrepreneur and the executive director of Punarnava.",
+    "Rashmi Samant is an emerging young leader with fire and drive. She scripted history by becoming the first Bharatiya female president of the Oxford University Student Union. She often appears on national television debates, occasionally writes columns for prominent national dailies, and is a vocal human rights advocate for marginalised indigenous communities. Her impactful work involves collaborating with the media, think tanks, and governments. Samant’s most notable contributions to global peace include presenting in the British Parliament a comprehensive report on human rights violation against majorities. She runs a nonprofit foundation called ATMAH. Her debut book, A Hindu in Oxford, became a bestseller within hours of its release. Rashmi wears many hats. Besides being a thought leader, she is an entrepreneur and the executive director of Punarnava.",
     authorSocial: [
-      "https://www.instagram.com/rashmi_in_oxford?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      "https://www.instagram.com/rashmi_in_oxford",
       "https://x.com/RashmiDVS",
+      "https://www.linkedin.com/in/rashmi-samant?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BQH7k5iI4Qh%2B5wyOCmHGnTA%3D%3D",
+      "https://www.facebook.com/profile.php?id=100072562120670",
     ],
   },
   {
@@ -589,6 +619,8 @@ export const AuthorsList = [
     "Ratul Chakraborty is one of the most accomplished video-game makers in India. After more than a decade of procrastination and other assorted excuses, he finally gathered enough courage to take a break from the corporate world in late 2019 and complete writing his highly regarded collection of short stories, Sutradhar. He is fascinated by history and people, the two lenses that form the foundation of his creative perspective. He loves to travel across India doing street portraiture photography and is also a lifelong follower of Juventus FC. Ratul is currently juggling his corporate leadership responsibilities along with other creative pursuits interspersed with periods of high- quality laziness. He is based out of Kolkata, where he lives with his parents, his wife, Surela, and three daughters—a Labrador, Gogo, and two rescued Indies, Truffles and Mowgli.",
     authorSocial: [
       "https://x.com/maxratul",
+      "https://www.instagram.com/maxratul/",
+      "https://www.linkedin.com/in/maxratul?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3B8Ytyi8TgR1G1ttVC1oaJ6w%3D%3D",
     ],
   },
   {
@@ -610,8 +642,9 @@ export const AuthorsList = [
     authorDescription:
       "Dr S. Beena Unnikrishnan Beena Unnikrishnan is an artist with multifaceted personality. Her career spans over three decades, encompassing various fields such as education, entrepreneurship, healing practices, filmmaking and artistry. Her journey began in 1992 as an educator and has evolved into a remarkable exploration of diverse domains. At the core of her identity lies an unwavering connection to art as a medium of spiritual expression and transformation, drawing inspiration from mystical traditions.",
     authorSocial: [
-      "https://www.instagram.com/beenaunnikrishnan?igsh=MXFsYXc1N25ucDZrbg==",
+      "https://www.instagram.com/beenaunnikrishnan",
       "https://x.com/beena1869",
+      "https://www.linkedin.com/in/beenaunnikrishnan?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BHpyqMDnaQxez0bugjY0jkQ%3D%3D",
     ],
   },
   {
@@ -620,7 +653,7 @@ export const AuthorsList = [
     author_name: "S. Gurumurthy", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/s-gurumurthy.jpg",
     authorDescription:
-    "Swaminathan Gurumurthy is highly popular as a writer and journalist in India. Celebrated for his investigative journalism, he has ceaselessly campaigned against corruption at high places, exposing the bribery in Bofors arms deal and the nexus between corporates and government. Hamish McDonald, well-known Australian journalist, wrote in his book Polyester Prince, that Gurumurthy's investigative work must rank among the most powerful examples of investigative journalism anywhere in the world, adding that Gurumurthy had a strong sense of probity. Business Baron Magazine rated Gurumurthy's knowledge of economics, finance and accounts as outstanding. In his biography on the media baron Ramnath Goenka, BG Verghese, a highly respected editor and writer, described Gurumurthy as a brilliant chartered accountant and exceedingly astute amateur lawyer. Mr. Gurumurthy is a Visiting Faculty member at IIT Bombay in the domains of Economics, Finance and Management. He is also a Distinguished Professor for Legal Anthropology in Sastra University. A chartered accountant by profession, Mr. Gurumurthy is also a corporate adviser of high standing. One of the founders of the Vivekananda International Foundation, Swaminathan Gurumurthy is also the chairman of its board of trustees.",
+    "Swaminathan Gurumurthy is highly popular as a writer and journalist in India. Celebrated for his investigative journalism, he has ceaselessly campaigned against corruption at high places, exposing the bribery in Bofors arms deal and the nexus between corporates and government. Hamish McDonald, wellknown Australian journalist, wrote in his book Polyester Prince, that Gurumurthy's investigative work must rank among the most powerful examples of investigative journalism anywhere in the world, adding that Gurumurthy had a strong sense of probity. Business Baron Magazine rated Gurumurthy's knowledge of economics, finance and accounts as outstanding. In his biography on the media baron Ramnath Goenka, BG Verghese, a highly respected editor and writer, described Gurumurthy as a brilliant chartered accountant and exceedingly astute amateur lawyer. Mr. Gurumurthy is a Visiting Faculty member at IIT Bombay in the domains of Economics, Finance and Management. He is also a Distinguished Professor for Legal Anthropology in Sastra University. A chartered accountant by profession, Mr. Gurumurthy is also a corporate adviser of high standing. One of the founders of the Vivekananda International Foundation, Swaminathan Gurumurthy is also the chairman of its board of trustees.",
     authorSocial: [
       
     ],
@@ -631,9 +664,10 @@ export const AuthorsList = [
     author_name: "Sandeep Balakrishna", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/sandeep-balakrishna.jpg",
     authorDescription:
-      "Lucas Lee is a bestselling author of thrillers that keep readers on the edge of their seats...",
+      "Sandeep is the author of the bestselling books Tipu Sultan: The Tyrant of Mysore, which has been widely referenced and quoted in mainstream publications and television programmes, and Madurai Sultanate: A Concise History. He is also the author of the critically acclaimed work, 70 Years of Secularism: Unpopular Essays on the Unofficial Political Religion of India. He has also translated the legendary Kannada novelist Dr S.L. Bhyrappa’s critically acclaimed work Aavarana into English, as Aavarana: The Veil, which is now in its twelfth reprint. Sandeep is the founder and editor of The Dharma Dispatch, an online journal dedicated to Indian civilisation, culture and history, and a contributing editor at Prekshaa Journal.",
     authorSocial: [
       "https://x.com/dharmadispatch",
+      "https://www.linkedin.com/in/sanbalakrishna?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BN%2BPWrW92QGuHLTJXn9q4Vg%3D%3D",
     ],
   },
   {
@@ -642,9 +676,11 @@ export const AuthorsList = [
     author_name: "Saumya Dey", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/saumya-dey.jpg",
     authorDescription:
-    "Sandeep Balakrishna is a veteran writer, author, editor, speaker and independent researcher with about 20 years of writing on Indian history, culture, literature and temples. During this period, he has authored over 900 articles, essays, critiques, academic papers and delivered lectures on numerous topics related to these themes at institutions like the Indian Council of Philosophical Research, IIM Bangalore, Sri Aurobindo Society, Shree Somanath Sanskrit University, Bangalore University and Amrita University, to name a few. He writes in both English and Kannada. His articles, columns and research papers have appeared in prestigious journals, newspapers and magazines in both print and digital format. Sandeep is the author of the bestselling books Tipu Sultan: The Tyrant of Mysore, which has been widely referenced and quoted in mainstream publications and television programmes, and Madurai Sultanate: A Concise History. He is also the author of the critically acclaimed work, 70 Years of Secularism: Unpopular Essays on the Unofficial Political Religion of India. He has also translated the legendary Kannada novelist Dr S.L. Bhyrappas critically acclaimed work Aavarana into English, as Aavarana: The Veil, which is now in its twelfth reprint. Sandeep is the founder and editor of The Dharma Dispatch, an online journal dedicated to Indian civilisation, culture and history, and a contributing editor at Prekshaa Journ",
+    "Saumya Dey is a professor of history at Rishihood University, Haryana. He did his PhD at the Centre for Historical Studies, JNU, Delhi. His chief research interests are cultural and intellectual history and the politics of colonial India. His prior books are Becoming Hindus and Muslims: Reading the Cultural Encounter in Bengal, 1342–1905 (Munshiram Manoharlal, 2015), The Cultural Landscape of Hindutva and Other Essays: Historical Legitimacy of an Idea (Shubhi Publications, 2019 [Revised Edition, 2023]), Narrativizing Bharatvarsa and Other Essays (Shubhi Publications, 2021 [Revised Edition, 2022]), and The Seedbed of Pakistan: Cultural Conflicts, Elite Muslim Anxieties, and the Congress, 1885–1906 (Vitasta Publications, 2023).",
     authorSocial: [
-      
+      "https://x.com/Saumya_stoic",
+      "https://www.instagram.com/deysaumya?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      "https://www.facebook.com/saumya.dey.9",
     ],
   },
   {
@@ -653,7 +689,7 @@ export const AuthorsList = [
     author_name: "Shakti Singh", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/shakti-singh.jpg",
     authorDescription:
-      "Shakti Singh is an IRS officer of the 2014 batch. Currently he is the joint commissioner of income tax in Punjab. He started his career as a banker before being bitten by the UPSC bug. He pursued his dream of clearing one of the toughest exams in the world alongside working a full-time job. He cleared the exam in 2014 and was allotted the Indian Revenue Service. Since then, he has worked in different sections of the income-tax department. His passion for learning went beyond job security. Rather than resting on his laurels, he studied law and earned LLB and LLM degrees from Gujarat National Law University, Gandhinagar. While preparing for CSE, Shakti realised the lack of good guidance for students preparing for the exam. How To Get into IAS is a direct result of that longstanding need. The book is a one-stop guide for all civil service aspirants.",
+      "Shakti Singh is an IRS officer of the 2014 batch. Currently he is the joint commissioner of income tax in Punjab. He started his career as a banker before being bitten by the UPSC bug. He pursued his dream of clearing one of the toughest exams in the world alongside working a fulltime job. He cleared the exam in 2014 and was allotted the Indian Revenue Service. Since then, he has worked in different sections of the incometax department. His passion for learning went beyond job security. Rather than resting on his laurels, he studied law and earned LLB and LLM degrees from Gujarat National Law University, Gandhinagar. While preparing for CSE, Shakti realised the lack of good guidance for students preparing for the exam. How To Get into IAS is a direct result of that longstanding need. The book is a onestop guide for all civil service aspirants.",
     authorSocial: [
       
     ],
@@ -675,21 +711,22 @@ export const AuthorsList = [
     author_name: "Shiv Kunal Verma", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/shiv-kunal-verma.jpg",
     authorDescription:
-      "Shiv Kunal Verma is a writer, photographer, and filmmaker who has worked across genres. Having done his initial schooling at St Joseph's Academy and the Doon School in Dehradun, he did his graduation from Madras Christian College, Tambaram, a cross-India move that impacted his outlook on life deeply. His career began with Tiger Tops Mountain Travel. This job entailed opening trekking routes between Kashmir and the Zanskar and Ladakh regions, apart from being trained as a naturalist at Chitwan in Nepal. He then had a brief stint with India Today before moving on to Associated Press, where apart from covering Punjab, he also worked on various wildlife and environment-related stories. In 1986 he went on to direct and film the bulk of the Project Tiger television series that Bittu Sahgal produced. In 1992, he shot and produced Salt of the Earth for the IAF, where he clocked hundreds of hours on fighters and helicopters, flying to some of the most inaccessible parts of the country. This film was followed by a series of Naval and Army films, culminating with one on the Kargil War, where he operated with both 8 Mountain and 3 Infantry Divisions. In addition, he has also made films on the NDA (The Standard Bearers) and the IMA (Making of a Warrior). In 2002 he made Aakash Yodha, which premiered with the NDA film on Discovery Channel and then aired repeatedly. His other works include the film on the War College, Mhow, and the College of Defence Management, Hyderabad. He also made the first-ever film on the Light Combat Aircraft (Tejas). Simultaneously, he worked on various illustrated books, first producing a book on aerial India, Ocean to Sky, followed by a pictorial on the Military World Games in 2007. The Northeast Palette on the Dimapur-based 3 Corps was a journey through Nagaland, Manipur, the Barak River Valley, Tripura, and Mizoram, and the beginning of the work done to put the Northeast Trilogy together. Books on the Assam Rifles further helped cover most of the Naga Patkai region in fine detail. The Long Road to Siachen: The Question Why delved into Jammu and Kashmir geopolitics and was published in 2012. He also authored 1962: The War That Wasn’t and 1965: A Western Sunrise, both hailed by critics as the definitive accounts of the two wars. His autobiography, Life of an INDUSTANI: Six Degrees of Separation and a set of twelve books that make up the Value Education program are currently being released. Apart from the three books on the Northeast, the South India Trilogy covers Tamil Nadu & Puducherry, Karnataka and Kerala. The Wildlife Quartet then covers the entire subcontinent’s wildlife, while two single volumes are on the Trans-Himalayan region. Finally, the Illustrated Military History of India completes the seminal series.",
+      "The book is a whirlwind journey through critical events in India's 1980s and 90s, narrated in an honest, exhilarating and selfdeprecating manner. It offers a unique perspective for Young India, as the author is a military history writer with vast exposure to various parts of the subcontinent. The book's brutal honesty and its cinematic unfolding of events will captivate the reader. The author was raised in an Army family and had a formative childhood shaped by his mother and schooling at St. Joseph's Academy and Doon School. He later graduated from Madras Christian College and worked with Tiger Tops Mountain Travel before becoming a journalist, filmmaker, and writer. He has produced classic films and authored books, including the Northeast Trilogy and two books about wars. Currently working on a Value Education Program for schools to bring India to Indians.",
     authorSocial: [
-      "https://www.instagram.com/shivkunalverma?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      "https://www.instagram.com/shivkunalverma",
       "https://x.com/shivkunalverma",
+      "https://www.facebook.com/shivkunalverma/",
     ],
   },
   {
     id: 62,
     authslug: "shubham-gokul-deore",
-    author_name: "Shubham Gokul Deore", 
+    author_name: "Shubham G. Deore", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/shubham-gokul-deore.jpg",
     authorDescription:
-      "Shubham Gokul Deore is a conscious researcher in history, philosophy, religion, political science and policymaking. Poetry is one of his other passions for which he received appreciation during his schooldays from the Magsaysay awardee Dr Prakash Amte. He also won multiple awards in essay-writing competition in school. He has a bachelor’s degree in civil engineering. Decolonizing Hinduism is his first book.",
+      "Shubham Gokul Deore is a conscious researcher in history, philosophy, religion, political science and policy making. Poetry is one of his other passions for which he received appreciation during his schooldays from the Magsaysay awardee Dr Prakash Amte. He also won multiple awards in essaywriting competition in school. He has a bachelor’s degree in civil engineering. Decolonizing Hinduism is his first book.",
     authorSocial: [
-      "https://www.instagram.com/dr_hinduism?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      "https://www.instagram.com/dr_hinduism",
       "https://x.com/Dr_Hinduism",
     ],
   },
@@ -710,9 +747,12 @@ export const AuthorsList = [
     author_name: "Subhash Kak", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/subhash-kak.jpg",
     authorDescription:
-    "Subhash Kak is a scientist and historian. He teaches at Oklahoma State University, Stillwater. He has held visiting appointments in Britain and Australia. His areas of research are history and philosophy of science. He has translated several Sanskrit texts, including Kaṇāda’s Vaiśeṣika Sūtra, which is the earliest book on physics from India. Kak’s work has been showcased in the popular media such as Discovery and History channels, PBS, Public TV in Europe, and in several documentaries on science and art. He is the author of thirty books, the most recent two being The Idea of India: Bharat as a Civilisation and Eternal Bharat: Truth, Meaning, and Beauty. He is a member of the Prime Minister’s Science, Technology and Innovation Advisory Council (PM-STIAC). He was born in Srinagar and educated in Kashmir and Delhi.",
+    "Subhash Kak is a scientist and historian. He teaches at Oklahoma State University, Stillwater. He has held visiting appointments in Britain and Australia. His areas of research are history and philosophy of science. He has translated several Sanskrit texts, including Kaṇāda’s Vaiśeṣika Sūtra, which is the earliest book on physics from India. Kak’s work has been showcased in the popular media such as Discovery and History channels, PBS, Public TV in Europe, and in several documentaries on science and art. He is the author of thirty books, the most recent two being The Idea of India: Bharat as a Civilisation and Eternal Bharat: Truth, Meaning, and Beauty. He is a member of the Prime Minister’s Science, Technology and Innovation Advisory Council (PMSTIAC). He was born in Srinagar and educated in Kashmir and Delhi.",
     authorSocial: [
       "https://x.com/subhash_kak",
+      "https://www.instagram.com/subhashkak?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      "https://www.linkedin.com/in/subhash-kak-02b7515?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3Bknvt%2BooIQECzuFVaJanvEA%3D%3D",
+      "https://www.facebook.com/SubhashCKak/",
     ],
   },
   {
@@ -723,8 +763,10 @@ export const AuthorsList = [
     authorDescription:
     "Swadesh Singh is an author, teacher and activist. He completed his education from Jawaharlal Nehru University, New Delhi, and Indian Institute of Mass Communication, New Delhi. In a career spanning over fifteen years, including in academics, he has worked with reputed media organisations in the national capital. He now teaches political science at the University of Delhi. He has four books to his credit and regularly writes for newspapers, online platforms and academic journals. His core areas of interest are caste, social justice, party system, Hindutva and the media.",
     authorSocial: [
-      "https://www.instagram.com/swadesh171?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      "https://www.instagram.com/swadesh171",
       "https://x.com/swadesh171",
+      "https://www.linkedin.com/in/swadesh171?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3Bp9OIy1hgTKGjHrJ7YbnTDQ%3D%3D",
+      "https://www.facebook.com/SwadeshSinghBJP/",
     ],
   },
   {
@@ -744,10 +786,12 @@ export const AuthorsList = [
     author_name: "Tarun Chugh", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/tarun-chugh.jpg",
     authorDescription:
-    "Tarun Chugh is one of India’s leading politicians. He is currently serving his second term as the national general secretary of the Bharatiya Janata Party. Chugh is also the party in-charge of Jammu and Kashmir, Ladakh and Telangana, besides being a mentor to the youth wing of the party. He is an erudite politician and a leading debater in the political space in India. He takes keen interest in literature and art. Chugh hails from Amritsar in Punjab. He shot to national limelight in 1999 after taking out a 2,100-km-long Yuva Chetna Yatra to awaken the youth to national duty. Chugh has risen through the ranks of the BJP from the grassroots. He is a nationalist at heart and aspires to see India emerge as an economic superpower. Chugh has been actively involved in mentoring youths and students by overseeing training programmes to groom future leaders of the country.",
+    "Tarun Chugh is one of India’s leading politicians. He is currently serving his second term as the national general secretary of the Bharatiya Janata Party. Chugh is also the party incharge of Jammu and Kashmir, Ladakh and Telangana, besides being a mentor to the youth wing of the party. He is an erudite politician and a leading debater in the political space in India. He takes keen interest in literature and art. Chugh hails from Amritsar in Punjab. He shot to national limelight in 1999 after taking out a 2,100kmlong Yuva Chetna Yatra to awaken the youth to national duty. Chugh has risen through the ranks of the BJP from the grassroots. He is a nationalist at heart and aspires to see India emerge as an economic superpower. Chugh has been actively involved in mentoring youths and students by overseeing training programmes to groom future leaders of the country.",
     authorSocial: [
-      "https://www.instagram.com/itarunchugh?igsh=MTF4NDg5YjNwY2ZpZg==",
+      "https://www.instagram.com/itarunchugh",
       "https://x.com/tarunchughbjp",
+      "https://www.linkedin.com/in/itarunchugh?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3B44uQJjwKS%2FauG5tBSSdBmg%3D%3D",
+      "https://www.facebook.com/tarunchughbjp/",
     ],
   },
   {
@@ -756,9 +800,10 @@ export const AuthorsList = [
     author_name: "Tathagata Roy", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/Tathagata-Roy.jpg",
     authorDescription:
-    "Tathagata Roy was born in 1945 in Kolkata into a humble middle-class East Bengali Hindu family. Even as a student, he was brilliant at observing life around him, which has found expression in this book. Roy is something of a polymath. He began life as a civil engineer, joined the Indian railways and played a significant role in building India’s first Metro in Kolkata. He then branched off into law, enquiring into the intersection of law and engineering, the subject he taught at Jadavpur University. He later joined politics and worked to build up the BJP in his home state West Bengal. In 2015 he was appointed the governor of Tripura, and later also of Meghalaya and Arunachal Pradesh. Roy has authored a book on the exodus of Hindus from the erstwhile East Pakistan and Bangladesh, which he later translated into Bengali. He has also written a biography of Dr Syama Prasad Mookerjee, the founder of Bharatiya Jan Sangh, which is the forerunner of today’s BJP. He has five books to his credit—two in English and three in Bengali. Roy is widely travelled and has done considerable trekking in the Himalayas, including to places of pilgrimage such as Mount Kailash. He is married with two daughters, both married, and has lived most of his life in Kolkata.",
+    "Tathagata Roy was born in 1945 in Kolkata into a humble middleclass East Bengali Hindu family. Even as a student, he was brilliant at observing life around him, which has found expression in this book. Roy is something of a polymath. He began life as a civil engineer, joined the Indian railways and played a significant role in building India’s first Metro in Kolkata. He then branched off into law, enquiring into the intersection of law and engineering, the subject he taught at Jadavpur University. He later joined politics and worked to build up the BJP in his home state West Bengal. In 2015 he was appointed the governor of Tripura, and later also of Meghalaya and Arunachal Pradesh. Roy has authored a book on the exodus of Hindus from the erstwhile East Pakistan and Bangladesh, which he later translated into Bengali. He has also written a biography of Dr Syama Prasad Mookerjee, the founder of Bharatiya Jan Sangh, which is the forerunner of today’s BJP. He has five books to his credit—two in English and three in Bengali. Roy is widely travelled and has done considerable trekking in the Himalayas, including to places of pilgrimage such as Mount Kailash. He is married with two daughters, both married, and has lived most of his life in Kolkata.",
     authorSocial: [
       "https://x.com/tathagata2",
+      "https://www.facebook.com/tathagata2/",
     ],
   },
   {
@@ -767,9 +812,12 @@ export const AuthorsList = [
     author_name: "Tushar Srivastava", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/tushar-srivastava.jpg",
     authorDescription:
-    "Tushar Srivastava honed his storytelling skills across various beats, but crime reporting has been the pièce de resistance of his illustrious career. His professional journey later took him to cover politics, foreign affairs, and aviation, etc., but the spirit of investigative journalism has stayed with him. Tushar now leverages his insider knowledge of the media landscape as vice president and head of communications at SpiceJet. The Number You Are Calling Is Switched Off, partially inspired by real-life cases, is a thrilling exploration of the world he knows best.",
+    "Tushar Srivastava honed his storytelling skills across various beats, but crime reporting has been the pièce de resistance of his illustrious career. His professional journey later took him to cover politics, foreign affairs, and aviation, etc., but the spirit of investigative journalism has stayed with him. Tushar now leverages his insider knowledge of the media landscape as vice president and head of communications at SpiceJet. The Number You Are Calling Is Switched Off, partially inspired by reallife cases, is a thrilling exploration of the world he knows best.",
     authorSocial: [
-      
+      "https://x.com/tush_srivastava",
+      "https://www.instagram.com/life.with.khushi.and.hazel?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      "https://www.linkedin.com/in/tushar-srivastava-05b55471?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3Bp8OzkJ2GQoSqr2PR7Y%2BFXg%3D%3D",
+      "https://www.facebook.com/tushar.srivastava.16752",
     ],
   },
   {
@@ -780,8 +828,9 @@ export const AuthorsList = [
     authorDescription:
     "Utpal Kumar is the opinion editor at News18 and Firstpost. In his two decades of journalistic experience, he has worked with several media houses in the country. He started his career at the Pioneer and went on to work at the Hindustan Times, Mail Today (India Today Group) and the Sunday Guardian. Kumar has written hundreds of articles for reputed newspapers and magazines. He is among the most trenchant nationalist voices in mainstream media. Bharat Rising: Dharma, Democracy, Diplomacy is his first book.",
     authorSocial: [
-      "https://www.instagram.com/utpal.kumar1?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      "https://www.instagram.com/utpal.kumar1",
       "https://x.com/Utpal_Kumar1",
+      "https://www.linkedin.com/in/utpal-kumar-a8967a10a?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BdiZ6ph8eQbST2No1c3iuwA%3D%3D",
     ],
   },
   {
@@ -792,8 +841,9 @@ export const AuthorsList = [
     authorDescription:
     "Vamsee Juluri is a professor of media studies at the University of San Francisco, California. He is the author of The Mythologist: A Novel (Penguin India) and Bollywood Nation: India through Its Cinema (Penguin India). His writings on the media, Hinduism, and current issues have been published in Foreign Affairs, Huffington Post, San Francisco Chronicle, The Hindu, The Indian Express, and elsewhere.",
     authorSocial: [
-      "https://www.instagram.com/vamsee_juluri?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      "https://www.instagram.com/vamsee_juluri",
       "https://x.com/VamseeJuluri",
+      "https://www.facebook.com/VamseeJuluri/",
     ],
   },
   {
@@ -802,7 +852,7 @@ export const AuthorsList = [
     author_name: "Vijaya Viswanathan", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/vijaya-viswanathan.jpg",
     authorDescription:
-      "Vijaya Viswanathan is a mechanical engineer by training and holds an MBA from the Wharton Business School. After a successful corporate career in manufacturing and finance based in the USA, Singapore, and Europe, she turned her focus to education. As she embarked on a homeschooling journey with her children, she gained deep insights into the relevance of Indic knowledge systems in modern education. Vijaya is active in initiatives that focus on curricula, pedagogy, and mentoring. As a student under Swami Dayananda Saraswati of Arsha Vidya Gurukulam, Vijaya studied Vedanta as well as dharmic and civilizational thought. Vijaya also serves on the board of Infinity Foundation.",
+      "Vijaya Viswanathan is a mechanical engineer by training and holds an MBA from the Wharton Business School. After a successful corporate career in manufacturing and finance based in the USA, Singapore, and Europe, she turned her focus to education. As she embarked on a homeschooling journey with her children, she gained deep insights into the relevance of Indic knowledge systems in modern education. Vijaya is active in initiatives that focus on curricula, pedagogy, and mentoring. As a student under Swami Dayananda Saraswati of Arsha Vidya Gurukulam, Vijaya studied Vedanta as well as dharmic and civilizational thought. She serves on the board of Infinity Foundation.",
     authorSocial: [
       
     ],
@@ -813,10 +863,12 @@ export const AuthorsList = [
     author_name: "Vikram Sampath", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/vikram-sampath.jpg",
     authorDescription:
-      "Dr Vikram Sampath is a historian based in Bangalore. He is the author of eight acclaimed books including Splendours of Royal Mysore: The Untold Story of the Wodeyars, Voice of the Veena: S. Balachander, Women of the Records and Indian Classical Music and the Gramophone, 1900–1930. His two-volume biography of V.D. Savarkar, Savarkar: Echoes from a Forgotten Past, 1881–1924, and Savarkar: A Contested Legacy, 1924–1966, and his latest book, Bravehearts of Bharat: Vignettes from Indian History, have gone on to become national bestsellers. In 2021, Vikram was elected a fellow of the prestigious Royal Historical Society. He was awarded the Sahitya Akademi’s first Yuva Puraskar in English literature and the ARSC International Award for excellence in historical research in New York for his book My Name Is Gauhar Jaan: The Life and Times of a Musician. The book has been adapted for a play, Gauhar, by Lillette Dubey. He was among four writers and artists selected as writers-in-residence at the Rashtrapati Bhawan in 2015. Vikram has a doctorate in history and music from the University of Queensland, Australia, and was a senior research fellow at the Nehru Memorial Museum and Library, New Delhi (2017–2019). He was also a fellow of Aspen Global Leadership Network and Eisenhower Fellowships 2020 and a visiting fellow at the Wissenschaftskolleg zu Berlin in 2010. Currently, he is an adjunct senior fellow at Monash University, Australia. He has an engineering and mathematics degree from BITS Pilani with an MBA in finance from S.P. Jain Institute of Management and Research, Mumbai. Vikram is also a trained Carnatic vocalist. He established the Foundation for Indian Historical and Cultural Research to promote original, primary source–based research on Indian history and the Archive of Indian Music, India’s first digital sound archive for vintage recordings. He is the founder-director of the Bangalore Literature Festival and curates the ZEE Group’s cultural fest, Arth.",
+      "Dr Vikram Sampath is a historian based in Bangalore. He is the author of eight acclaimed books including Splendours of Royal Mysore: The Untold Story of the Wodeyars, Voice of the Veena: S. Balachander, Women of the Records and Indian Classical Music and the Gramophone, 1900–1930. His twovolume biography of V.D. Savarkar, Savarkar: Echoes from a Forgotten Past, 1881–1924, and Savarkar: A Contested Legacy, 1924–1966, and his latest book, Bravehearts of Bharat: Vignettes from Indian History, have gone on to become national bestsellers.",
     authorSocial: [
-      "https://www.instagram.com/vikramsampath?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      "https://www.instagram.com/vikramsampath",
       "https://x.com/vikramsampath",
+      "https://www.linkedin.com/in/dr-vikram-sampath-frhists-056910?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BLY7eyzWNQd6M5yy9PgWuBQ%3D%3D",
+      "https://www.facebook.com/p/Vikram-Sampath-100063795846989/",
     ],
   },
   {
@@ -825,9 +877,11 @@ export const AuthorsList = [
     author_name: "Vivek Ranjan Agnihotri", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/vivek-ranjan-agnihotri.jpg",
     authorDescription:
-    "Vivek Ranjan Agnihotri is a national award–winning filmmaker, bestselling author and freethinker. He was an advertising man before switching gear and becoming a filmmaker. He is popular among the masses and speaks on various socio political issues, creative thinking and innovation at top global institutes. Vivek is an Indic civilisation crusader and the recipient of several national and international awards. Vivek’s Buddha in a Traffic Jam (2016) deals with the contentious theme of urban Naxalism; the film opened with critical reviews but went on to receive a cult following. His film The Kashmir Files (2022) won the Nargis Dutt Award for Best Feature Film on National Integration at the 69th National Film Awards. His latest, The Vaccine War, hits theaters in September 2023. Vivek’s debut book, Urban Naxals, became the fastest-selling #1 bestseller. He is married to the national award–winning actor Pallavi Joshi. They run an NGO, I Am Buddha Foundation, which mentors and trains disadvantaged youth in creative thinking. They have two children.",
+    "Vivek Ranjan Agnihotri is a national award–winning filmmaker, bestselling author and freethinker. He was an advertising man before switching gear and becoming a filmmaker. He is popular among the masses and speaks on various socio political issues, creative thinking and innovation at top global institutes. Vivek is an Indic civilisation crusader and the recipient of several national and international awards. Vivek’s Buddha in a Traffic Jam (2016) deals with the contentious theme of urban Naxalism; the film opened with critical reviews but went on to receive a cult following. His film The Kashmir Files (2022) won the Nargis Dutt Award for Best Feature Film on National Integration at the 69th National Film Awards. His latest, The Vaccine War, hits theaters in September 2023. Vivek’s debut book, Urban Naxals, became the fastestselling #1 bestseller. He is married to the national award–winning actor Pallavi Joshi. They run an NGO, I Am Buddha Foundation, which mentors and trains disadvantaged youth in creative thinking. They have two children.",
     authorSocial: [
-      "https://www.instagram.com/vivekagnihotri?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      "https://www.instagram.com/vivekagnihotri",
+      "https://www.linkedin.com/in/vivek-ranjan-agnihotri-5905342a3?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BIXtUmDChQr%2BqM6wCV3HIDA%3D%3D",
+      "https://www.facebook.com/VivekRanjanAgnihotriTV/",
       "https://x.com/vivekagnihotri",
     ],
   },
@@ -837,7 +891,18 @@ export const AuthorsList = [
     author_name: "Zain Hashmy", 
     image: "https://bluone-ink.s3.amazonaws.com/images/authors/zain-hashmy.jpg",
     authorDescription:
-    "Zain Hashmy is a biotechnologist from Australia. He loves to write stories for people of all ages, and Hop’s Spectacular Adventure is his first book, based on a story originally intended for his god-daughter Evelyn, as a birthday gift.",
+    "Zain Hashmy is a biotechnologist from Australia. He loves to write stories for people of all ages, and Hop’s Spectacular Adventure is his first book, based on a story originally intended for his goddaughter Evelyn, as a birthday gift.",
+    authorSocial: [
+      
+    ],
+  },
+  {
+    id: 76,
+    authslug: "gaatha-shakti",
+    author_name: "Gaatha Shakti", 
+    image: "",
+    authorDescription:
+    "",
     authorSocial: [
       
     ],

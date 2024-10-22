@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function AlphabetFilter({ onFilter }) {
-  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  const alphabet = "ABDFGHIJKLMNPRSTUVZ".split("");
   const [activeLetter, setActiveLetter] = useState("ALL");
 
   const handleFilter = (letter) => {
@@ -10,11 +10,11 @@ export default function AlphabetFilter({ onFilter }) {
   };
 
   return (
-    <div className="flex flex-wrap justify-between space-x-6 mb-6 text-lg font-light">
+    <div className="flex flex-wrap md:justify-between space-x-6 mb-6 text-lg font-light">
       <button
         onClick={() => handleFilter("ALL")}
         className={`${
-          activeLetter === "ALL" ? "text-black" : "text-gray-500"
+          activeLetter === "ALL" ? "text-black font-medium font-barlow" : "text-[#8A8A8A] font-medium font-barlow"
         } hover:text-black`}
       >
         ALL
@@ -24,7 +24,7 @@ export default function AlphabetFilter({ onFilter }) {
           key={letter}
           onClick={() => handleFilter(letter)}
           className={`${
-            activeLetter === letter ? "text-black" : "text-gray-500"
+            activeLetter === letter ? "text-black font-medium font-barlow" : "text-[#8A8A8A] font-medium font-barlow"
           } hover:text-black`}
         >
           {letter}
