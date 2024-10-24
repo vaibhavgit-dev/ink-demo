@@ -14,6 +14,8 @@ import inkdouble1 from "@/app/assests/image/inkdouble1.svg";
 import inkdouble2 from "@/app/assests/image/inkdouble2.svg";
 import Loader from "./components/Loader";
 import { BooksDetails } from "./API/getbookDetails";
+import { HelmetProvider } from "react-helmet-async";
+import { Helmet } from "react-helmet";
 
 export default function Home() {
   function getUniqueTitlesCount(books) {
@@ -104,6 +106,12 @@ function getUniqueTitlesAndBooks(books) {
         <Loader />
       ) : (
         <div className="relative wrapper homepage">
+          <HelmetProvider>
+  <Helmet>
+    <title>BluOne Ink - Publishing, with a Difference</title>
+    <meta name="description" content="Let's celebrate India's heritage and build a platform for thinkers, scholars, writers, and philosophers together through excellence in publishing." />
+  </Helmet>
+</HelmetProvider>
           <div className="main pt-5">
             <section className="slider relative z-1 top-2">
               <BannerSlider />
