@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Loader from "@/app/components/Loader";
+import { HelmetProvider } from "react-helmet-async";
+import { Helmet } from "react-helmet";
 
 function contact() {
   const [loading, setLoading] = useState(true);
@@ -31,6 +33,14 @@ function contact() {
       {loading ? (
         <Loader />
       ) : (
+        <main>
+          <HelmetProvider>
+  <Helmet>
+    <title>Contact | BluOne Ink Publishing</title>
+    <meta name="description" content="Get in touch with us for your queries related to publishing your manuscript, interactions with our authors, orders, or a cup of tea or coffee." />
+  </Helmet>
+</HelmetProvider>
+        
         <div className="container flex flex-col items-center justify-center contactus ">
           <div className="text-center pb-[100px] max-w-screen-md">
             <h2 className="font-medium pt-20 pb-14 lg:pt-[90px] lg:pb-[50px]">
@@ -112,6 +122,7 @@ function contact() {
             </i>
           </div>
         </div>
+        </main>
       )}
     </>
   );

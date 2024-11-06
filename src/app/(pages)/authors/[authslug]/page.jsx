@@ -106,7 +106,7 @@ const Page = ({ params }) => {
                 className="text-center"
                 style={{ position: "relative", zIndex: 1 }}
               >
-                <h4 className="mt-20 pt-10 text-4xl mb-5">
+                <h4 className="mt-20 pt-10 text-[28px] lg:text-4xl mb-5">
                   {authorInfo.author_name}
                 </h4>
 
@@ -204,10 +204,10 @@ const Page = ({ params }) => {
                   authorBooks.slice(0, 4).map((book, i) => (
                     <div
                       key={i}
-                      className={`p-4 flex-none mb-4 hover:shadow-md input-border border-[#ffffff00] hover:border-[#BABABA] rounded-md ${
+                      className={`p-4 mb-4 hover:shadow-md input-border border-[#ffffff00] hover:border-[#BABABA] rounded-md ${
                         authorBooks.length < 4
                           ? "md:w-1/2 lg:w-1/4"
-                          : "md:w-1/2 lg:w-1/4"
+                          : "md:w-1/2 lg:w-1/4 lg:flex-1"
                       } `}
                     >
                       <Link
@@ -219,6 +219,7 @@ const Page = ({ params }) => {
                           coverImage={book.book_image}
                           publishYear={book.publish_year}
                           authorName={book.author}
+                          imageContainerClass={'h-[400px] lg:h-[400px]'}
                         />
                       </Link>
                     </div>

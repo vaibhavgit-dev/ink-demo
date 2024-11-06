@@ -1,6 +1,15 @@
 import { AuthorsList } from "./allAuthorList";
 export const BooksList = [
   {
+    id: 98,
+    title: "OUT OF MADNESS",
+    slug: "out-of-madness",
+    publish_year: 2024,
+    author: "Rithwik Aryan",
+    price: "",
+    book_image: "https://bluone-ink.s3.us-east-1.amazonaws.com/images/books/out-of-madness/out-of-madness-front-cover.png",
+  },
+  {
     id: 1,
     slug:"sri-aurobindo-and-the-literary-renaissance-of-india",
     title: "Sri Aurobindo and The Literary Renaissance of India",

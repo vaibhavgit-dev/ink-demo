@@ -2,6 +2,7 @@ import { AuthorsList } from "./allAuthorList";
 import { BooksList } from "./allBookList";
 
 export const BooksDetails = [
+  
   {
     id: 1,
     title: "Sri Aurobindo and the Literary Renaissance of India",  
@@ -4415,7 +4416,11 @@ export const BooksDetails = [
     meta_title: "",
     book_image: BooksList.find((book) => book.slug === "anjali-geetan-ri")?.book_image,
     book_thumbnail: [
-      
+      "https://bluone-ink.s3.amazonaws.com/images/books/anjali-geetan-ri/thumbnail1.jpg",
+      "https://bluone-ink.s3.amazonaws.com/images/books/anjali-geetan-ri/thumbnail2.jpg",
+      "https://bluone-ink.s3.amazonaws.com/images/books/anjali-geetan-ri/thumbnail3.jpg",
+      "https://bluone-ink.s3.amazonaws.com/images/books/anjali-geetan-ri/thumbnail5.jpg",
+      "https://bluone-ink.s3.amazonaws.com/images/books/anjali-geetan-ri/thumbnail6.jpg",
     ],
     
     book_format: "Paperback",
@@ -4427,4 +4432,48 @@ export const BooksDetails = [
     ],
     
   },
+
+  {
+    id: 98,
+    title: "Out of Madness",
+    slug: "out-of-madness",
+    publish_year: 2024,
+    author: AuthorsList.filter((author) => [77].includes(author.id)).map((author) => author.author_name),
+    AuthorInfo: AuthorsList.filter((author) => [77].includes(author.id)).map((author) => author.authorDescription),
+    Authorimage: AuthorsList.filter((author) => [77].includes(author.id)).map((author) => author.image),
+    author_slug: AuthorsList.filter((author) => [77].includes(author.id)).map((author) => author.authslug),
+    price: "499",
+    isbn13: "9789365477788",
+    amazonlink:"https://www.amazon.in/Out-Madness-Rithwik-Aryan/dp/9365477786/ref=sr_1_1?crid=",
+    flipkartlink: "",
+    preorder:"",
+    downloadaisheet: "/books/out-of-madness/sample.pdf",
+    language: "English",
+    dimension: "21.6 x 13.5 x 1 cm",
+    pages: "373",
+    about_book:
+      "Mason Moron, a young psychology professor at Nalanda University, fakes his death and disappears after discovering that his wife has been cheating on him. His quest for reinvention leads him to a madman politician, Bahubali, who dreams of making the greatest porn movie ever. Together they plunge into a deep, dark world of carnal desire. But fate takes an insidious turn when they find themselves trapped in a mental asylum where the mesmerizing actress Ms Staci is battling her own demon. As their bond deepens, Mason must decide if his obsession with the starlet is worth sacrificing his freedom and life for. Stuck at the intersection of madness, lust, and love, Mason must exorcise his inner demons even as Bahubali plots his twisted legacy. Will they escape the clutches of insanity or find solace in madness? In a world where the line between sanity and insanity is wafer-thin and friendship and love are tested in the most surreal ways, Mason must confront his deepest desire, darkest fear, and the question whether he can ever truly be free. Out of Madness is a wild, heart-pounding tale of grief, lust, and redemption where madness might just be the key to salvation.",
+    category: "Fiction",
+    genre: "Crime Fiction, Thriller and Suspense, Mystery",
+    meta_description: "",
+    meta_title: "",
+    book_image: BooksList.find((book) => book.slug === "out-of-madness")?.book_image,
+    book_thumbnail: [
+      "https://bluone-ink.s3.amazonaws.com/images/books/out-of-madness/thumbnail1.jpg",
+      "https://bluone-ink.s3.amazonaws.com/images/books/out-of-madness/thumbnail2.jpg",
+      "https://bluone-ink.s3.amazonaws.com/images/books/out-of-madness/thumbnail3.jpg",
+      "https://bluone-ink.s3.amazonaws.com/images/books/out-of-madness/thumbnail5.jpg",
+      "https://bluone-ink.s3.amazonaws.com/images/books/out-of-madness/thumbnail6.jpg",
+    ],
+    
+    book_format: "Paperback",
+    weight: "350g",
+    endorsement: [
+      "Lorem Ipsum is simply dummy",
+      "of the printing and typesetting industry. Lorem Ipsum has been the industry’s",
+      "text ever since the 1500s,  unknown printer took a galley of type it to make a type specimen book. ",
+    ],
+    
+  },
+  
 ];

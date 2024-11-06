@@ -146,7 +146,7 @@ const pageDescription = bookInfo.meta_description;
               id="book-detail"
               className="about_the_book_sec text-center pt-6"
             >
-              <h1 className="text-4xl w-full lg:w-[75%] mx-auto font-medium mb-4">
+              <h1 className="text-[28px] lg:text-4xl w-full lg:w-[75%] mx-auto font-medium mb-4">
                 {bookInfo.title}
               </h1>
               <i>
@@ -180,7 +180,7 @@ const pageDescription = bookInfo.meta_description;
                 </div>
               </div>
 
-              <div className="flex w-full lg:w-[50%] md:gap-6 gap-6 justify-center mx-auto pt-6">
+              <div className={`flex ${[bookInfo.amazonlink, bookInfo.flipkartlink, bookInfo.preorder, bookInfo.downloadaisheet].filter(Boolean).length > 2 ? 'w-full flex-wrap' : 'lg:w-[50%]'} md:gap-6 gap-6 justify-center mx-auto pt-6`}>
                 {bookInfo.amazonlink && (
                   <Link href={`${bookInfo.amazonlink}`} target="_blank">
                     <button className="bg-black rounded-full px-10 py-3 text-[#fff]">
@@ -197,6 +197,22 @@ const pageDescription = bookInfo.meta_description;
                   <Link href={`${bookInfo.flipkartlink}`} target="_blank">
                     <button className="bg-[#007BD7] rounded-full px-10 py-4 text-[#fff]">
                       <Image src={flipkartimg} width={100} height={100} />
+                    </button>
+                  </Link>
+                )}
+
+                {bookInfo.preorder && (
+                  <Link href={`${bookInfo.preorder}`}>
+                    <button className="bg-[#FF8100] rounded-full px-10 py-3.5 font-barlow text-[#fff]">
+                      <h6 className="font-semibold text-[18px]">PRE-ORDER</h6>
+                    </button>
+                  </Link>
+                )}
+
+                {bookInfo.downloadaisheet && (
+                  <Link href={`${bookInfo.downloadaisheet}`} target="_blank">
+                    <button className="bg-white border-2 border-[#FF8100] rounded-full px-10 py-3 font-barlow text-[#000]">
+                      <h6 className="font-semibold text-[18px]">Preview Sample</h6>
                     </button>
                   </Link>
                 )}
@@ -254,8 +270,8 @@ const pageDescription = bookInfo.meta_description;
                 <div className="flex w-full">
                   <i>
                     <h3 className="text-lg font-normal">
-                      Categories:{" "}
-                      <em className="text-[#007DD7]">{bookInfo.category}</em>
+                    {`Categor${bookInfo.genre.length > 1 ? 'ies' : 'ie'}:`}{" "}
+                      <em className="text-[#007DD7]">{bookInfo.genre}</em>
                     </h3>
                   </i>
                 </div>
@@ -357,7 +373,7 @@ const pageDescription = bookInfo.meta_description;
               </Link>
             </div>
             <div
-              className={`flex flex-wrap ${
+              className={`related_title_sec flex flex-wrap ${
                 BooksDetails.length < 6 ? "justify-between" : "justify-center"
               }`}
             >
@@ -379,7 +395,7 @@ const pageDescription = bookInfo.meta_description;
                 .map((filteredBook, i) => (
                   <div
                     key={i}
-                    className="p-4 mb-4 hover:shadow-md input-border border-[#ffffff00] hover:border-[#BABABA] rounded-md"
+                    className="related_title_sec_card flex-1 p-4 mb-4 hover:shadow-md input-border border-[#ffffff00] hover:border-[#BABABA] rounded-md"
                     style={{ maxWidth: "200px" }} 
                   >
                     <Link

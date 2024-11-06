@@ -6,7 +6,7 @@ function AuthorBooksCards({ title, bookPrice, authorName, coverImage, publishYea
   return (
     <div className="w-full min-h-[400px]">
       <div className="flex flex-col h-full">
-        <div className="h-[200px] lg:h-[400px]">
+        <div className="h-full lg:h-[400px] object-cover">
           <img
             src={coverImage || defaultImage}
             alt={title || "Book cover"}

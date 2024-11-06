@@ -13,6 +13,8 @@ import AlphabetFilter from "@/app/components/AlphabetFilter";
 import Loader from "@/app/components/Loader";
 import { MdOutlineArrowLeft, MdOutlineArrowRight } from "react-icons/md";
 import slugify from "slugify";
+import { HelmetProvider } from "react-helmet-async";
+import { Helmet } from "react-helmet";
 
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -78,6 +80,12 @@ export default function Home() {
       ) : (
         <main
           className="flex flex-col h-full pb-20 mx-auto top_bg_gradient">
+            <HelmetProvider>
+  <Helmet>
+    <title>All Authors | BluOne Ink Publishing</title>
+    <meta name="description" content="Meet the 75+ Indian and International Authors who trusted BluOne Ink with the publication of their creative and influential manuscripts." />
+  </Helmet>
+</HelmetProvider>
           <div className="container px-4 mx-auto">
             <div className="w-full flex justify-center">
               <h1 className="text-[42px] font-medium pt-20 pb-14">All Authors</h1>
@@ -158,45 +166,47 @@ export default function Home() {
 
               {currentAuthors.length > 0 && totalPages > 1 && (
                 <div className="flex justify-center gap-2 items-center">
-                  {currentPage > 1 && (
-                    <button
-                      onClick={() => setCurrentPage((prev) => prev - 1)}
-                      className={`p-2 mx-2 flex items-center ${
-                        currentPage === 1
-                          ? "cursor-not-allowed text-[#241b6d]"
-                          : "hover:rounded-md text-[#241b6d] hover:text-[#241b6d]"
-                      }`}
-                    >
-                      <MdOutlineArrowLeft className="w-6 h-6" />
-                    </button>
-                  )}
-
-                  {Array.from({ length: totalPages }).map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setCurrentPage(i + 1)}
-                      className={`p-1 px-2.5 py-0 text-lg font-medium font-barlow text-[#8A8A8A] rounded-full ${
-                        currentPage === i + 1
-                          ? "bg-[#8A8A8A66] text-black"
-                          : "bg-white hover:bg-[#241b6d] hover:text-white"
-                      }`}
-                    >
-                      {i + 1}
-                    </button>
-                  ))}
-
+                {currentPage > 1 && (
                   <button
-                    disabled={currentPage === totalPages}
-                    onClick={() => setCurrentPage((prev) => prev + 1)}
-                    className={`p-2 mx-2 flex items-center ${
-                      currentPage === totalPages
-                        ? "cursor-not-allowed text-[#241b6d]"
-                        : "hover:rounded-md text-[#241b6d] hover:text-[#241b6d]"
+                    onClick={() => {
+                      setCurrentPage((prev) => prev - 1);
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
+                    className="p-2 mx-2 flex items-center text-[#241b6d] hover:rounded-md hover:text-[#241b6d]"
+                  >
+                    <MdOutlineArrowLeft className="w-6 h-6" />
+                  </button>
+                )}
+
+                {Array.from({ length: totalPages }).map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => {
+                      setCurrentPage(i + 1);
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
+                    className={`p-1 px-2.5 py-0 text-lg font-medium font-barlow text-[#8A8A8A] rounded-full  ${
+                      currentPage === i + 1
+                        ? "bg-[#8A8A8A66] text-black"
+                        : "bg-white hover:bg-[#241b6d] hover:text-white"
                     }`}
+                  >
+                    {i + 1}
+                  </button>
+                ))}
+
+                {currentPage < totalPages && (
+                  <button
+                    onClick={() => {
+                      setCurrentPage((prev) => prev + 1);
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
+                    className="p-2 mx-2 flex items-center text-[#241b6d] hover:rounded-md hover:text-[#241b6d]"
                   >
                     <MdOutlineArrowRight className="text-[#241b6d] w-6 h-6" />
                   </button>
-                </div>
+                )}
+              </div>
               )}
             </div>
           </div>

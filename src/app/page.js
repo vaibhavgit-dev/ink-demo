@@ -220,25 +220,25 @@ function getUniqueTitlesAndBooks(books) {
               </div>
               
               <div className="w-full lg:max-w-[650px] mx-auto">
-                <div className="flex items-center gap-16 lg:gap-24 justify-center">
+                <div className="flex items-center gap-8 lg:gap-24 justify-center">
                   {/* JLF */}
                   <div className="relative overflow-hidden flex justify-center">
                     <Link href="https://jaipurliteraturefestival.org/" target="blank">
-                      <Image src={jlf} alt="jlf" width={600} height={600} layout="intrinsic" className="" />
+                      <Image src={jlf} alt="jlf" width={500} height={500} layout="intrinsic" className="" />
                     </Link>
                   </div>
 
                   {/* PLF */}
                   <div className="relative overflow-hidden flex justify-center">
                     <Link href="http://pondylitfest.com/" target="blank">
-                      <Image src={plf} alt="plf" width={700} height={700} className="" />
+                      <Image src={plf} alt="plf" width={600} height={600} className="" />
                     </Link>
                   </div>
 
                   {/* The Jaipur */}
                   <div className="relative overflow-hidden flex justify-center">
                     <Link href="https://www.thejaipurdialogues.com/" target="blank">
-                      <Image src={thejaipur} alt="the jaipur" width={750} height={750} layout="intrinsic" className="" />
+                      <Image src={thejaipur} alt="the jaipur" width={650} height={650} layout="intrinsic" className="" />
                     </Link>
                   </div>
                 </div>

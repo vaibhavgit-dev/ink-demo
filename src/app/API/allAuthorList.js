@@ -907,4 +907,16 @@ export const AuthorsList = [
       
     ],
   },
+
+  {
+    id: 77,
+    authslug: "rithwik-aryan",
+    author_name: "Rithwik Aryan", 
+    image: "https://bluone-ink.s3.us-east-1.amazonaws.com/images/authors/ritwikaryan.png",
+    authorDescription:
+    "Rithwik Aryan has the distinction of being one of the quickest dropouts of Harvard Extension School, Harvard University. He exited the hallowed institution within three months of starting his bachelor’s degree in psychology to pursue a career in writing. It took him five years to meticulously craft his debut novel, Out of Madness, during which one-and-a-half years he spent inside two of India’s most dangerous mental asylums—The Central Institute of Psychiatry and The Agra Mental Asylum—to bring to bear the hyper realistic elements of the setting in the narrative.",
+    authorSocial: [
+      
+    ],
+  },
 ];

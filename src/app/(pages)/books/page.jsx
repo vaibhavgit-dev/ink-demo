@@ -15,6 +15,8 @@ import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import Link from "next/link";
 import Loader from "@/app/components/Loader";
 import { BooksDetails } from "@/app/API/getbookDetails";
+import { HelmetProvider } from "react-helmet-async";
+import { Helmet } from "react-helmet";
 
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -122,8 +124,12 @@ export default function Home() {
       formatCondition &&
       languageCondition &&
       priceCondition
-    );
-  }).sort((a, b) => {
+    );}).sort((a, b) => {
+      // Sort by book id in descending order to show the latest book first
+      return b.id - a.id;
+    });
+
+  filteredBooks.sort((a, b) => {
     if (sortOption === "Title: A to Z") return a.title.localeCompare(b.title);
     if (sortOption === "Title: Z to A") return b.title.localeCompare(a.title);
     if (sortOption === "Price: Lowest First") return a.price - b.price;
@@ -132,7 +138,6 @@ export default function Home() {
       return b.publish_year - a.publish_year;
     if (sortOption === "Publish Year: Oldest First")
       return a.publish_year - b.publish_year;
-
     return 0;
   });
 
@@ -171,6 +176,12 @@ export default function Home() {
         <Loader />
       ) : (
         <main className="flex flex-col h-full pb-20 mx-auto top_bg_gradient">
+          <HelmetProvider>
+  <Helmet>
+    <title>All Books | BluOne Ink Publishing</title>
+    <meta name="description" content="Fiction, Non-fiction, and Children books published in Hardcover, Paperback, and eBook formats, in English, Hindi, Rajasthani, Bengali, Marathi and Telugu." />
+  </Helmet>
+</HelmetProvider>
           <div className="container px-8  mx-auto">
             <div className="w-full flex justify-center">
               <h1 className="text-[42px] font-medium pt-20 pb-20">All Books</h1>
@@ -201,7 +212,7 @@ export default function Home() {
                     <div className="border-[#8A8A8A] p-6 rounded-2xl shadow-xl bg-white hover:shadow-2xl sm:p-6 md:p-8 book_filter">
                       <div className="flex flex-col md:flex-row">
                         {/* Sort Section */}
-                        <div className="w-full md:w-1/3 md:mb-0">
+                        <div className="w-full md:w-1/3 mb-6 md:mb-0">
                           <i>
                             <h4 className="font-semibold mb-2 text-[#007DD7] text-2xl">
                               Sort
@@ -292,6 +303,9 @@ export default function Home() {
                                       "Fantasy & Science Fiction",
                                       "Crime, Thriller & Mystery",
                                       "Arts, Film & Photography",
+                                      "Crime Fiction",
+                                      "Thriller and Suspense",
+                                      "Mystery",
                                     ].map((subcategory) => (
                                       <label
                                         key={`${g}: ${subcategory}`} // Unique key using category and subcategory
@@ -580,7 +594,7 @@ export default function Home() {
                         <BooksCards
                           title={book.title}
                           coverImage={book.book_image}
-                          bookPrice={`₹${book.price}`}
+                          bookPrice={book.price ? `₹${book.price}` : ''}
                           authorName={book.author ? book.author : "No Author"}
                         />
                       </Link>
@@ -608,47 +622,47 @@ export default function Home() {
 
                 {totalPages > 1 && (
                   <div className="flex justify-center gap-2 items-center">
-                    {currentPage > 1 && (
-                      <button
-                        onClick={() => setCurrentPage((prev) => prev - 1)}
-                        className={`p-2 mx-2 flex items-center ${
-                          currentPage === 1
-                            ? "cursor-not-allowed text-[#241b6d]"
-                            : "hover:rounded-md text-[#241b6d] hover:text-[#241b6d]"
-                        }`}
-                      >
-                        <MdOutlineArrowLeft className="w-6 h-6" />
-                      </button>
-                    )}
-
-                    {Array.from({ length: totalPages }).map((_, i) => (
-                      <button
-                        key={i}
-                        onClick={() => setCurrentPage(i + 1)}
-                        className={`p-1 px-2.5 py-0 text-lg font-medium font-barlow text-[#8A8A8A] rounded-full ${
-                          currentPage === i + 1
-                            ? "bg-[#8A8A8A66] text-black"
-                            : "bg-white hover:bg-[#241b6d] hover:text-white"
-                        }`}
-                      >
-                        {i + 1}
-                      </button>
-                    ))}
-
+                  {currentPage > 1 && (
                     <button
-                      disabled={currentPage === totalPages}
-                      onClick={() =>
-                        setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-                      }
-                      className={`p-2 mx-2 flex items-center ${
-                        currentPage === totalPages
-                          ? "cursor-not-allowed text-[#241b6d]"
-                          : "hover:rounded-md text-[#241b6d] hover:text-[#241b6d]"
+                      onClick={() => {
+                        setCurrentPage((prev) => prev - 1);
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }}
+                      className="p-2 mx-2 flex items-center text-[#241b6d] hover:rounded-md hover:text-[#241b6d]"
+                    >
+                      <MdOutlineArrowLeft className="w-6 h-6" />
+                    </button>
+                  )}
+
+                  {Array.from({ length: totalPages }).map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => {
+                        setCurrentPage(i + 1);
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }}
+                      className={`p-1 px-2.5 py-0 text-lg font-medium font-barlow text-[#8A8A8A] rounded-full  ${
+                        currentPage === i + 1
+                          ? "bg-[#8A8A8A66] text-black"
+                          : "bg-white hover:bg-[#241b6d] hover:text-white"
                       }`}
+                    >
+                      {i + 1}
+                    </button>
+                  ))}
+
+                  {currentPage < totalPages && (
+                    <button
+                      onClick={() => {
+                        setCurrentPage((prev) => prev + 1);
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }}
+                      className="p-2 mx-2 flex items-center text-[#241b6d] hover:rounded-md hover:text-[#241b6d]"
                     >
                       <MdOutlineArrowRight className="text-[#241b6d] w-6 h-6" />
                     </button>
-                  </div>
+                  )}
+                </div>
                 )}
               </div>
             )}

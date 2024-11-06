@@ -37,7 +37,7 @@ export default function Footer() {
                         And you can always easily unsubscribe.
                     </p>
 
-                    <div className='w-[50%] max-w-[405px] flex justify-center mx-auto '>
+                    <div className='w-[75%] lg:w-[50%] max-w-[405px] flex justify-center mx-auto '>
                         <iframe
                             data-tally-src="https://tally.so/embed/3XMW9z?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
                             loading="lazy"
@@ -63,7 +63,7 @@ export default function Footer() {
                     <Image src={Logo} alt="Logo" width={150} height={100} className="mb-3" />
                      </Link>
                     <h3 className="text-xl md:text-2xl font-medium mb-6 text-center">
-                        Publishing, <i className="font-light">with a difference.</i>
+                        Publishing, <i className="font-light">with a Purpose</i>
                     </h3>
 
                     <ul className="flex flex-wrap space-x-4 md:space-x-6 justify-center text-sm md:text-xl font-light">
@@ -85,9 +85,9 @@ export default function Footer() {
 
                     <ul className="  flex flex-wrap justify-center text-sm md:text-base font-light pt-6 mb-3 space-x-4 md:space-x-6">
                         <li className={`hover:underline ${isActive('#')} text-xs`}><Link href="/sitemap.xml">SITEMAP</Link></li>
-                        <li className={`hover:underline ${isActive('/termsandcondition')} text-xs list-disc`}><Link href="/terms">TERMS OF USE</Link></li>
-                        <li className={`hover:underline ${isActive('/privacypolicy')} text-xs list-disc`}><Link href="/privacypolicy">PRIVACY POLICY</Link></li>
-                        <li className={`hover:underline ${isActive('/disclaimer')} text-xs list-disc`}><Link href="/disclaimer">DISCLAIMER</Link></li>
+                        <li className={`hover:underline ${isActive('/termsandcondition')} text-xs list-disc`}><Link href="/resources/policies/terms">TERMS OF USE</Link></li>
+                        <li className={`hover:underline ${isActive('/privacypolicy')} text-xs list-disc`}><Link href="/resources/policies/privacy">PRIVACY POLICY</Link></li>
+                        <li className={`hover:underline ${isActive('/disclaimer')} text-xs list-disc`}><Link href="/resources/policies/disclaimer">DISCLAIMER</Link></li>
                     </ul>
 
                     <span className="text-xs uppercase  font-light pb-4 text-center">

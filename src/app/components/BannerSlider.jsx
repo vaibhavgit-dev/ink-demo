@@ -44,7 +44,7 @@ const BannerSlider = () => {
       >
         <div className="section-1-design item">
           <div className="w-full">
-            <h3 className="text-sm font-medium lg:text-2xl">
+            <h3 className="text-[20px] font-medium lg:text-2xl">
               Books have the power to{" "}
               <span className="bg-yellow-400 rounded-md pl-1 font-ibm">
                 transform lives
@@ -65,7 +65,7 @@ const BannerSlider = () => {
       <div className="pin h-full bg-[#FFF9ED] rounded-lg shadow-lg border-2 flex items-center">
         <div className="section-2-design item">
           <div className="w-full lg:w-[70%] mx-auto">
-            <h3 className="mb-6 text-sm font-medium leading-extra-loose lg:text-2xl text-black">
+            <h3 className="mb-6 text-[20px] font-medium lg:leading-extra-loose lg:text-2xl text-black">
               Ours is the land of <i>dharma.</i> <br/>
               We are a civilization with rich literary and cultural heritage, <br/>
               but also with countless,
@@ -88,7 +88,7 @@ const BannerSlider = () => {
           </div>
           <div className="w-full lg:w-[70%] mx-auto">
             <i>
-              <p className="text-sm leading-medium-loose lg:text-2xl text-black">
+              <p className="text-[20px] leading-medium-loose lg:text-2xl text-black">
                 Could there be <span className="leading-medium-loose border_line_2 font-ibm">a platform</span> compelling and powerful enough<br/>
                  to
                 catch the{" "}
@@ -136,11 +136,11 @@ const BannerSlider = () => {
           </div>
           <div className="w-full lg:w-[44%] mx-auto">
             <i>
-              <p className="text-2xl font-light pt-6 leading-medium-loose text-black">
+              <h6 className="text-lg font-normal pt-6 leading-loose text-black">
                 How do we celebrate the written <span className="word_bg font-ibm"
                 style={{ backgroundImage: `url(${WordBg.src})`, backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', padding: '10px 10px 10px 0px', position: 'relative' }}
                 >world?</span>
-              </p>
+              </h6>
             </i>
           </div>
           <div className="w-full lg:w-[44%] mx-auto">

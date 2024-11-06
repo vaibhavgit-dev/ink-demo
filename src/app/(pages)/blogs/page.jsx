@@ -5,6 +5,9 @@ import Loader from "@/app/components/Loader";
 import BlogsCards from "./BlogsCards";
 import { allBlogsList } from "@/app/API/allBlogsList";
 import Link from "next/link";
+import { MdOutlineArrowLeft, MdOutlineArrowRight } from "react-icons/md";
+import { HelmetProvider } from "react-helmet-async";
+import { Helmet } from "react-helmet";
 
 export default function Page() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -13,14 +16,24 @@ export default function Page() {
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
-  const blogsPerPage = 6; // Number of blogs per page
+  const blogsPerPage = 6;
+
+  // Sorting state
+  const [sortOrder, setSortOrder] = useState("newest"); // "newest" or "oldest"
 
   // Calculate the index range for the current page's blogs
   const indexOfLastBlog = currentPage * blogsPerPage;
   const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
 
+  // Sort blogs by publishedDate
+  const sortedBlogs = [...blogs].sort((a, b) => {
+    const dateA = new Date(a.publishedDate);
+    const dateB = new Date(b.publishedDate);
+    return sortOrder === "newest" ? dateB - dateA : dateA - dateB;
+  });
+
   // Filter blogs based on search query
-  const filteredBlogs = blogs.filter((blog) =>
+  const filteredBlogs = sortedBlogs.filter((blog) =>
     blog.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -40,15 +53,43 @@ export default function Page() {
         <Loader />
       ) : (
         <main className="flex flex-col h-full pb-20 mx-auto top_bg_gradient">
+          <HelmetProvider>
+  <Helmet>
+    <title>Blogs | BluOne Ink Publishing</title>
+    <meta name="description" content="Fiction, Non-fiction, and Children books published in Hardcover, Paperback, and eBook formats, in English, Hindi, Rajasthani, Bengali, Marathi and Telugu." />
+  </Helmet>
+</HelmetProvider>
           <div className="container px-4 mx-auto">
             <div className="w-full flex justify-center">
               <h1 className="text-[42px] font-medium pt-20 pb-14">All Blogs</h1>
             </div>
 
-            {/* Search Bar */}
+            {/* Search Bar and Sort Filter */}
             <div className="w-full flex justify-between items-center pt-6 pb-2">
-              <div className="w-full">
-                <div className="relative">
+              <div className="w-full flex flex-wrap lg:flex-nowrap space-x-4 gap-6 items-center">
+                {/* Newest / Oldest Filter */}
+                <div className="flex justify-start items-center pb-4">
+                  <p className="text-[#0D1928] font-semibold mr-2">View:</p>
+                  <button
+                    className={`mr-2 text-lg font-medium ${
+                      sortOrder === "newest" ? "text-[#0D1928]" : "text-[#8A8A8A]"
+                    }`}
+                    onClick={() => setSortOrder("newest")}
+                  >
+                    Newest
+                  </button>
+                  <span className="text-[#8A8A8A]">/</span>
+                  <button
+                    className={`ml-2 text-lg font-medium ${
+                      sortOrder === "oldest" ? "text-[#0D1928]" : "text-[#8A8A8A]"
+                    }`}
+                    onClick={() => setSortOrder("oldest")}
+                  >
+                    Oldest
+                  </button>
+                </div>
+                {/* Search Input */}
+                <div className="relative w-full">
                   <FiSearch className="absolute left-4 top-3 w-6 h-6 text-[#8A8A8A]" />
                   {searchQuery && (
                     <FiXCircle
@@ -68,18 +109,25 @@ export default function Page() {
             </div>
 
             {/* Blogs Grid */}
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 pt-6">
-              {currentBlogs.map((blog) => (
-                <Link href={`/blogs/${blog.blogslug}`}>
-                <BlogsCards
-                  key={blog.id}
-                  title={blog.title}
-                  blogimage={blog.blogimage}
-                  imageContainerClass="h-[200px] lg:h-[300px]"
-                />
-              </Link>              
-              ))}
-            </div>
+              <div className={`pt-6 ${currentBlogs.length > 0 ? "grid grid-cols-2 lg:grid-cols-3 gap-4" : "flex justify-center items-center h-64"}`}>
+                {currentBlogs.length > 0 ? (
+                  currentBlogs.map((blog) => (
+                    <Link
+                      href={`/blogs/${encodeURIComponent(blog.blogslug)}`}
+                      key={blog.id}
+                      className="p-4 mb-4 hover:shadow-md input-border border-[#ffffff00] hover:border-[#BABABA] rounded-md"
+                    >
+                      <BlogsCards
+                        title={blog.title}
+                        blogimage={blog.blogimage}
+                        imageContainerClass="h-[200px] lg:h-[300px]"
+                      />
+                    </Link>
+                  ))
+                ) : (
+                  <p className="text-md">No Result Found</p>
+                )}
+              </div>
 
             {/* Pagination Controls */}
             <div className="w-full flex-wrap md:flex justify-center md:justify-between mt-10">
@@ -99,18 +147,24 @@ export default function Page() {
                 <div className="flex justify-center gap-2 items-center">
                   {currentPage > 1 && (
                     <button
-                      onClick={() => setCurrentPage((prev) => prev - 1)}
+                      onClick={() => {
+                        setCurrentPage((prev) => prev - 1);
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }}
                       className="p-2 mx-2 flex items-center text-[#241b6d] hover:rounded-md hover:text-[#241b6d]"
                     >
-                      Previous
+                      <MdOutlineArrowLeft className="w-6 h-6" />
                     </button>
                   )}
 
                   {Array.from({ length: totalPages }).map((_, i) => (
                     <button
                       key={i}
-                      onClick={() => setCurrentPage(i + 1)}
-                      className={`p-1 px-2.5 text-lg font-medium text-[#8A8A8A] rounded-full ${
+                      onClick={() => {
+                        setCurrentPage(i + 1);
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }}
+                      className={`p-1 px-2.5 py-0 text-lg font-medium font-barlow text-[#8A8A8A] rounded-full  ${
                         currentPage === i + 1
                           ? "bg-[#8A8A8A66] text-black"
                           : "bg-white hover:bg-[#241b6d] hover:text-white"
@@ -122,10 +176,13 @@ export default function Page() {
 
                   {currentPage < totalPages && (
                     <button
-                      onClick={() => setCurrentPage((prev) => prev + 1)}
+                      onClick={() => {
+                        setCurrentPage((prev) => prev + 1);
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }}
                       className="p-2 mx-2 flex items-center text-[#241b6d] hover:rounded-md hover:text-[#241b6d]"
                     >
-                      Next
+                      <MdOutlineArrowRight className="text-[#241b6d] w-6 h-6" />
                     </button>
                   )}
                 </div>
