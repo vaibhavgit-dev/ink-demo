@@ -8,7 +8,7 @@ import Image from "next/image";
 const NextArrow = ({ onClick }) => {
   return (
     <div
-      className="custom-arrow next-arrow absolute right-0 top-1/2 transform -translate-y-1/2 cursor-pointer p-2 z-10"
+      className="custom-arrow next-arrow absolute right-[-50px] top-1/2 transform -translate-y-1/2 cursor-pointer p-2 z-10"
       onClick={onClick}
     >
       <Image src={rightarrow} width={25} height={25} alt="Next" />
@@ -17,21 +17,17 @@ const NextArrow = ({ onClick }) => {
 };
 
 const PrevArrow = ({ onClick }) => {
-  const handleClick = () => {
-    onClick();
-  };
-
   return (
     <div
-      className="custom-arrow prev-arrow absolute left-0 top-1/2 transform -translate-y-1/2 cursor-pointer p-2 z-10"
-      onClick={handleClick}
+      className="custom-arrow prev-arrow absolute left-[-50px] top-1/2 transform -translate-y-1/2 cursor-pointer p-2 z-10"
+      onClick={onClick}
     >
       <Image src={leftarrow} width={25} height={25} alt="Prev" />
     </div>
   );
 };
 
-const SliderBook = ({ testimonials }) => {
+const SliderBook = ({ testimonials = [] }) => {
   const settings = {
     dots: false,
     infinite: true,
@@ -39,25 +35,61 @@ const SliderBook = ({ testimonials }) => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 10000,
+    adaptiveHeight: true,
     nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />
+    prevArrow: <PrevArrow />,
   };
 
   return (
-    <div className="wrapper bg-[#DDF5FF] w-full relative">
-      <div className="container mx-auto p-0 pt-6">
-        <Slider {...settings}>
-          {testimonials.map((testimonial, index) => (
-            <div key={index} className="text-center p-8 w-full">
-              <p className="text-xl md:text-2xl text-gray-700">“{testimonial.quote}”</p>
+    <div className="wrapper bg-[#DDF5FF] w-[80%] mx-auto relative">
+      <div className="container mx-auto p-0">
+        {testimonials && testimonials.length > 0 ? (
+          testimonials.length === 1 ? (
+            // Single testimonial, no slider
+            <div className="text-center p-8 w-full flex flex-col justify-center items-center min-h-[150px]">
+              <p className="text-xl testi-quote md:text-2xl text-gray-700">
+                {testimonials[0].quote}
+              </p>
               <div className="text-center mt-6">
-                <p className="text-xl font-bold text-blue-800">{testimonial.name}</p>
-                <p className="text-sm text-gray-600">{testimonial.designation}</p>
+                <p className="text-xl font-bold text-blue-800">
+                  {testimonials[0].name}
+                </p>
+                <p className="text-sm text-gray-600">
+                  {testimonials[0].designation}
+                </p>
               </div>
             </div>
-          ))}
-        </Slider>
+          ) : (
+            // Multiple testimonials, show slider
+            <Slider {...settings}>
+              {testimonials.map((testimonial, index) => (
+                <div
+                  key={index}
+                  className="text-center p-8 w-full flex flex-col justify-center items-center min-h-[150px]"
+                >
+                  <p className="text-xl testi-quote md:text-2xl text-gray-700">
+                    {testimonial.quote}
+                  </p>
+                  <div className="text-center mt-6">
+                    <i>
+                      <p className="text-2xl font-semibold font-ibm text-[#241B6D]">
+                        {testimonial.name}
+                      </p>
+                    </i>
+                    <i>
+                      <p className="text-lg text-[#241B6D] font-normal">
+                        {testimonial.designation}
+                      </p>
+                    </i>
+                  </div>
+                </div>
+              ))}
+            </Slider>
+          )
+        ) : (
+          <p className="text-center text-gray-700">No testimonials available</p>
+        )}
       </div>
     </div>
   );

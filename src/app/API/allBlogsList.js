@@ -19,7 +19,7 @@ export const allBlogsList = [
       "Categories": ["Science & Technology", "Religion & Spirituality"],
       "blogimage": "https://bluone-ink.s3.us-east-1.amazonaws.com/images/blogs/What-Sanatan-Dharma-Is-Not.webp",
       "blogbanner": "/banner-back.png",
-      "meta_description": "What Sanatan Dharma Is Not",
+      "meta_description": "",
     },
     {
       "id": 2,

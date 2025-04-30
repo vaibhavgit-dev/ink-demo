@@ -17,12 +17,12 @@ export default function Page() {
     setLoading(true);
     setTimeout(() => {
       setResources([
-        { id: 1, title: "Blogs", image: "/blogs.png", link: "/blogs" },
-        { id: 2, title: "Policies", image: "/policies.png", link: "/resources/policies" },
-        { id: 3, title: "Gallery", image: "/gallery.png", link: "/comingsoon" },
-        { id: 4, title: "Brand Assets", image: "/brandasset.png", link: "/comingsoon" },
-        { id: 5, title: "Books", image: "/bookresours.png", link: "/comingsoon" },
-        { id: 6, title: "Authors", image: "/authorresourse.png", link: "/comingsoon" },
+        { id: 1, title: "Blogs", image: "/blogs.png", link: "resources/blogs" },
+        { id: 2, title: "Brand Assets", image: "/brandasset.png", link: "resources/brandassets" },
+        { id: 3, title: "Events", image: "/events.webp", link: "/resources/events/" },
+        { id: 4, title: "Gallery", image: "/gallery.png", link: "/resources/gallery" },
+        { id: 5, title: "Policies", image: "/policies.png", link: "/resources/policies" },
+        // { id: 6, title: "Authors", image: "/authorresourse.png", link: "/comingsoon" },
         // Add more resources as needed
       ]);
       setLoading(false);
@@ -42,40 +42,52 @@ export default function Page() {
       ) : (
         <main className="flex flex-col h-full pb-20 mx-auto top_bg_gradient">
           <HelmetProvider>
-  <Helmet>
-    <title>Resources | BluOne Ink Publishing</title>
-    <meta name="description" content="" />
-  </Helmet>
-</HelmetProvider>
+            <Helmet>
+              <title>All Resources | BluOne Ink Publishing</title>
+              <meta name="description" content="A hub for our Blogs and Musings, Albums, Media Kit and Brand Assets, and Policies and Terms." />
+              <link rel="canonical" href="https://www.bluone.ink/resources" />
+            </Helmet>
+          </HelmetProvider>
           <div className="container px-4 mx-auto">
             <div className="w-full flex justify-center">
               <h1 className="text-[42px] font-medium pt-20 pb-14">Resources</h1>
             </div>
 
             {/* Resource Grid */}
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-5 pt-6">
-              {currentResources.map((resource) => (
-                <div key={resource.id} className="w-full min-h-[150px] lg:min-h-[300px] p-3 hover:shadow-lg">
-                  <div className="flex flex-col h-full pb-1">
-                    <Link href={resource.link}>
-                      <div className="h-[200px] lg:h-[300px]">
-                        <img
-                          src={resource.image}
-                          alt={resource.title}
-                          className="object-cover w-full h-full"
-                        />
-                      </div>
-                      <div className="flex-1">
-                        <h6 className="pt-4 uppercase font-medium font-barlow leading-6">
-                          {resource.title}
-                        </h6>
-                      </div>
-                    </Link>
+            <div className="flex flex-wrap gap-5 pt-6">
+                {Array.from({ length: Math.ceil(currentResources.length / 3) }).map((_, rowIndex) => (
+                  <div
+                    key={rowIndex}
+                    className="flex justify-center w-full"
+                  >
+                    {currentResources
+                      .slice(rowIndex * 3, rowIndex * 3 + 3)
+                      .map((resource) => (
+                        <div
+                          key={resource.id}
+                          className="w-[calc(33.333%-10px)] min-h-[150px] lg:min-h-[300px] p-3 hover:shadow-lg"
+                        >
+                          <div className="flex flex-col h-full pb-1">
+                            <Link href={resource.link}>
+                              <div className="h-[200px] lg:h-[300px]">
+                                <img
+                                  src={resource.image}
+                                  alt={resource.title}
+                                  className="object-cover w-full h-full"
+                                />
+                              </div>
+                              <div className="flex-1">
+                                <h6 className="pt-4 uppercase font-medium font-barlow leading-6">
+                                  {resource.title}
+                                </h6>
+                              </div>
+                            </Link>
+                          </div>
+                        </div>
+                      ))}
                   </div>
-                </div>
-              ))}
-            </div>
-
+                ))}
+              </div>
             {/* Pagination Controls */}
             {/* {totalPages > 1 && (
               <div className="flex justify-center gap-2 mt-10">

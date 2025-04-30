@@ -12,6 +12,7 @@ export const AuthorsList = [
       "https://www.linkedin.com/in/abhijit-majumder-474a3663?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BIZAvOCA%2FT6uGtPhvjogEmA%3D%3D",
       "https://www.facebook.com/AbhijitWrites/",
     ],
+    
   },
   {
     id: 2,
@@ -915,6 +916,248 @@ export const AuthorsList = [
     image: "https://bluone-ink.s3.us-east-1.amazonaws.com/images/authors/ritwikaryan.png",
     authorDescription:
     "Rithwik Aryan has the distinction of being one of the quickest dropouts of Harvard Extension School, Harvard University. He exited the hallowed institution within three months of starting his bachelor’s degree in psychology to pursue a career in writing. It took him five years to meticulously craft his debut novel, Out of Madness, during which one-and-a-half years he spent inside two of India’s most dangerous mental asylums—The Central Institute of Psychiatry and The Agra Mental Asylum—to bring to bear the hyper realistic elements of the setting in the narrative.",
+    authorSocial: [
+      
+    ],
+  },
+  {
+    id: 78,
+    authslug: "iqbal-chand-malhotra",
+    author_name: "Iqbal Chand Malhotra", 
+    image: "https://bluone-ink.s3.us-east-1.amazonaws.com/images/authors/Iqbal+chand+Malhotra.png",
+    authorDescription:
+    "Iqbal Chand Malhotra is an accomplished author with four books on the geopolitics of South Asia to his name. His fifth book, The Nukes, the Jihad, the Hawalas and Crystal Meth, continues his exploration of this complex region. Malhotra holds dual degrees in economics from Queens’ College, University of Cambridge, and Shriram College of Commerce, University of Delhi. He is a foundation scholar of Queens’ College and a recipient of the prestigious Wrenbury Scholarship from the University of Cambridge. Additionally, he is a black belt shodan in Shotokan karate-do. Between 1993 and 1996, he served as an adviser on India to Rupert Murdoch and MTV Networks. Malhotra has directed six internationally acclaimed feature documentaries and produced over 500 hours of television programming broadcast worldwide. He resides in New Delhi.",
+    authorSocial: [
+      
+    ],
+  },
+  {
+    id: 79,
+    authslug: "david-frawley",
+    author_name: "David Frawley", 
+    image: "https://bluone-ink.s3.us-east-1.amazonaws.com/images/authors/David+Frawley.png",
+    authorDescription:
+    "David Frawley (Pandit Vamadeva Shastri) is a Vedic teacher and Hindu acharya. He is the author of more than fifty books published in over twenty languages worldwide. His fields of expertise include Yoga, Ayurveda, Vedanta, Vedic astrology and ancient Vedic texts. He has also written on historical, social and cultural issues facing Hinduism and India today. He was honoured with the Padma Bhushan, the third highest civilian award of the government of India, in 2015. He has two doctorate degrees in literature from Swami Vivekananda Yoga Anusandhana Samsthana, Bangalore, and Ram Manohar Lohia Avadh University, Uttar Pradesh. He is a recipient of the National Eminence Award from the South Indian Educational Society, Mumbai. Vamadeva, as he is commonly known, carries on the teachings of Kavyakantha Ganapati Muni, the chief disciple of Bhagavan Ramana Maharshi. He is a disciple of Sadguru Sivananda Murty of Andhra Pradesh. He has been associated with many Hindu organizations, including Swaminarayan BAPS, Chinmaya Mission, Arsha Vidya Gurukulam, Sri Ramanashram and the magazine Hinduism Today. He is the director of the American Institute of Vedic Studies.",
+    authorSocial: [
+      
+    ],
+  },
+  {
+    id: 80,
+    authslug: "pawan-vijay",
+    author_name: "Pawan Vijay", 
+    image: "https://bluone-ink.s3.us-east-1.amazonaws.com/images/authors/Pawan+Vijay.png",
+    authorDescription:
+    "डॉ. पवन विजय मूलत: समाज के अध्येता हैं, जो अपने उत्तर आधुनिक विमर्शके लिए जाने जाते हैं। समाज की मुख्यधारा के अलावा विशेष रूप से हाशिये पर खड़े लोगों की भावनाओं, मनोविज्ञान, उपलब्धि और वंचनाओं का प्रकार्यात्मक विश्लेषण डॉ. विजय के साहित्य की प्रमुख विशेषता है। एक साथ कई आयामों पर काम करना डॉ. विजय की विशेषता है , वह साहित्यकार होनेके साथ- साथ समाजशास्त्री, स्तंभकार, सामजिक कार्यकर्ता और शिक्षाविद हैं।",
+    authorSocial: [
+      
+    ],
+  },
+  {
+    id: 81,
+    authslug: "shyamal-chakraborty",
+    author_name: "Shyamal Chakraborty", 
+    image: "https://bluone-ink.s3.us-east-1.amazonaws.com/images/authors/Shyamal+Chakraborty.png",
+    authorDescription:
+    "Born in Kashi. Originally from the village of Agarakunda in undivided Nadia district. Educated in Kashi and Patna. Started and ended his career in the Language Department of the Bihar Government. Special expertise in Hindi. Regular broadcasting of self-written Hindi plays from All India Radio Patna. Served as president for a decade in the once-renowned theater group of Bihar, Chaturanga. Former General Secretary of the Bihar Bengali Association. Former member of the Executive Committee of the Bihar Rabindra Parishad. Self-written Hindi and Bengali plays, with various flavors, performed on different stages in Patna. Special recognition from the Bihar Government for significant service in the Hindi language. After retirement, currently residing in Kolkata",
+    authorSocial: [
+      
+    ],
+  },
+  {
+    id: 82,
+    authslug: "rami-chhabra",
+    author_name: "Rami Chhabra", 
+    image: "https://bluone-ink.s3.us-east-1.amazonaws.com/images/authors/Rami+Chabbra.png",
+    authorDescription:
+    "Rami Chhabra debuts into the world of fiction with Becoming the Storm, but she is a well-known print-media and TV personality of several decades standing. Her life and work represent sustained commitment to women and social development issues addressed through multiple roles spanning media, public advocacy, administration, international consultancies and volunteer work, the last of which as the founder-president of Streebal, a non-profit working for women’s issues and community upliftment since 1975. She attended the International Women’s Conference in Mexico City in 1975 as an invited UN fellow and was an official delegate to the UN Women’s Decade Conference in Nairobi in 1985. Amongst scores of international and national consultations and a life of worldwide travel, one that stands out is a reportage from Vietnam right after the war end in July 1975. Breaking Ground: Journey into the Media ... and Out is her memoir published by National Book Trust India (2012). Angadh Raste: Media Kshetra Mein Aagman ... aur Alvida (NBT, 2018) is the Hindi translation. She has also authored several technical monographs and 7 children’s books. Born in Dehra Ismail Khan in 1938, Rami Chhabra graduated in English honours from Miranda House, Delhi University. In 2005, she was honoured by Farleigh Dickinson University, New Jersey, with a Doctor of Humane Letters. The late Dr Michael Adams, then president of International Association of University Presidents, hailed her as a ‘steadfast and independent voice for women’.",
+    authorSocial: [
+      
+    ],
+  },
+  {
+    id: 83,
+    authslug: "subramanian-chidambaran",
+    author_name: "Subramanian Chidambaran", 
+    image: "https://bluone-ink.s3.us-east-1.amazonaws.com/images/authors/Subramanian.png",
+    authorDescription:
+    "Subramanian, also known as Subbu, hails from a family of Samavedic scholars in Puthucode village, Palakkad district, Kerala. He graduated in electrical engineering from Veermata Jijabai Technological Institute (VJTI), Mumbai, and holds a postgraduate degree in management from the Indian Institute of Management (IIM), Lucknow. With over fifteen years of experience in management consulting and corporate strategy, he has published several case studies and articles in leading national and international management journals and has delivered lectures at top B-schools in India. Subbu also holds a master’s degree in Sanskrit, specializing in Vedanta, and a diploma in manuscriptology, both from the University of Mumbai, where he has served as a visiting faculty member teaching Vedanta, Itihasa, Purāṇas, and Bhakti. He has formally studied Veda chanting for eight years and is currently pursuing doctoral studies on the topic ‘Indic Perspectives for Modern Leadership’ at Chinmaya Vishwa Vidyapeeth. He has authored several papers and articles on Indian Knowledge Systems (IKS), published in various national and international journals, and has presented at numerous conferences and seminars. Coming from a maternal family of music connoisseurs, Subbu began his formal training in Carnatic music at the age of thirteen. He is currently under the tutelage of ‘Sangita Kala Acharya’ Vidushi Smt. Alamelu Mani, with whom he has been learning for over fifteen years. Subbu has been giving lecture demonstrations and ‘Sangeeta Upanyasam’ (musical storytelling), combining his interests and skills in music and Indic knowledge. Additionally, he hosts a YouTube channel called Subbu’s Corner, raising awareness about Sanātana-dharma.",
+    authorSocial: [
+      
+    ],
+  },
+  {
+    id: 84,
+    authslug: "jules-verne",
+    author_name: "Jules Verne", 
+    image: "https://bluone-ink.s3.us-east-1.amazonaws.com/images/authors/Jules+Verne.jpg",
+    authorDescription:
+    "Jules Verne (1828-1905) was a French author best known for his tales of adventure, including Twenty Thousand Leagues under the Sea, Journey to the Center of the Earth, and Around the World in Eighty Days. A true visionary, Verne foresaw the skyscraper, the submarine, and the airplane, among many other inventions, and is now regarded as one of the fathers of science fiction.",
+    authorSocial: [
+      
+    ],
+  },
+  {
+    id: 85,
+    authslug: "charles-dickens",
+    author_name: "Charles Dickens", 
+    image: "https://bluone-ink.s3.us-east-1.amazonaws.com/images/authors/Charles-Dickens.webp",
+    authorDescription:
+    "Charles Dickens was born in 1812 near Portsmouth where his father was a clerk in the navy pay office. The family moved to London in 1823, but their fortunes were severely impaired. Dickens was sent to work in a blacking-warehouse when his father was imprisoned for debt. Both experiences deeply affected the future novelist. In 1833 he began contributing stories to newspapers and magazines, and in 1836 started the serial publication of Pickwick Papers. Thereafter, Dickens published his major novels over the course of the next twenty years, from Nicholas Nickleby to Little Dorrit. He also edited the journals Household Words and All the Year Round. Dickens died in June 1870.",
+    authorSocial: [
+      
+    ],
+  },
+  {
+    id: 86,
+    authslug: "daniel-defoe",
+    author_name: "Daniel Defoe", 
+    image: "https://bluone-ink.s3.us-east-1.amazonaws.com/images/authors/330px-Daniel_Defoe_Kneller_Style.jpg",
+    authorDescription:
+    "Daniel Defoe was an English novelist, journalist, merchant, pamphleteer, and spy. He is best known for his 1719 novel Robinson Crusoe, which is said to be one of the most widely translated works, second only to the Bible.",
+    authorSocial: [
+      
+    ],
+  },
+  {
+    id: 87,
+    authslug: "h-g-wells",
+    author_name: "H. G. Wells", 
+    image: "https://bluone-ink.s3.us-east-1.amazonaws.com/images/authors/HG+Wells.jpg",
+    authorDescription:
+    "The son of a professional cricketer and a lady's maid, H. G. Wells (1866-1946) served apprenticeships as a draper and a chemist's assistant before winning a scholarship to the prestigious Normal School of Science in London. While he is best remembered for his groundbreaking science fiction novels, including The Time Machine, The War of the Worlds, The Invisible Man, and The Island of Doctor Moreau, Wells also wrote extensively on politics and social matters and was one of the foremost public intellectuals of his day.",
+    authorSocial: [
+      
+    ],
+  },
+  {
+    id: 88,
+    authslug: "l-frank-baum",
+    author_name: "L. Frank Baum", 
+    image: "https://bluone-ink.s3.us-east-1.amazonaws.com/images/authors/L.Frank+Baum.jfif",
+    authorDescription:
+    "Lyman Frank Baum was born in Chittenango, New York, on May 15, 1856. Over the course of his life, Baum raised fancy poultry, sold fireworks, managed an opera house, opened a department store, and an edited a newspaper before finally turning to writing. In 1900, he published his best known book The Wonderful Wizard of Oz. Eventually he wrote fifty-five novels, including thirteen Oz books, plus four “lost” novels, eighty-three short stories, more than two hundred poems, an unknown number of scripts, and many miscellaneous writings. Baum died on May 6, 1919. He is buried in the Forest Lawn Memorial Park Cemetery, in Glendale, California.",
+    authorSocial: [
+      
+    ],
+  },
+  {
+    id: 89,
+    authslug: "ravindra-kumar",
+    author_name: "Ravindra Kumar", 
+    image: "https://bluone-ink.s3.us-east-1.amazonaws.com/images/authors/Ravindra+Kumar+-+Everest+Ki+Dusri+Ore.png",
+    authorDescription:
+    "रविंद्र कुमार (IAS) का जन्म बिहार के बेगूसराय जिले के छोटे से गाँव बसही में हुआ। नवोदय विद्यालय से प्रारंभिक शिक्षा के बाद उन्होंने रांची का रुख लिया और वहाँ डी.ए.वी. श्यामली में उत्कृष्ट प्रदर्शन के साथ आई.आई.टी. प्रवेश परीक्षा उत्तीर्ण की। तत्पश्चात उन्होंने मुंबई से मर्चेंट नेवी में प्रशिक्षण प्राप्त कर शिपिंग क्षेत्र में महत्वपूर्ण सेवाएँ प्रदान कीं। अपने दृढ़ निश्चय और अथक परिश्रम के बल पर उन्होंने वह नौकरी छोड़कर भारतीय प्रशासनिक सेवा (आई.ए.एस.) की प्रतिष्ठित परीक्षा पास की। रविंद्र कुमार भारत के पहले और एकमात्र आई.ए.एस. अधिकारी हैं जिन्होंने अलग-अलग मार्गों से दो बार माउंट एवरेस्ट की सफलतम चढ़ाई की है। उन्होंने सिक्किम, उत्तर प्रदेश और केंद्र सरकार के विभिन्न महत्वपूर्ण पदों पर अपनी सेवाएँ दी हैं और वर्तमान में उत्तर प्रदेश में बरेली के जिलाधिकारी के रूप में कार्यरत हैं। रविंद्र कुमार एक संवेदनशील आशुकवि और लेखक भी हैं, जिनकी अब तक दस कृतियाँ प्रकाशित हो चुकी हैं। पर्वतारोहण पर उनकी कृति 'एवरेस्ट: सपनों की उड़ान- सिफर से शिखर तक' को साहित्य जगत में व्यापक सराहना मिली, जिसके लिए उन्हें वर्ष 2020 में प्रतिष्ठित 'अमृतलाल नागर पुरस्कार' से सम्मानित किया गया। उनकी जीवन यात्रा साहस, संकल्प और सकारात्मक सोच से कठिनाइयों और संघर्षों पर विजय प्राप्त करने की अद्वितीय मिसाल है, जो हर संघर्षशील व्यक्ति को जीवन में सकारात्मक सोच के साथ विजय प्राप्त करने की प्रेरणा देती है।",
+    authorSocial: [
+      
+    ],
+  },
+  {
+    id: 90,
+    authslug: "tuhin-a-sinha",
+    author_name: "Tuhin A. Sinha", 
+    image: "https://bluone-ink.s3.us-east-1.amazonaws.com/images/authors/Tuhin+A.+Sinha-+Climate+Action+India.png",
+    authorDescription:
+    "Tuhin A. Sinha is a bestselling author, columnist, and politician. Presently, he is the national spokesperson of BJP. Tuhin is among the most prolific Indian writers with a knack for experimenting with unorthodox genres. He is the author of the trilogy on India’s unsung subaltern freedom fighters: The Legend of Birsa Munda, The Great Tribal Warriors of Bharat, and Sido Kanhu. Tuhin’s previous book, Modi’s Northeast Story, is an anthology of 23 essays that document the transformation of India’s northeastern states under PM Modi. His books traverse a wide range of subjects across both fiction and nonfiction genres. As a popular media voice of the BJP, Tuhin has been vocal and articulate on all recent political issues in his articles and on TV news debates.",
+    authorSocial: [
+      
+    ],
+  },
+  {
+    id: 91,
+    authslug: "dr-kaviraj-singh",
+    author_name: "Dr. Kaviraj Singh", 
+    image: "https://bluone-ink.s3.us-east-1.amazonaws.com/images/authors/Dr.+Kaviraj+Singh.png",
+    authorDescription:
+    "Dr. Kaviraj Singh is the founder CEO of Earthood, a multinational company based in Gurugram, Haryana. The company is accredited by prominent international bodies, including the United Nations, Voluntary Carbon Standard, Gold Standard Foundation, and Global Carbon Council. Dr. Singh has an extensive track record of working on hundreds of carbon offset projects across the globe. He is a prominent voice in climate change advocacy and actively contributes to numerous national and international committees. As the president of international validation and verification bodies, he leads global efforts in advancing validation and verification standards. Additionally, he serves as a member of expert committees for the International Carbon Verification and Certification Management Institute, International Carbon Auditor Forum, and VERRA Expert Committee. Dr. Singh holds a master’s degree in energy management and a doctorate in environmental engineering from the Indian Institute of Technology Delhi. He has authored and co-authored several books and published extensively in international journals. His academic journey has been distinguished by two national scholarships and one prestigious international scholarship.",
+    authorSocial: [
+      
+    ],
+  },
+  {
+    id: 92,
+    authslug: "shantanu-gupta",
+    author_name: "Shantanu Gupta", 
+    image: "https://bluone-ink.s3.us-east-1.amazonaws.com/images/authors/Shantanu+Gupta.jpg",
+    authorDescription:
+    "Shantanu Gupta is an author, TEDx speaker, TV panellist, and the founder of The Ramayana School. He is also a part-time faculty member at the Hindu University of America and a professor at Rashtram School of Public Policy, Rishihood University. He is the first to introduce political comic books with his two graphic novels, 101 Reasons Why I Will Vote for Modi and Ajay to Yogi Adityanath. His book, The Monk Who Became Chief Minister, a biography of Yogi Adityanath, was listed among the ‘Most Memorable Nonfiction Books of 2017’ by Amazon India, spawning a sequel, The Monk Who Transformed Uttar Pradesh. Another of his books, Bharatiya Janata Party: Past, Present and Future, has been translated into multiple Indian languages. Shantanu has participated in more than 5,000 TV debates on leading channels such as India Today, CNN News18, Times Now, Republic TV, Aaj Tak, Zee News, India TV, and others. He has also written opinion pieces for Indian Express, The Hindu, Hindustan Times, Times of India, Dainik Jagran, Swarajya, and OpIndia. He is a fellow of the University of Oxford’s Chevening Gurukul Fellowship. Shantanu holds an engineering degree from GB Pant University (India), management education from XLRI, Jamshedpur (India), and a master’s in policy and politics from the Institute of Development Studies, University of Sussex (United Kingdom). Shantanu worked for a decade as a process and management consultant in various cities across India, Switzerland, Cyprus, Hungary, and Israel. He has represented India in numerous international conferences on economy and policy in Germany, Malaysia, and Sri Lanka. He has also worked with think tanks such as the Centre for Civil Society and non-profits such as UNICEF, Naandi Foundation, and the National Independent Schools Alliance.",
+    authorSocial: [
+      
+    ],
+  },
+  {
+    id: 93,
+    authslug: "gautam-r-desiraju",
+    author_name: "Gautam R. Desiraju", 
+    image: "https://bluone-ink.s3.us-east-1.amazonaws.com/images/authors/Gautam+Desiraju+-+Delimitation.png",
+    authorDescription:
+    "Gautam Desiraju is one of India’s foremost scientists, with an h-index of 104 and seminal contributions to the fields of crystal engineering and hydrogen bonding. He is Professor Emeritus at the Indian Institute of Science, Bengaluru, and Distinguished Professor at UPES, Dehradun. Desiraju served as the President of the International Union of Crystallography from 2011 to 2014. He is a recipient of several prestigious international awards, including the Humboldt Research Award and the van der Waals Prize. He is also the author of Bhārat: India 2.0, a book that advocates for constitutional reform in India to align it more closely with its civilizational essence.",
+    authorSocial: [
+      
+    ],
+  },
+  {
+    id: 94,
+    authslug: "deekhit-bhattacharya",
+    author_name: "Deekhit Bhattacharya", 
+    image: "https://bluone-ink.s3.us-east-1.amazonaws.com/images/authors/Deekhit+Bhattacharya-+Delimitation.png",
+    authorDescription:
+    "Deekhit Bhattacharya is an associate at Luthra & Luthra, Delhi. He holds degrees in economics and law from the University of Delhi. His interests lie at the interface of state, society, and business, about which he has authored longform research and policy articles. Bhattacharya has also served as a research associate at Global Order, a Delhi-based policy research center.",
+    authorSocial: [
+      
+    ],
+  },
+  {
+    id: 95,
+    authslug: "shirish-thorat",
+    author_name: "Shirish Thorat", 
+    image: "https://bluone-ink.s3.us-east-1.amazonaws.com/images/authors/Shirish+Thorat-Code+Name+Lucifer.png",
+    authorDescription:
+    "Shirish Thorat is a prominent author and consultant known for his expertise in risk mitigation and vulnerability assessment. His notable works include The Scout: The Definitive Account of David Headley and the Mumbai Attacks, Twisted: A Profile of Indian Serial Killers, A Ticket to Syria, and Clay Horses. The Disney+ Hotstar web series The Freelancer is an adaption of A Ticket to Syria. Thorat’s background in law enforcement equips him with a deep understanding of security operations. He specialises in aviation security management with the prestigious ICAO certification as an Aviation Security Professional Manager (Avsec-PM). His knowledge of managing complex security scenarios in the high-stakes aviation industry makes him a valuable advisor to organisations looking to safeguard their operations against threats. In addition to consulting, Thorat works as a private military contractor, where his experience in both public law enforcement and the private security sector provides a unique perspective on risk management. His multifaceted career reflects a deep commitment to enhancing safety and security and addressing some of the most pressing risks faced by individuals and organisations today. Through his writing and consulting work, he contributes to a broader understanding of security challenges in the modern world.",
+    authorSocial: [
+      
+    ],
+  },
+  // {
+  //   id: 96,
+  //   authslug: "shirish-thorat",
+  //   author_name: "Shirish Thorat", 
+  //   image: "",
+  //   authorDescription:
+  //   "Shirish Thorat is a prominent author and consultant known for his expertise in risk mitigation and vulnerability assessment. His notable works include The Scout: The Definitive Account of David Headley and the Mumbai Attacks, Twisted: A Profile of Indian Serial Killers, A Ticket to Syria, and Clay Horses. The Disney+ Hotstar web series The Freelancer is an adaption of A Ticket to Syria. Thorat’s background in law enforcement equips him with a deep understanding of security operations. He specialises in aviation security management with the prestigious ICAO certification as an Aviation Security Professional Manager (Avsec-PM). His knowledge of managing complex security scenarios in the high-stakes aviation industry makes him a valuable advisor to organisations looking to safeguard their operations against threats. In addition to consulting, Thorat works as a private military contractor, where his experience in both public law enforcement and the private security sector provides a unique perspective on risk management. His multifaceted career reflects a deep commitment to enhancing safety and security and addressing some of the most pressing risks faced by individuals and organisations today. Through his writing and consulting work, he contributes to a broader understanding of security challenges in the modern world.",
+  //   authorSocial: [
+      
+  //   ],
+  // },
+  {
+    id: 97,
+    authslug: "savio-rodrigues",
+    author_name: "Savio Rodrigues", 
+    image: "https://bluone-ink.s3.us-east-1.amazonaws.com/images/authors/Savio-+Code+Name+Lucifer.png",
+    authorDescription:
+    "Savio Rodrigues is a passionate journalist and writer, who has embraced entrepreneurship to effect positive change. His journey from his formative years in Dubai, UAE, to a flourishing professional career in India is marked by rich experiences across diverse fields. With a deep-rooted interest in law, politics, religion, and spirituality, Savio has pursued these subjects extensively. He is also an avid technology enthusiast and an angel investor dedicated to nurturing innovative startup ideas. His unique philosophy, which advocates for making gradual, meaningful contributions rather than disruptive actions, shapes his approach to problem-solving and growth. Savio’s literary contributions are both prolific and impactful. His debut novel, Karmic Ishq, is a poignant exploration of the psychological effects of child sexual abuse. Co-authored with Amit Bagaria, his second book, Modi Stole My Mask, which documents India’s struggle against the COVID-19 pandemic, is an Amazon bestseller. His third book, The Path of Peace: Conflict Avoidance the Jesus Way, also an Amazon bestseller, delves into themes of peace and conflict resolution. In addition to his novels, Savio returned to his poetic roots with Love of My Life, a collection that showcases his love for poetry writing. Through diverse endeavours and a commitment to addressing critical societal issues, Savio Rodrigues continues to inspire readers and entrepreneurs alike, leaving a lasting impact on both literature and the community.",
+    authorSocial: [
+      
+    ],
+  },
+  {
+    id: 98,
+    authslug: "arjun-singh-kadian",
+    author_name: "Arjun Singh Kadian", 
+    image: "https://bluone-ink.s3.us-east-1.amazonaws.com/images/authors/Arjun+Singh+Kadian.webp",
+    authorDescription:
+    "Arjun Singh Kadian is an academic and policy professional based out of offices in Haryana and Delhi. A geologist by training, he graduated from Hansraj College, University of Delhi, and is a gold medallist in his master’s degree. In addition to teaching, he has worked at the Haryana chief minister’s office and travelled widely across the region to understand its problems and challenges. Arjun is an alumnus of the Observer Research Foundation, New Delhi, and Zeit-Stiftung, Hamburg, and a fellow at Konrad-Adenauer-Stiftung, Berlin. He is involved in projects with Indic Academy and Rath Foundation and has initiated the Haryana Thinkers Forum. His first book, Land of the Gods: The Story of Haryana, was published in 2021 and his second, Neeraj Chopra: From Panipat to the Podium, in 2022. Currently, Arjun is associated with the Prime Ministers’ Memorial Museum and Library, New Delhi.",
+    authorSocial: [
+      
+    ],
+  },
+  {
+    id: 99,
+    authslug: "piyush-srivastava",
+    author_name: "Piyush Srivastava", 
+    image: "",
+    authorDescription:
+    "Piyush Srivastava is an Indian mainstream journalist with over two decades of experience. He has a postgraduate degree in English literature from the University of Allahabad. Currently with The Telegraph, he has worked in the past with the India Today Group, The Indian Express, The Hindustan Times, and The Times of India. He has covered politics and society in almost all major states of India including Maharashtra, Delhi, Madhya Pradesh, Chhattisgarh, Uttarakhand, and Uttar Pradesh. The floods of stories around him have recently prompted him to try his hand at screenplay writing.",
     authorSocial: [
       
     ],

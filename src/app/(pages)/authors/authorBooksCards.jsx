@@ -1,12 +1,19 @@
 import React from 'react';
 
-function AuthorBooksCards({ title, bookPrice, authorName, coverImage, publishYear }) {
+function AuthorBooksCards({
+  title,
+  bookPrice,
+  authorName,
+  coverImage,
+  publishYear,
+  imageContainerClass
+}) {
   const defaultImage = "https://via.placeholder.com/250x400.png?text=No+Image+Available";
 
   return (
     <div className="w-full min-h-[400px]">
       <div className="flex flex-col h-full">
-        <div className="h-full lg:h-[400px] object-cover">
+        <div className={`h-full lg:h-[400px] object-cover ${imageContainerClass}`}>
           <img
             src={coverImage || defaultImage}
             alt={title || "Book cover"}
@@ -30,9 +37,7 @@ function AuthorBooksCards({ title, bookPrice, authorName, coverImage, publishYea
             </h4>
           )}
           {publishYear && (
-            <p className="text-gray-500">
-              {publishYear}
-            </p>
+            <p className="text-gray-500 text-sm">{publishYear}</p>
           )}
         </div>
       </div>

@@ -38,6 +38,7 @@ function contact() {
   <Helmet>
     <title>Contact | BluOne Ink Publishing</title>
     <meta name="description" content="Get in touch with us for your queries related to publishing your manuscript, interactions with our authors, orders, or a cup of tea or coffee." />
+    <link rel="canonical" href="https://www.bluone.ink/contact" />
   </Helmet>
 </HelmetProvider>
         

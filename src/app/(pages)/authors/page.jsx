@@ -2,41 +2,55 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import AuthorsCards from "./authorsCards";
-import { AuthorsList } from "@/app/API/allAuthorList";
-import {
-  FiChevronLeft,
-  FiChevronRight,
-  FiSearch,
-  FiXCircle,
-} from "react-icons/fi";
+import {FiSearch,FiXCircle,} from "react-icons/fi";
 import AlphabetFilter from "@/app/components/AlphabetFilter";
 import Loader from "@/app/components/Loader";
 import { MdOutlineArrowLeft, MdOutlineArrowRight } from "react-icons/md";
-import slugify from "slugify";
 import { HelmetProvider } from "react-helmet-async";
 import { Helmet } from "react-helmet";
 
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchQuery, setSearchQuery] = useState(""); // State for search
-  const [alphabetFilter, setAlphabetFilter] = useState("ALL"); // State for alphabetic filter
+  const [searchQuery, setSearchQuery] = useState("");
+  const [alphabetFilter, setAlphabetFilter] = useState("ALL");
   const authorsPerPage = 18;
 
-  // Sort authors in ascending order by author_name
-  const sortedAuthorsList = AuthorsList.sort((a, b) => {
-    const nameA = a.author_name.toLowerCase();
-    const nameB = b.author_name.toLowerCase();
+  // State to store authors data
+  const [authorsList, setAuthorsList] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch authors data from the API
+  useEffect(() => {
+    const fetchAuthors = async () => {
+      try {
+        const response = await fetch("https://dashboard.bluone.ink/api/public/authors");
+        const data = await response.json();
+        setAuthorsList(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching authors:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchAuthors();
+  }, []);
+
+  // Sort authors in ascending order by name
+  const sortedAuthorsList = authorsList.sort((a, b) => {
+    const nameA = a.name ? a.name.toLowerCase() : ''; // Ensure 'name' exists
+    const nameB = b.name ? b.name.toLowerCase() : ''; // Ensure 'name' exists
     return nameA.localeCompare(nameB); // Sort in ascending order
   });
 
   // Filter authors by search query and alphabetic filter
   const filteredAuthors = sortedAuthorsList.filter((author) => {
-    let authorName = author.author_name || "Unknown Author"; // Handle undefined author names
+    let authorName = author.name || "Unknown Author"; // Default to "Unknown Author" if 'name' is undefined
     
     const matchesSearchQuery = authorName
       .toLowerCase()
       .includes(searchQuery.toLowerCase());
-  
+
     const excludePrefixes = ["brig", "dr.", "lt gen.", "colonel", "mrs."];
     
     excludePrefixes.forEach((prefix) => {
@@ -44,14 +58,14 @@ export default function Home() {
         authorName = authorName.substring(prefix.length).trim();
       }
     });
-  
+
     const matchesAlphabet =
       alphabetFilter === "ALL" ||
       (authorName && authorName[0].toUpperCase() === alphabetFilter);
-  
+
     return matchesSearchQuery && matchesAlphabet;
-  });  
-  
+  });
+
   const totalPages = Math.ceil(filteredAuthors.length / authorsPerPage);
   const indexOfLastAuthor = currentPage * authorsPerPage;
   const indexOfFirstAuthor = indexOfLastAuthor - authorsPerPage;
@@ -59,8 +73,6 @@ export default function Home() {
     indexOfFirstAuthor,
     indexOfLastAuthor
   );
-
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 500);
@@ -78,14 +90,14 @@ export default function Home() {
       {loading ? (
         <Loader />
       ) : (
-        <main
-          className="flex flex-col h-full pb-20 mx-auto top_bg_gradient">
-            <HelmetProvider>
-  <Helmet>
-    <title>All Authors | BluOne Ink Publishing</title>
-    <meta name="description" content="Meet the 75+ Indian and International Authors who trusted BluOne Ink with the publication of their creative and influential manuscripts." />
-  </Helmet>
-</HelmetProvider>
+        <main className="flex flex-col h-full pb-20 mx-auto top_bg_gradient">
+          <HelmetProvider>
+            <Helmet>
+              <title>All Authors | BluOne Ink Publishing</title>
+              <meta name="description" content="Meet the 75+ Indian and International Authors who trusted BluOne Ink with the publication of their creative and influential manuscripts." />
+              <link rel="canonical" href="https://www.bluone.ink/authors" />
+            </Helmet>
+          </HelmetProvider>
           <div className="container px-4 mx-auto">
             <div className="w-full flex justify-center">
               <h1 className="text-[42px] font-medium pt-20 pb-14">All Authors</h1>
@@ -133,10 +145,10 @@ export default function Home() {
                     key={i}
                     className="p-4 hover:shadow-md input-border border-[#ffffff00] hover:border-[#BABABA] rounded-md"
                   >
-                    <Link href={`/authors/${author.authslug}`}>
+                    <Link href={`/authors/${author.slug}`}>
                       <AuthorsCards
-                        coverImage={author.image}
-                        authorName={author.author_name || "Unknown Author"}
+                        coverImage={author.imageUrl}
+                        authorName={author.name || "Unknown Author"}
                       />
                     </Link>
                   </div>
@@ -155,10 +167,8 @@ export default function Home() {
                   <i>
                     <p>
                       Showing {indexOfFirstAuthor + 1}-{""}
-                      {Math.min(
-                        indexOfLastAuthor,
-                        filteredAuthors.length
-                      )} of {filteredAuthors.length} Authors
+                      {Math.min(indexOfLastAuthor, filteredAuthors.length)} of{" "}
+                      {filteredAuthors.length} Authors
                     </p>
                   </i>
                 </div>
@@ -166,47 +176,47 @@ export default function Home() {
 
               {currentAuthors.length > 0 && totalPages > 1 && (
                 <div className="flex justify-center gap-2 items-center">
-                {currentPage > 1 && (
-                  <button
-                    onClick={() => {
-                      setCurrentPage((prev) => prev - 1);
-                      window.scrollTo({ top: 0, behavior: "smooth" });
-                    }}
-                    className="p-2 mx-2 flex items-center text-[#241b6d] hover:rounded-md hover:text-[#241b6d]"
-                  >
-                    <MdOutlineArrowLeft className="w-6 h-6" />
-                  </button>
-                )}
+                  {currentPage > 1 && (
+                    <button
+                      onClick={() => {
+                        setCurrentPage((prev) => prev - 1);
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }}
+                      className="p-2 mx-2 flex items-center text-[#241b6d] hover:rounded-md hover:text-[#241b6d]"
+                    >
+                      <MdOutlineArrowLeft className="w-6 h-6" />
+                    </button>
+                  )}
 
-                {Array.from({ length: totalPages }).map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => {
-                      setCurrentPage(i + 1);
-                      window.scrollTo({ top: 0, behavior: "smooth" });
-                    }}
-                    className={`p-1 px-2.5 py-0 text-lg font-medium font-barlow text-[#8A8A8A] rounded-full  ${
-                      currentPage === i + 1
-                        ? "bg-[#8A8A8A66] text-black"
-                        : "bg-white hover:bg-[#241b6d] hover:text-white"
-                    }`}
-                  >
-                    {i + 1}
-                  </button>
-                ))}
+                  {Array.from({ length: totalPages }).map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => {
+                        setCurrentPage(i + 1);
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }}
+                      className={`p-1 px-2.5 py-0 text-lg font-medium font-barlow text-[#8A8A8A] rounded-full  ${
+                        currentPage === i + 1
+                          ? "bg-[#8A8A8A66] text-black"
+                          : "bg-white hover:bg-[#241b6d] hover:text-white"
+                      }`}
+                    >
+                      {i + 1}
+                    </button>
+                  ))}
 
-                {currentPage < totalPages && (
-                  <button
-                    onClick={() => {
-                      setCurrentPage((prev) => prev + 1);
-                      window.scrollTo({ top: 0, behavior: "smooth" });
-                    }}
-                    className="p-2 mx-2 flex items-center text-[#241b6d] hover:rounded-md hover:text-[#241b6d]"
-                  >
-                    <MdOutlineArrowRight className="text-[#241b6d] w-6 h-6" />
-                  </button>
-                )}
-              </div>
+                  {currentPage < totalPages && (
+                    <button
+                      onClick={() => {
+                        setCurrentPage((prev) => prev + 1);
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }}
+                      className="p-2 mx-2 flex items-center text-[#241b6d] hover:rounded-md hover:text-[#241b6d]"
+                    >
+                      <MdOutlineArrowRight className="text-[#241b6d] w-6 h-6" />
+                    </button>
+                  )}
+                </div>
               )}
             </div>
           </div>

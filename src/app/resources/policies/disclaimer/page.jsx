@@ -20,7 +20,8 @@ function disclaimer() {
           <HelmetProvider>
   <Helmet>
     <title>Disclaimer | BluOne Ink Publishing</title>
-    <meta name="description" content="" />
+    <meta name="description" content="This page highlights BluOne Ink's limited liability related to the information and content on our website, as well as its use and access." />
+    <link rel="canonical" href="https://www.bluone.ink/resources/policies/disclaimer" />
   </Helmet>
 </HelmetProvider>
           {/* Page Container */}

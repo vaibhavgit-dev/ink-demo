@@ -1,6 +1,6 @@
 // /app/sitemap.xml.js
 import { AuthorsList } from "@/app/API/allAuthorList";
-import { BooksDetails } from "../API/getbookDetails";
+import { fetchAllBooks } from "../API/booksapi";
 
 export async function GET() {
   const baseUrl = "https://bluone.ink";
@@ -36,15 +36,21 @@ export async function GET() {
     </url>
   `).join("");
 
-  // Generate XML for dynamic author URLs
-  const booksUrls = BooksDetails.map(book => `
-    <url>
-      <loc>${baseUrl}/books/${book.slug}</loc>
-      <lastmod>${new Date().toISOString()}</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>0.8</priority>
-    </url>
-  `).join("");
+  // Fetch books data and generate XML for dynamic book URLs
+  let booksUrls = "";
+  try {
+    const books = await fetchAllBooks();
+    booksUrls = books.map(book => `
+      <url>
+        <loc>${baseUrl}/books/${book.slug}</loc>
+        <lastmod>${new Date().toISOString()}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+      </url>
+    `).join("");
+  } catch (error) {
+    console.error("Error fetching books for sitemap:", error);
+  }
 
   // Combine both static and dynamic parts
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

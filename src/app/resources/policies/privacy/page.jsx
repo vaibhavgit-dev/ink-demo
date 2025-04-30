@@ -19,9 +19,10 @@ function privacypolicy() {
         <main className="wrapper pt-0 mt-0 pb-20 relative top-0">
           <HelmetProvider>
   <Helmet>
-    <title>Privacy | BluOne Ink Publishing</title>
-    <meta name="description" content="" />
-  </Helmet>
+    <title>Privacy Policy | BluOne Ink Publishing</title>
+    <meta name="description" content="Our privacy policy talks about the information we collect from our users and explains your choices surrounding how we use information about you." />
+    <link rel="canonical" href="https://www.bluone.ink/resources/policies/privacy" />
+   </Helmet>
 </HelmetProvider>
           {/* Page Container */}
           <div className="w-full bottom-0">

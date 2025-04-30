@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&display=swap');
 
 /* Global */
 html{scroll-behavior: smooth;}
@@ -391,3 +392,14 @@ input[type="checkbox"]:checked::after {
 .blog-content p {font-size: 16px; line-height: 26px; padding-bottom: 18px; padding-top: 5px; font-weight: 400;}
 .blog-content a {font-size: 16px; line-height: 26px; color:#007DD7; font-weight: 400;}
 .blog-content h4 {font-size: 18px; font-style: italic; line-height: 24px; padding-top: 20px;}
+
+/* Book Details info html */
+
+.book-info-html h6 {margin: 10px 0px 5px; font-size: 18px; font-weight: 600;}
+.book-info-html p {padding-bottom: 10px;}
+.book-info-html ul li {font-family: "'IBM Plex Serif', serif'"; margin-left: 15px; list-style: disc; font-size: 1rem; font-weight: 400; line-height: 1.7;}
+
+/* endorsement */
+.testi-quote {font-family: "Literata", serif; font-weight: 300; font-style: italic; position: relative; display: inline-block; color: #4a4a4a; font-size: 1.25rem; }
+.testi-quote::before { content: ""; display: inline-block; width: 24px; height: 24px; background-image: url('/quotebefore.svg'); background-size: contain; background-repeat: no-repeat; margin-right: 0.5rem; vertical-align: top;}
+.testi-quote::after { content: ""; position: relative; top: 10px; display: inline-block; width: 24px; height: 24px; background-image: url('/quoteafter.svg');  background-size: contain; background-repeat: no-repeat; margin-left: 0.5rem; vertical-align: bottom;}

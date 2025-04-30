@@ -3,7 +3,8 @@ import React, { useEffect } from 'react';
 import Link from "next/link"
 import Image from "next/image"
 import Logo from "../assests/image/Logo.png"
-import { usePathname } from 'next/navigation'; // Use this hook for getting the current pathname
+import { usePathname } from 'next/navigation';
+import { AiOutlineCopyright } from 'react-icons/ai';
 
 export default function Footer() {
     const pathname = usePathname(); // Get the current pathname
@@ -73,14 +74,14 @@ export default function Footer() {
                         <li className="hover:underline"><a href="https://www.youtube.com/channel/UC2hOgss9-N9Yx5c3DuyIU0Q" target="blank">YOUTUBE</a></li>
                     </ul>
 
-                    <ul className="hidden flex flex-wrap gap-2 justify-center text-sm md:text-2xl space-x-4 md:space-x-8 pt-1 font-normal">
+                    <ul className="flex flex-wrap gap-2 justify-center text-sm md:text-2xl space-x-4 md:space-x-4 pt-6 font-normal">
                         <li className="hover:underline"><Link href="/comingsoon">ABOUT</Link></li>
-                        <li className="hover:underline list-disc"><Link href="/comingsoon">EVENTS</Link></li>
-                        <li className="hover:underline list-disc"><Link href="/comingsoon">RESOURCES</Link></li>
-                        <li className="hover:underline list-disc"><Link href="/comingsoon">GALLERY</Link></li>
-                        <li className="hover:underline list-disc"><Link href="/comingsoon">MEDIA KIT</Link></li>
-                        <li className="hover:underline list-disc"><Link href="/comingsoon">CATALOGUE</Link></li>
-                        <li className="hover:underline list-disc"><Link href="/comingsoon">CONTACT</Link></li>
+                        <li className="hover:underline list-disc marker:text-sm"><Link href="/resources/events">EVENTS</Link></li>
+                        <li className="hover:underline list-disc marker:text-sm"><Link href="/resources">RESOURCES</Link></li>
+                        <li className="hover:underline list-disc marker:text-sm"><Link href="/resources/gallery">GALLERY</Link></li>
+                        <li className="hover:underline list-disc marker:text-sm"><Link href="/resources/media-kit">MEDIA KIT</Link></li>
+                        <li className="hover:underline list-disc marker:text-sm"><Link href="/resources/catalogue">CATALOGUE</Link></li>
+                        <li className="hover:underline list-disc marker:text-sm"><Link href="/contact">CONTACT</Link></li>
                     </ul>
 
                     <ul className="  flex flex-wrap justify-center text-sm md:text-base font-light pt-6 mb-3 space-x-4 md:space-x-6">
@@ -90,11 +91,14 @@ export default function Footer() {
                         <li className={`hover:underline ${isActive('/disclaimer')} text-xs list-disc`}><Link href="/resources/policies/disclaimer">DISCLAIMER</Link></li>
                     </ul>
 
-                    <span className="text-xs uppercase  font-light pb-4 text-center">
-                        ©️ 2024. All Rights Reserved. BluOne Ink Pvt. Ltd.
+                    <span className="text-xs uppercase font-light pb-4 text-center text-white">
+                        <AiOutlineCopyright className="inline-block mb-0.5 mr-1" />
+                        2025. All Rights Reserved. BluOne Ink Pvt. Ltd.
                     </span>
                 </div>
             </nav>
         </>
     )
 }
+
+

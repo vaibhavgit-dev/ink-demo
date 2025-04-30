@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react';
 const SmoothScrollSlider = ({ clonedThumbnails }) => {
     const sliderRef = useRef(null);
     const scrollIntervalRef = useRef(null);
-    const noImageUrl = "https://via.placeholder.com/150?text=No+Image";
+    const noImageUrl = "https://bluone-ink.s3.us-east-1.amazonaws.com/images/books/no-img.jpg";
 
     const scrollSpeed = 1; 
     const intervalTime = 0; 

@@ -1,70 +1,88 @@
 "use client";
-import { BooksDetails } from "@/app/API/getbookDetails";
-import { AuthorsList } from "@/app/API/allAuthorList";
 import { useEffect, useState } from "react";
+import { fetchBookBySlug, processBookData } from "@/app/API/booksapi";
+import { AuthorsList } from "@/app/API/allAuthorList";
 import Image from "next/image";
 import Link from "next/link";
 import inkdouble1 from "@/app/assests/image/inkdouble1.svg";
 import inkdouble2 from "@/app/assests/image/inkdouble2.svg";
 import BooksCards from "../BooksCards";
 import SliderBook from "@/app/components/SliderBook";
-import amazonimg from "@/app/assests/image/amazon.svg";
-import flipkartimg from "@/app/assests/image/Flipkart.svg";
 import Loader from "@/app/components/Loader";
 import CurveBottom from "@/app/assests/image/aboutbookbg.png";
 import CurveTop from "@/app/assests/image/aboutauthorbg.png";
-import { HelmetProvider, Helmet } from 'react-helmet-async';
-import SmoothScrollSlider from './slide';
-import ScriptLoader from '@/app/ScriptLoader'; 
+import { HelmetProvider, Helmet } from "react-helmet-async";
+import SmoothScrollSlider from "./slide";
+import ScriptLoader from "@/app/ScriptLoader";
+import Select from 'react-select';
+import { useRouter } from "next/navigation"; 
+import { AiFillCaretDown } from "react-icons/ai";
 
 const Page = ({ params }) => {
+  const router = useRouter();
   const { slug } = params;
-  const bookInfo = BooksDetails.find((book) => book.slug === slug);
-
-  if (!bookInfo) {
-    return <div>Loading...</div>;
-  }
-
-  const authorsArray = Array.isArray(bookInfo.author)
-    ? bookInfo.author
-    : [bookInfo.author || "Unknown Author"];
-
-  const noImageUrl = "https://via.placeholder.com/150?text=No+Image";
-  const thumbnails = Array.isArray(bookInfo.book_thumbnail) ? bookInfo.book_thumbnail : [];
-
-  // State to track current index and cloned slides logic
-  const clonedThumbnails = [...thumbnails, ...thumbnails];
-
-  const pageTitle = `${bookInfo.title} by ${bookInfo.author} | BluOne Ink Book`;
-const pageDescription = bookInfo.meta_description;
-
-  // Authors details
-  const [activeTab, setActiveTab] = useState(authorsArray[0]);
+  const decodedSlug = decodeURIComponent(slug);
+  
+  // All state declarations
+  const [bookInfo, setBookInfo] = useState(null);
+  const [relatedBooks, setRelatedBooks] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 500);
-  }, []);
-
-  // copy Link
-  const Tooltip = ({ message, show }) => {
-    return (
-      <div className={`absolute bg-gray-700 text-white text-xs rounded py-1 px-1 transition-opacity duration-100 ${ show ? "opacity-100" : "opacity-0" }`} style={{top: "28px", left: "60%", transform: "translateX(-50%)", pointerEvents: "none", }} >
-        {message}
-      </div>
-    );
-  };
-
+  const [error, setError] = useState(null);
+  const [activeTab, setActiveTab] = useState(null);
   const [copied, setCopied] = useState(false);
-  const copyLink = () => {
-    navigator.clipboard.writeText(window.location.href).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
-  };
-
-  // Active sidebar
   const [activeSection, setActiveSection] = useState("");
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [isAuthExpanded, setIsAuthExpanded] = useState(false);
+
+  // All effects
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setLoading(true);
+        const bookData = await fetchBookBySlug(decodedSlug);
+        console.log('Raw book data:', bookData); // Debug raw data
+        const processedBook = processBookData(bookData);
+        console.log('Processed book data:', processedBook); // Debug processed data
+        setBookInfo(processedBook);
+        
+        // Set activeTab when book data is available
+        if (processedBook.author) {
+          setActiveTab(processedBook.author.name);
+        }
+        
+        // Fetch related books
+        const relatedResponse = await fetch(`https://dashboard.bluone.ink/api/public/books`);
+        if (relatedResponse.ok) {
+          const allBooks = await relatedResponse.json();
+          const processedBooks = allBooks.map(book => processBookData(book));
+          
+          if (processedBook.genre) {
+            const filteredBooks = processedBooks.filter(book => {
+              if (book.slug === processedBook.slug) return false;
+              
+              const bookGenres = book.genre?.toLowerCase()?.split(",")?.map(g => g.trim()) || [];
+              const currentBookGenres = processedBook.genre?.toLowerCase()?.split(",")?.map(g => g.trim()) || [];
+              
+              return bookGenres.some(genre => currentBookGenres.includes(genre));
+            });
+            
+            setRelatedBooks(filteredBooks.slice(0, 6));
+          }
+        }
+        
+        setError(null);
+      } catch (err) {
+        console.error("Error fetching book details:", err);
+        setError("Failed to load book details. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    if (decodedSlug) {
+      fetchData();
+    }
+  }, [decodedSlug]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -73,7 +91,6 @@ const pageDescription = bookInfo.meta_description;
 
       sections.forEach((section) => {
         const rect = section.getBoundingClientRect();
-        // Determine if section is in view
         if (rect.top >= 0 && rect.top <= window.innerHeight / 2) {
           currentSection = section.getAttribute("id");
         }
@@ -83,15 +100,73 @@ const pageDescription = bookInfo.meta_description;
     };
 
     window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Early returns
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (error || !bookInfo) {
+    return <div className="container mx-auto p-4 text-center">
+      <h2 className="text-2xl font-bold mb-4">Error</h2>
+      <p>{error || "Book not found"}</p>
+      <Link href="/books" className="text-blue-500 underline mt-4 inline-block">
+        Return to Books
+      </Link>
+    </div>;
+  }
+
+  // Data processing after early returns
+  const authorsArray = bookInfo.author ? [bookInfo.author.name] : ["Unknown Author"];
+  const noImageUrl = "";
+  const authorimgurl = "/author-defaultimages.png";
+  
+  // Process book images
+  const processImageUrl = (url) => {
+    if (!url) return '';
+    return url.replace(/[\[\]"]/g, '').trim();
+  };
+
+  const thumbnails = Array.isArray(bookInfo.book_thumbnail)
+    ? bookInfo.book_thumbnail.map(processImageUrl)
+    : typeof bookInfo.book_thumbnail === 'string'
+      ? [processImageUrl(bookInfo.book_thumbnail)]
+      : [];
+
+  const clonedThumbnails = [...thumbnails, ...thumbnails].filter(Boolean);
+  const pageTitle = `${bookInfo.title} by ${authorsArray.join(', ')} | BluOne Ink Book`;
+  const pageDescription = bookInfo.meta_description;
+  const canonicalUrl = `https://www.bluone.ink/books/${slug}`;
+
+  // copy Link
+  const Tooltip = ({ message, show }) => {
+    return (
+      <div
+        className={`absolute bg-gray-700 text-white text-xs rounded py-1 px-1 transition-opacity duration-100 ${
+          show ? "opacity-100" : "opacity-0"
+        }`}
+        style={{
+          top: "28px",
+          left: "200px",
+          transform: "translateX(-50%)",
+          pointerEvents: "none",
+        }}
+      >
+        {message}
+      </div>
+    );
+  };
+
+  const copyLink = () => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
   // read more read less
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [isAuthExpanded, setIsAuthExpanded] = useState(false);
   const activeAuthor = AuthorsList.find(
     (author) => author.author_name === activeTab
   );
@@ -105,42 +180,119 @@ const pageDescription = bookInfo.meta_description;
     setIsAuthExpanded(!isAuthExpanded);
   };
 
-  
+  // Generate language options dynamically from relatedBooks
+  const languageOptions = [
+    { label: bookInfo.language, value: bookInfo.slug } // Current book's language
+    // Additional languages would be added here if available
+  ];
+
+  // Generate format options
+  const formatOptions = Array.isArray(bookInfo.book_format)
+    ? bookInfo.book_format.map((format) => ({
+        label: format,
+        value: format.toLowerCase(),
+      }))
+    : bookInfo.book_format
+    ? [{ label: bookInfo.book_format, value: bookInfo.book_format.toLowerCase() }]
+    : [];
+
+  // Handle language change
+  const handleLanguageChange = (selectedOption) => {
+    router.push(`/books/${selectedOption.value}`); // Redirect to the selected book page
+  };
+
+  const handleFormatChange = (selectedOption) => {
+    if (!selectedOption || !selectedOption.value) {
+      return;
+    }
+    setSelectedFormat(selectedOption);
+  };
+
+  const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+      borderRadius: "20px",
+      border: "1px solid #0D1928",
+      padding: "4px 10px",
+      minHeight: "unset",
+      "&:hover": {
+        border: "1px solid #0D1928",
+      },
+    }),
+    valueContainer: (provided) => ({
+      ...provided,
+      padding: "0px 6px",
+    }),
+    singleValue: (provided) => ({
+      ...provided,
+      fontWeight: "medium",
+      fontSize: "16px",
+      textTransform: "uppercase",
+    }),
+    dropdownIndicator: (provided) => ({
+      ...provided,
+      padding: "0 4px",
+      color: "#0D1928", // Icon color same as text
+    }),
+    indicatorSeparator: () => ({
+      display: "none", // Remove separator line
+    }),
+    menu: (provided) => ({
+      ...provided,
+      borderRadius: "10px",
+      overflow: "hidden",
+      boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+      marginTop: "5px",
+    }),
+    menuList: (provided) => ({
+      ...provided,
+      padding: "5px 0",
+      background: "#fff",
+      borderRadius: "10px",
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      padding: "10px 12px",
+      fontSize: "14px",
+      fontWeight: "medium",
+      textTransform: "uppercase",
+      cursor: "pointer",
+      background: state.isSelected ? "#eaeaea" : "transparent",
+      color: "#000",
+      "&:hover": {
+        background: "#007dd7",
+        color: "#fff",
+      },
+    }),
+  };
+
+  const DropdownIndicator = (props) => {
+    return (
+      <div {...props.innerRef} style={{ paddingRight: "6px", display: "flex", alignItems: "center" }}>
+        <AiFillCaretDown size={12} />
+      </div>
+    );
+  };
 
   return (
     <>
-      {loading ? (
-        <Loader />
-      ) : (
-        <main id="top">
+      <main id="top">
         <HelmetProvider>
-  <Helmet>
-    <title>{pageTitle}</title>
-    <meta name="description" content={pageDescription} />
-  </Helmet>
-</HelmetProvider>
+          <Helmet>
+            <title>{pageTitle}</title>
+            <meta name="description" content={pageDescription} />
+            <link rel="canonical" href={canonicalUrl} />
+          </Helmet>
+        </HelmetProvider>
 
-          {/* slider */}
-          {/* <section className="relative bg-white overflow-hidden w-full z-[1000]">
-            <div className="slider-track flex items-center">
-            {clonedThumbnails.map((thumbnail, index) => (
-                <div key={index} className="flex-none slide_item">
-                  <img className="w-full object-cover" src={thumbnail || noImageUrl} alt={`Thumbnail ${index}`}
-                    onError={(e) => {
-                      e.target.src = noImageUrl;
-                    }}
-                  />
-                </div>
-              ))}
-            </div>
-          </section> */}
+        <ScriptLoader />
 
-          {/* mobile slider */}
-          <ScriptLoader />
-
+        {clonedThumbnails && clonedThumbnails.length > 0 && (
           <SmoothScrollSlider clonedThumbnails={clonedThumbnails} />
-          {/* Main Book Information Section */}
-          <section className="w-full relative z-[1000] bg-white">
+        )}
+
+        {/* Main Book Information Section */}
+        <section className="w-full relative z-[1000] bg-white">
           <div className="mx-auto max-w-5xl px-4 pt-8 pb-8">
             <section
               id="book-detail"
@@ -149,20 +301,52 @@ const pageDescription = bookInfo.meta_description;
               <h1 className="text-[28px] lg:text-4xl w-full lg:w-[75%] mx-auto font-medium mb-4">
                 {bookInfo.title}
               </h1>
-              <i>
-                <h2 className="text-2xl text-[#007DD7] font-normal mb-2">
-                  {authorsArray.join(", ")}
-                </h2>
+              <i className="flex justify-center">
+              {authorsArray.map((author, index) => (
+                <div key={index}>
+                  <Link
+                    href={`/authors/${bookInfo.author?.authslug || ""}`}
+                    className="text-[20px] text-[#007DD7]"
+                  >
+                    {author}
+                  </Link>
+                  {index < authorsArray.length - 1 && <span>{", "}</span>}
+                </div>
+              ))}
               </i>
 
-              <div className="flex w-[60%] lg:w-[30%] gap-6 lg:gap-2 mx-auto pt-6">
-                <div className="flex-1  font-barlow uppercase">
-                  {bookInfo.language}
-                </div>
-                <div className="flex-1 font-barlow uppercase">
-                  {bookInfo.book_format}
-                </div>
-              </div>
+              <div className="flex w-[80%] justify-center lg:w-[35%] gap-6 lg:gap-10 mx-auto pt-6">
+
+                {/* Language Dropdown */}
+                  {languageOptions.length > 1 ? (
+                    <Select
+                      options={languageOptions}
+                      className="font-barlow uppercase cursor-pointer w-32"
+                      styles={customStyles}
+                      defaultValue={languageOptions.find((opt) => opt.label === bookInfo.language)}
+                      isSearchable={false}
+                      onChange={handleLanguageChange}
+                      components={{ DropdownIndicator }} // Custom Icon
+                    />
+                  ) : (
+                    <span className="font-barlow flex items-center uppercase border border-[#000] rounded-full px-6 py-1">{languageOptions[0]?.label}</span>
+                  )}
+
+                  {/* Format Dropdown */}
+                  {formatOptions.length > 1 ? (
+                    <Select
+                      options={formatOptions}
+                      className="font-barlow uppercase cursor-pointer w-32"
+                      styles={customStyles}
+                      defaultValue={formatOptions[0]}
+                      isSearchable={false}
+                      onChange={handleFormatChange}
+                      components={{ DropdownIndicator }} // Custom Icon
+                    />
+                  ) : (
+                    <span className="font-barlow flex items-center uppercase border border-[#000] rounded-full px-6 py-1">{formatOptions[0]?.label}</span>
+                  )}
+               </div>
 
               <div className="flex md:w-[50%] gap-3 md:mx-auto pt-6">
                 <div className="flex-1">
@@ -180,35 +364,78 @@ const pageDescription = bookInfo.meta_description;
                 </div>
               </div>
 
-              <div className={`flex ${[bookInfo.amazonlink, bookInfo.flipkartlink, bookInfo.preorder, bookInfo.downloadaisheet].filter(Boolean).length > 2 ? 'w-full flex-wrap' : 'lg:w-[50%]'} md:gap-6 gap-6 justify-center mx-auto pt-6`}>
+              <div
+                className={`flex ${(() => {
+                  const activeButtons = [
+                    bookInfo.amazonlink,
+                    bookInfo.amazon_comlink,
+                    bookInfo.flipkartlink,
+                    bookInfo.preorder,
+                    bookInfo.downloadaisheet,
+                  ].filter(Boolean).length;
+
+                  if (activeButtons === 3) return "lg:w-[70%]";
+                  if (activeButtons > 3) return "w-full flex-wrap";
+                  return "lg:w-[50%]";
+                })()} md:gap-6 gap-4 justify-center mx-auto pt-6`}
+              >
                 {bookInfo.amazonlink && (
                   <Link href={`${bookInfo.amazonlink}`} target="_blank">
-                    <button className="bg-black rounded-full px-10 py-3 text-[#fff]">
+                    <button className="">
                       <Image
-                        src={amazonimg}
-                        width={80}
-                        height={80}
-                        className="mt-1.5 max-w-full h-auto"
+                        src="/amazon_in.png"
+                        width={178}
+                        height={178}
+                        className="max-w-full h-auto"
+                      />
+                    </button>
+                  </Link>
+                )}
+                {bookInfo.amazon_comlink && (
+                  <Link href={`${bookInfo.amazon_comlink}`} target="_blank">
+                    <button className="">
+                      <Image
+                        src="/amazon_com.png"
+                        width={195}
+                        height={195}
+                        className="max-w-full h-auto"
                       />
                     </button>
                   </Link>
                 )}
                 {bookInfo.flipkartlink && (
                   <Link href={`${bookInfo.flipkartlink}`} target="_blank">
-                    <button className="bg-[#007BD7] rounded-full px-10 py-4 text-[#fff]">
-                      <Image src={flipkartimg} width={100} height={100} />
+                    <button className="">
+                      <Image src="/flipkart.png" width={180} height={180} />
                     </button>
                   </Link>
                 )}
+                {(bookInfo.preorder || bookInfo.orderbtn) && (
+                  <div className="text-center">
+                    <Link
+                      href={
+                        new Date() < new Date(bookInfo.preorderdate)
+                          ? bookInfo.preorder
+                          : bookInfo.orderbtn || bookInfo.preorder
+                      }
+                      target="_blank"
+                    >
+                      <button className="bg-[#FF8100] rounded-full px-10 py-3.5 font-barlow text-[#fff]">
+                        <h6 className="font-semibold text-[16px] lg:text-[18px]">
+                          {new Date().toISOString().split("T")[0] < bookInfo.preorderdate
+                            ? "PRE-ORDER"
+                            : "ORDER NOW"}
+                        </h6>
+                      </button>
+                    </Link>
 
-                {bookInfo.preorder && (
-                  <Link href={`${bookInfo.preorder}`}>
-                    <button className="bg-[#FF8100] rounded-full px-10 py-3.5 font-barlow text-[#fff]">
-                      <h6 className="font-semibold text-[18px]">PRE-ORDER</h6>
-                    </button>
-                  </Link>
+                    {/* Preorder text will only show if the button text is "PRE-ORDER" */}
+                    {new Date().toISOString().split("T")[0] < bookInfo.preorderdate &&
+                      bookInfo.preordertext && (
+                        <p className="mt-1 text-[12px] font-barlow">{bookInfo.preordertext}</p>
+                      )}
+                  </div>
                 )}
-
                 {bookInfo.downloadaisheet && (
                   <Link href={`${bookInfo.downloadaisheet}`} target="_blank">
                     <button className="bg-white border-2 border-[#FF8100] rounded-full px-10 py-3 font-barlow text-[#000]">
@@ -220,7 +447,7 @@ const pageDescription = bookInfo.meta_description;
 
               {/* Copy Link Button */}
               <h6
-                className="text-center font-barlow cursor-pointer underline text-[#0D1928] pt-6 mb-12 relative"
+                className="text-center w-[50%] lg:w-[15%]  pt-6 m-auto font-barlow cursor-pointer underline text-[#0D1928] pt-6 mb-4 relative"
                 onClick={copyLink}
               >
                 {" "}
@@ -229,105 +456,90 @@ const pageDescription = bookInfo.meta_description;
               </h6>
             </section>
           </div>
-          </section>
-          {/* Endorement section */}
-          {/* <div id="endorsements" className="wrapper bg-[#DDF5FF] w-full">
-          <div className="container mx-auto p-10 pt-10">
-            <SliderBook testimonials={testimonials} />
-          </div>
-        </div> */}
+        </section>
 
-          {/* About the Book */}
-          <section
-            id="about-book"
-            className="container pt-2 p-0 lg:w-[70%] lg:mx-auto"
-          >
-            <div className="about-book author-details-container mx-auto p-10 rounded-2xl w-full lg:w-[85%] bg-[#FF81001A]">
-              <div
-                className="text-center"
-                style={{ position: "relative", zIndex: 1 }}
-              >
-                <div className=" w-full pt-6 mb-6 pb-">
-                  <h3 className="font-semibold text-3xl pb-4">
-                    About the Book
-                  </h3>
-                  <p className="text-lg text-start font-normal">
-                    {isExpanded
-                      ? bookInfo.about_book
-                      : `${bookInfo.about_book.substring(0, maxLength)}.`}
-                    {bookInfo.about_book.length > maxLength && (
-                      <button
-                        onClick={toggleExpand}
-                        className="text-[#0D1928] underline font-medium ml-2"
-                      >
-                        {isExpanded ? "Read Less" : "Read More"}
-                      </button>
-                    )}
-                  </p>
-                </div>
-
-                {/* Book category */}
-                <div className="flex w-full">
-                  <i>
-                    <h3 className="text-lg font-normal">
-                    {`Categor${bookInfo.genre.length > 1 ? 'ies' : 'ie'}:`}{" "}
-                      <em className="text-[#007DD7]">{bookInfo.genre}</em>
-                    </h3>
-                  </i>
-                </div>
+        {/* About the Book */}
+        <section
+          id="about-book"
+          className="container pt-2 p-0 lg:w-[70%] lg:mx-auto"
+        >
+          <div className="about-book author-details-container mx-auto p-10 rounded-2xl w-full lg:w-[85%] bg-[#FF81001A]">
+            <div
+              className="text-center"
+              style={{ position: "relative", zIndex: 1 }}
+            >
+              <div className="w-full pt-6 mb-6">
+                <h3 className="font-semibold text-3xl pb-4">
+                  About the Book
+                </h3>
+                <p className="text-lg text-start font-normal book-info-html">
+                  <span
+                    className="font-ibm"
+                    dangerouslySetInnerHTML={{
+                      __html: isExpanded
+                        ? bookInfo.about_book
+                        : `${bookInfo.about_book?.substring(0, maxLength)} `,
+                    }}
+                  ></span>
+                  {bookInfo.about_book && bookInfo.about_book.length > maxLength && (
+                    <button
+                      onClick={toggleExpand}
+                      className="text-[#0D1928] underline font-medium inline"
+                    >
+                      {isExpanded ? "Read Less" : "Read More"}
+                    </button>
+                  )}
+                </p>
               </div>
-              <div className="curve_img">
-                <Image src={CurveBottom}></Image>
+              {/* Book category */}
+              <div className="flex w-full">
+                <i>
+                  <h3 className="text-lg font-normal">
+                    {`Category: `}{" "}
+                    <em className="text-[#007DD7]">{bookInfo.genre}</em>
+                  </h3>
+                </i>
               </div>
             </div>
-          </section>
+            <div className="curve_img">
+              <Image src={CurveBottom} alt="Curved Bottom Decoration" />
+            </div>
+          </div>
+        </section>
 
-          {/* About the Book Authour */}
+        {/* About the Book Author */}
+        {bookInfo.author && (
           <section
             id="about-author"
             className="container mx-auto text-center py-10 pt-0 p-0 lg:w-[70%] lg:mx-auto"
           >
             <div className="about-author author-details-container mx-auto p-10 pt-5 rounded-2xl w-full lg:w-[85%] bg-[#FF81001A]">
               <div className="curve_img">
-                <Image src={CurveTop}></Image>
+                <Image src={CurveTop} alt="Curve Top" />
               </div>
               <div className="flex justify-center space-x-2 lg:space-x-4 mb-2">
-                {authorsArray.map((authorName, index) => (
-                  <div
-                    key={index}
-                    onClick={() => setActiveTab(authorName)}
-                    className="cursor-pointer z-[10]"
-                  >
-                    <img
-                      src={
-                        bookInfo.Authorimage && bookInfo.Authorimage[index]
-                          ? bookInfo.Authorimage[index]
-                          : noImageUrl
-                      }
-                      alt={authorName}
-                      className={`rounded-full  w-[100px] h-[100px] lg:w-[150px] lg:h-[150px] object-cover transition duration-200 ${
-                        activeTab === authorName
-                          ? "border-[#FF8100] border-4 "
-                          : "border-[#f5f5f5] grayscale"
-                      }`}
-                      onError={(e) => {
-                        e.target.src = noImageUrl;
-                      }}
-                    />
-                  </div>
-                ))}
+                <div className="cursor-pointer z-[10]">
+                  <img
+                    src={bookInfo.author.image || authorimgurl}
+                    alt={bookInfo.author.author_name}
+                    className="rounded-full w-[100px] h-[100px] lg:w-[150px] lg:h-[150px] object-cover transition duration-200 border-[#FF8100] border-4"
+                    onError={(e) => {
+                      e.currentTarget.src = authorimgurl;
+                    }}
+                  />
+                </div>
               </div>
 
               <div className="lg:p-8 pt-10 mx-auto">
                 <div className="relative z-[10]">
                   <i>
-                    <h3 className="font-medium text-3xl mb-4">{activeTab}</h3>
+                    <h3 className="font-medium text-3xl mb-4">{bookInfo.author.author_name}</h3>
                   </i>
                   <p className="text-gray-700 text-start mb-4 text-lg leading-relaxed">
                     {isAuthExpanded
-                      ? activeAuthor?.authorDescription || "Description not available."
-                      : `${activeAuthor?.authorDescription?.substring(0, 450)}`}
-                    {activeAuthor?.authorDescription.length > maxLength && (
+                      ? bookInfo.author.authorDescription || "Description not available."
+                      : `${bookInfo.author.authorDescription?.substring(0, 600)}`}
+                    {bookInfo.author.authorDescription && bookInfo.author.authorDescription.length > maxLength && (
                       <button
                         onClick={authortoggleExpand}
                         className="text-[#0D1928] underline font-medium ml-2"
@@ -339,9 +551,7 @@ const pageDescription = bookInfo.meta_description;
                   <div className="w-full">
                     <h6 className="text-[#007DD7] text-md">
                       <Link
-                        href={`/authors/${
-                          bookInfo.author_slug[bookInfo.author.indexOf(activeTab)]
-                        }`}
+                        href={`/authors/${bookInfo.author.authslug}`}
                         className="text-blue-500 underline"
                       >
                         Visit the Author Page
@@ -352,141 +562,298 @@ const pageDescription = bookInfo.meta_description;
               </div>
             </div>
           </section>
-          {/* Other Books by the Same Author */}
-          <section id="related-titles" className="container">
-            <div className="flex items-center gap-2 justify-center pb-2 pt-6">
-              <Image src={inkdouble1} width={55} height={55} alt="inkdouble1" />
-              <i>
-                <h3 className="font-medium text-2xl md:text-2xl text-center">
-                  Related Titles
-                </h3>
-              </i>
-              <Image src={inkdouble2} width={55} height={55} alt="inkdouble2" />
-            </div>
-            <div className="flex items-center justify-center pb-6">
-              <Link href="/books">
-                <i>
-                  <h4 className="text-[#007DD7] text-base underline font-medium">
-                    View All Titles
-                  </h4>
-                </i>
-              </Link>
-            </div>
-            <div
-              className={`related_title_sec flex flex-wrap ${
-                BooksDetails.length < 6 ? "justify-between" : "justify-center"
-              }`}
-            >
-              {BooksDetails.filter((book) => {
-                const bookGenres = book.genre
-                  .toLowerCase()
-                  .split(",")
-                  .map((genre) => genre.trim());
-                const currentBookGenres = bookInfo.genre
-                  .toLowerCase()
-                  .split(",")
-                  .map((genre) => genre.trim());
+        )}
 
-                return bookGenres.some((genre) =>
-                  currentBookGenres.includes(genre)
-                );
-              })
-                .slice(0, 6)
-                .map((filteredBook, i) => (
-                  <div
-                    key={i}
-                    className="related_title_sec_card flex-1 p-4 mb-4 hover:shadow-md input-border border-[#ffffff00] hover:border-[#BABABA] rounded-md"
-                    style={{ maxWidth: "200px" }} 
-                  >
-                    <Link
-                      href={`./${filteredBook.slug}`}
-                      style={{ textDecoration: "none" }}
-                    >
-                      <BooksCards
-                        title={filteredBook.title}
-                        coverImage={filteredBook.book_image}
-                        bookPrice={`₹${filteredBook.price}`}
-                        authorName={filteredBook.author}
-                      />
-                    </Link>
-                  </div>
-                ))}
-            </div>
-          </section>
-          <div className="bg-[#FF81001A] pt-4 pb-4 mt-20 flex justify-center">
-            <div className="container flex gap-4 justify-center items-center">
-              <div className="w-[60%] md:w-full flex-wrap md:flex md:justify-center mx-auto gap-2">
-                <h6 className="font-medium text-center">Other Specifications: </h6>
-                <ul className="flex-wrap items-center space-x-6 md:flex">
-                  {/* <li className="md:list-none pl-6 md:pl-0">
-                    ISBN10:{bookInfo.isbn10}
-                  </li> */}
-                  <li className="md:list-none pl-6 md:pl-0">ISBN: {bookInfo.isbn13}</li>
-                  <li className="md:list-disc">Weight: {bookInfo.weight}</li>
-                  <li className="md:list-disc">
-                    Dimensions: {bookInfo.dimension}
-                  </li>
-                </ul>
+        {/* Endorsement section */}
+        <section id="endorsements">
+          {bookInfo.testimonials && bookInfo.testimonials.length > 0 && (
+            <div className="wrapper bg-[#DDF5FF] w-full mt-14 mb-14">
+              <div className="container mx-auto p-10 pt-10">
+                <SliderBook testimonials={bookInfo.testimonials} />
               </div>
             </div>
-          </div>
+          )}
+        </section>
 
-          {/* Sidebar Navigation */}
-          <div className="hidden lg:block aside_fixed">
-            <ul className="flex flex-col">
-              <li>
-                <a
-                  href="#top"
-                  className={`pb-2 ${
-                    activeSection === "top"
-                      ? "text-[#007BD7] font-medium"
-                      : "text-[#0D1928] font-light"
-                  }`}
-                >
-                  Go to Top
-                </a>
-              </li>
-              <li>&nbsp;</li>
-              <li>
-                <a
-                  href="#about-book"
-                  className={`pb-2 ${
-                    activeSection === "about-book"
-                      ? "text-[#007BD7] font-medium"
-                      : "text-[#0D1928] font-light"
-                  }`}
-                >
-                  About the Book
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#about-author"
-                  className={`pb-2 ${
-                    activeSection === "about-author"
-                      ? "text-[#007BD7] font-medium"
-                      : "text-[#0D1928] font-light"
-                  }`}
-                >
-                  About the Author
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#related-titles"
-                  className={`pb-2 ${
-                    activeSection === "related-titles"
-                      ? "text-[#007BD7] font-medium"
-                      : "text-[#0D1928] font-light"
-                  }`}
-                >
-                  Related Titles
-                </a>
-              </li>
-            </ul>
+        {/* Press Coverage section */}
+        <section id="press-coverage">
+          {bookInfo.pressCoverage && (
+            <div className="wrapper bg-white w-full mt-14 mb-14">
+              <div className="container mx-auto p-10 pt-10">
+                <div className="flex items-center gap-2 justify-center pb-2">
+                  <Image src={inkdouble1} width={55} height={55} alt="inkdouble1" />
+                  <i>
+                    <h3 className="font-medium text-2xl md:text-2xl text-center">
+                      Press Coverage
+                    </h3>
+                  </i>
+                  <Image src={inkdouble2} width={55} height={55} alt="inkdouble2" />
+                </div>
+                <div 
+                  className="mt-8 prose prose-lg max-w-none"
+                  dangerouslySetInnerHTML={{ 
+                    __html: bookInfo.pressCoverage
+                      .replace(/&lt;/g, '<')
+                      .replace(/&gt;/g, '>')
+                      .replace(/&quot;/g, '"')
+                      .replace(/&amp;/g, '&')
+                      .replace(/\\"/g, '"')
+                      .replace(/\\\\/g, '\\')
+                  }} 
+                />
+              </div>
+            </div>
+          )}
+        </section>
+
+        {/* Spotlight section */}
+        <section id="spotlight">
+          {bookInfo.spotlight && bookInfo.spotlight.length > 0 && (
+            <div className="wrapper bg-[#FFF5EB] w-full mt-14 mb-14">
+              <div className="container mx-auto p-10 pt-10">
+                <div className="flex items-center gap-2 justify-center pb-8">
+                  <Image src={inkdouble1} width={55} height={55} alt="inkdouble1" />
+                  <i>
+                    <h3 className="font-medium text-2xl md:text-2xl text-center">
+                      Spotlight
+                    </h3>
+                  </i>
+                  <Image src={inkdouble2} width={55} height={55} alt="inkdouble2" />
+                </div>
+
+                {/* Featured Media */}
+                {bookInfo.spotlight[0] && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    <div className="relative aspect-video">
+                      {bookInfo.spotlight[0].type === 'video' ? (
+                        <iframe
+                          src={bookInfo.spotlight[0].videoUrl}
+                          className="absolute inset-0 w-full h-full rounded-lg"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        />
+                      ) : (
+                        <Image
+                          src={bookInfo.spotlight[0].imageUrl || bookInfo.spotlight[0].thumbnailUrl}
+                          alt={bookInfo.spotlight[0].title}
+                          fill
+                          className="object-cover rounded-lg"
+                        />
+                      )}
+                    </div>
+                    <div className="flex flex-col justify-center">
+                      <h4 className="text-xl font-semibold mb-4">{bookInfo.spotlight[0].title}</h4>
+                      <p className="text-gray-700">{bookInfo.spotlight[0].description}</p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Media Grid */}
+                {bookInfo.spotlight.length > 1 && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                    {bookInfo.spotlight.slice(1).map((media, index) => (
+                      <div key={index} className="relative">
+                        <div className="relative aspect-video mb-2">
+                          {media.type === 'video' ? (
+                            <iframe
+                              src={media.videoUrl}
+                              className="absolute inset-0 w-full h-full rounded-lg"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              allowFullScreen
+                            />
+                          ) : (
+                            <Image
+                              src={media.imageUrl || media.thumbnailUrl}
+                              alt={media.title}
+                              fill
+                              className="object-cover rounded-lg"
+                            />
+                          )}
+                          {media.type === 'video' && (
+                            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                              <div className="w-12 h-12 bg-black bg-opacity-50 rounded-full flex items-center justify-center">
+                                <div className="w-0 h-0 border-t-8 border-t-transparent border-l-12 border-l-white border-b-8 border-b-transparent ml-1"></div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                        <h5 className="text-sm font-medium line-clamp-2">{media.title}</h5>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </section>
+
+        {/* Related Books */}
+        <section id="related-titles" className="container">
+          <div className="flex items-center gap-2 justify-center pb-2 pt-6">
+            <Image src={inkdouble1} width={55} height={55} alt="inkdouble1" />
+            <i>
+              <h3 className="font-medium text-2xl md:text-2xl text-center">
+                Related Titles
+              </h3>
+            </i>
+            <Image src={inkdouble2} width={55} height={55} alt="inkdouble2" />
           </div>
-        </main>
-      )}
+          <div className="flex items-center justify-center pb-6">
+            <Link href="/books">
+              <i>
+                <h4 className="text-[#007DD7] text-base underline font-medium">
+                  View All Titles
+                </h4>
+              </i>
+            </Link>
+          </div>
+          <div
+            className={`related_title_sec flex flex-wrap ${
+              relatedBooks.length < 6 ? "justify-between" : "justify-center"
+            }`}
+          >
+            {relatedBooks.map((relatedBook, i) => (
+              <div
+                key={i}
+                className="related_title_sec_card flex-1 p-4 mb-4 hover:shadow-md input-border border-[#ffffff00] hover:border-[#BABABA] rounded-md"
+                style={{ maxWidth: "200px" }}
+              >
+                <Link
+                  href={`/books/${relatedBook.slug}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <BooksCards
+                    title={relatedBook.title}
+                    coverImage={Array.isArray(relatedBook.book_image) 
+                      ? relatedBook.book_image[0]?.replace(/[\[\]"]/g, '') 
+                      : typeof relatedBook.book_image === 'string' 
+                        ? relatedBook.book_image.replace(/[\[\]"]/g, '')
+                        : ''} 
+                    bookPrice={`₹${relatedBook.price}`}
+                    authorName={relatedBook.author?.author_name || (Array.isArray(relatedBook.author) ? relatedBook.author.join(', ') : relatedBook.author)}
+                    imageContainerClass={`h-[200px] lg:h-[250px]`}
+                  />
+                </Link>
+              </div>
+            ))}
+          </div>
+        </section>
+        <div className="bg-[#FF81001A] pt-4 pb-4 mt-20 flex justify-center">
+          <div className="container flex gap-4 justify-center items-center">
+            <div className="w-[60%] md:w-full flex-wrap md:flex md:justify-center mx-auto gap-2">
+              <h6 className="font-medium text-center">
+                Other Specifications:{" "}
+              </h6>
+              <ul className="flex-wrap items-center space-x-6 md:flex">
+                <li className="md:list-none pl-6 md:pl-0">
+                  ISBN: {bookInfo.isbn13}
+                </li>
+                <li className="md:list-disc">Weight: {bookInfo.weight}</li>
+                <li className="md:list-disc">
+                  Dimensions: {bookInfo.dimension}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Sidebar Navigation */}
+        <div className="hidden lg:block aside_fixed">
+          <ul className="flex flex-col">
+            <li>
+              <a
+                href="#top"
+                className={`pb-2 ${
+                  activeSection === "top"
+                    ? "text-[#007BD7] font-medium"
+                    : "text-[#0D1928] font-light"
+                }`}
+              >
+                Go to Top
+              </a>
+            </li>
+            <li>&nbsp;</li>
+            <li>
+              <a
+                href="#about-book"
+                className={`pb-2 ${
+                  activeSection === "about-book"
+                    ? "text-[#007BD7] font-medium"
+                    : "text-[#0D1928] font-light"
+                }`}
+              >
+                About the Book
+              </a>
+            </li>
+            <li>
+              <a
+                href="#about-author"
+                className={`pb-2 ${
+                  activeSection === "about-author"
+                    ? "text-[#007BD7] font-medium"
+                    : "text-[#0D1928] font-light"
+                }`}
+              >
+                About the Author
+              </a>
+            </li>
+            {bookInfo.testimonials && bookInfo.testimonials.length > 0 && (
+              <li>
+                <a
+                  href="#endorsements"
+                  className={`pb-2 ${
+                    activeSection === "endorsements"
+                      ? "text-[#007BD7] font-medium"
+                      : "text-[#0D1928] font-light"
+                  }`}
+                >
+                  Endorsements
+                </a>
+              </li>
+            )}
+            {bookInfo.pressCoverage && (
+              <li>
+                <a
+                  href="#press-coverage"
+                  className={`pb-2 ${
+                    activeSection === "press-coverage"
+                      ? "text-[#007BD7] font-medium"
+                      : "text-[#0D1928] font-light"
+                  }`}
+                >
+                  Press Coverage
+                </a>
+              </li>
+            )}
+            {bookInfo.spotlight && bookInfo.spotlight.length > 0 && (
+              <li>
+                <a
+                  href="#spotlight"
+                  className={`pb-2 ${
+                    activeSection === "spotlight"
+                      ? "text-[#007BD7] font-medium"
+                      : "text-[#0D1928] font-light"
+                  }`}
+                >
+                  Spotlight
+                </a>
+              </li>
+            )}
+            <li>
+              <a
+                href="#related-titles"
+                className={`pb-2 ${
+                  activeSection === "related-titles"
+                    ? "text-[#007BD7] font-medium"
+                    : "text-[#0D1928] font-light"
+                }`}
+              >
+                Related Titles
+              </a>
+            </li>
+          </ul>
+        </div>
+      </main>
     </>
   );
 };

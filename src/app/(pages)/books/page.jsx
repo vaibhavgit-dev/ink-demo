@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import { BooksList } from "@/app/API/allBookList";
+import { fetchAllBooks, processBookData } from "@/app/API/booksapi";
 import { AuthorsList } from "@/app/API/allAuthorList";
 import BooksCards from "./BooksCards";
 import {
@@ -14,7 +14,6 @@ import { MdOutlineArrowLeft, MdOutlineArrowRight } from "react-icons/md";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import Link from "next/link";
 import Loader from "@/app/components/Loader";
-import { BooksDetails } from "@/app/API/getbookDetails";
 import { HelmetProvider } from "react-helmet-async";
 import { Helmet } from "react-helmet";
 
@@ -28,7 +27,30 @@ export default function Home() {
   const [formatFilter, setFormatFilter] = useState([]);
   const [priceRange, setPriceRange] = useState([]);
   const [showFilters, setShowFilters] = useState(false);
+  const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const filterRef = useRef(null);
+
+  // Fetch all books on component mount
+  useEffect(() => {
+    async function fetchBooks() {
+      try {
+        setLoading(true);
+        const booksData = await fetchAllBooks();
+        const processedBooks = booksData.map(book => processBookData(book));
+        setBooks(processedBooks);
+        setError(null);
+      } catch (err) {
+        console.error("Error fetching books:", err);
+        setError("Failed to load books. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchBooks();
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -49,19 +71,18 @@ export default function Home() {
   }, [showFilters]);
 
   const booksPerPage = 15;
-  const category = [...new Set(BooksDetails.map((book) => book.category))];
-  const language = [...new Set(BooksDetails.map((book) => book.language))];
-  const format = [...new Set(BooksDetails.map((book) => book.book_format))];
-  const genre = [...new Set(BooksDetails.map((book) => book.genre))];
+  
+  // Extract unique values from books for filters
+  const category = [...new Set(books.filter(book => book.category).map(book => book.category))];
+  const language = [...new Set(books.filter(book => book.language).map(book => book.language))];
+  const format = [...new Set(books.filter(book => book.book_format).map(book => book.book_format))];
+  const genre = [...new Set(books.filter(book => book.genre).map(book => book.genre))];
+  
   const prices = [
     { label: "Under 399", range: [0, 399] },
     { label: "Between 400-599", range: [400, 599] },
     { label: "Above 600", range: [600, Infinity] },
   ];
-
-  const getAuthorById = (authorId) => {
-    return AuthorsList.find((author) => author.id === authorId);
-  };
 
   const handleFilterChange = (filter, setFilter, value) => {
     setFilter((prev) =>
@@ -92,10 +113,13 @@ export default function Home() {
     }
   };
 
-  const filteredBooks = BooksDetails.filter((book) => {
+  const filteredBooks = books.filter((book) => {
+    const authorName = book.author?.author_name || (Array.isArray(book.author) ? book.author.join(' ') : book.author);
+    
     const searchCondition =
-    (book.title?.toLowerCase().includes(searchQuery.toLowerCase()) || "" ||
-      book.author?.some((author) => author.toLowerCase().includes(searchQuery.toLowerCase())));
+      searchQuery === "" || 
+      book.title?.toLowerCase().includes(searchQuery.toLowerCase()) || 
+      authorName?.toLowerCase().includes(searchQuery.toLowerCase());
 
     const categoryCondition =
       categoryFilter.length === 0 || categoryFilter.includes(book.category);
@@ -104,7 +128,7 @@ export default function Home() {
       genreFilter.length === 0 ||
       genreFilter.some((genre) => {
         const [category, subgenre] = genre.split(": ");
-        return book.category === category && book.genre.includes(subgenre);
+        return book.category === category && book.genre && book.genre.includes(subgenre);
       });
 
     const formatCondition =
@@ -129,7 +153,8 @@ export default function Home() {
       return b.id - a.id;
     });
 
-  filteredBooks.sort((a, b) => {
+  // Apply sorting
+  const sortedBooks = [...filteredBooks].sort((a, b) => {
     if (sortOption === "Title: A to Z") return a.title.localeCompare(b.title);
     if (sortOption === "Title: Z to A") return b.title.localeCompare(a.title);
     if (sortOption === "Price: Lowest First") return a.price - b.price;
@@ -141,34 +166,44 @@ export default function Home() {
     return 0;
   });
 
-  const totalPages = Math.ceil(filteredBooks.length / booksPerPage);
+  const totalPages = Math.ceil(sortedBooks.length / booksPerPage);
   const indexOfLastBook = currentPage * booksPerPage;
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
-  const currentBooks = filteredBooks.slice(indexOfFirstBook, indexOfLastBook);
-
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 500);
-  }, []);
+  const currentBooks = sortedBooks.slice(indexOfFirstBook, indexOfLastBook);
 
   const getCountByCategory = (category) => {
-    return BooksDetails.filter((book) => book.category === category).length;
+    return books.filter((book) => book.category === category).length;
   };
 
   const getCountByLanguage = (language) => {
-    return BooksDetails.filter((book) => book.language === language).length;
+    return books.filter((book) => book.language === language).length;
   };
 
   const getCountByFormat = (format) => {
-    return BooksDetails.filter((book) => book.book_format === format).length;
+    return books.filter((book) => book.book_format === format).length;
   };
 
   const getCountByPriceRange = (range) => {
-    return BooksDetails.filter(
+    return books.filter(
       (book) => book.price >= range[0] && book.price <= range[1]
     ).length;
   };
+
+  // Error state
+  if (error) {
+    return (
+      <div className="container mx-auto py-10 px-4 text-center">
+        <h2 className="text-2xl font-bold mb-4">Error</h2>
+        <p>{error}</p>
+        <button 
+          onClick={() => window.location.reload()}
+          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Try Again
+        </button>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -177,11 +212,12 @@ export default function Home() {
       ) : (
         <main className="flex flex-col h-full pb-20 mx-auto top_bg_gradient">
           <HelmetProvider>
-  <Helmet>
-    <title>All Books | BluOne Ink Publishing</title>
-    <meta name="description" content="Fiction, Non-fiction, and Children books published in Hardcover, Paperback, and eBook formats, in English, Hindi, Rajasthani, Bengali, Marathi and Telugu." />
-  </Helmet>
-</HelmetProvider>
+            <Helmet>
+              <title>All Books | BluOne Ink Publishing</title>
+              <meta name="description" content="Fiction, Non-fiction, and Children books published in Hardcover, Paperback, and eBook formats, in English, Hindi, Rajasthani, Bengali, Marathi and Telugu." />
+              <link rel="canonical" href="https://www.bluone.ink/books" />
+            </Helmet>
+          </HelmetProvider>
           <div className="container px-8  mx-auto">
             <div className="w-full flex justify-center">
               <h1 className="text-[42px] font-medium pt-20 pb-20">All Books</h1>
@@ -381,6 +417,8 @@ export default function Home() {
                                     [
                                       "Action & Adventure",
                                       "Self-Help & Development",
+                                      "Classics",
+                                      "Life Skills and Development",
                                     ].map((subcategory) => (
                                       <label
                                         key={`${g}: ${subcategory}`}
@@ -422,9 +460,8 @@ export default function Home() {
                             </h4>
                           </i>
                           {language.map((lang) => (
-                            <div className="w-full ">
+                            <div className="w-full" key={lang}>
                               <label
-                                key={lang}
                                 className={`text-md pt-1 flex place-items-center text-[#0D1928] font-normal ${
                                   languageFilter.includes(lang)
                                     ? "font-semibold"
@@ -458,30 +495,29 @@ export default function Home() {
                               Format
                             </h4>
                           </i>
-                          {format.map((lang) => (
-                            <div className="w-full">
+                          {format.map((fmt) => (
+                            <div className="w-full" key={fmt}>
                               <label
-                                key={lang}
                                 className={`text-md pt-1 flex place-items-center text-[#0D1928] font-normal ${
-                                  formatFilter.includes(lang)
+                                  formatFilter.includes(fmt)
                                     ? "font-semibold"
                                     : "font-normal"
                                 }`}
                               >
                                 <input
                                   type="checkbox"
-                                  value={lang}
-                                  checked={formatFilter.includes(lang)}
+                                  value={fmt}
+                                  checked={formatFilter.includes(fmt)}
                                   onChange={() =>
                                     handleFilterChange(
                                       formatFilter,
                                       setFormatFilter,
-                                      lang
+                                      fmt
                                     )
                                   }
                                 />{" "}
                                 <span className="ml-2 font-ibm">
-                                  {lang} ({getCountByFormat(lang)})
+                                  {fmt} ({getCountByFormat(fmt)})
                                 </span>
                               </label>
                             </div>
@@ -581,21 +617,23 @@ export default function Home() {
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 pt-8 pb-6">
               {currentBooks.length > 0 ? (
                 currentBooks.map((book) => {
-                  const author = getAuthorById(book.author);
+                  const authorName = book.author?.author_name || (Array.isArray(book.author) ? book.author.join(', ') : book.author);
                   return (
                     <div
                       key={book.id}
                       className="p-4 mb-4 hover:shadow-md input-border border-[#ffffff00] hover:border-[#BABABA] rounded-md"
                     >
                       <Link
-                        href={`./books/${book.slug}`}
+                        href={`./books/${encodeURIComponent(book.slug)}`}
                         style={{ textDecoration: "none" }}
                       >
                         <BooksCards
                           title={book.title}
                           coverImage={book.book_image}
                           bookPrice={book.price ? `₹${book.price}` : ''}
-                          authorName={book.author ? book.author : "No Author"}
+                          authorName={authorName || "Unknown Author"}
+                          language={book.language}
+                          format={book.book_format === 'Paperback' ? 'PB' : book.book_format === 'Hardback' ? 'HB' : book.book_format}
                         />
                       </Link>
                     </div>
@@ -614,8 +652,8 @@ export default function Home() {
                   <i>
                     <p>
                       Showing {indexOfFirstBook + 1}-{""}
-                      {Math.min(indexOfLastBook, filteredBooks.length)} of{" "}
-                      {filteredBooks.length} Books
+                      {Math.min(indexOfLastBook, sortedBooks.length)} of{" "}
+                      {sortedBooks.length} Books
                     </p>
                   </i>
                 </div>

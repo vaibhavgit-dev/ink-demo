@@ -20,8 +20,9 @@ function termsandcondition() {
         <main className="wrapper pt-0 mt-0 pb-20 relative top-0">
           <HelmetProvider>
   <Helmet>
-    <title>terms | BluOne Ink Publishing</title>
-    <meta name="description" content="" />
+    <title>Terms of Use | BluOne Ink Publishing</title>
+    <meta name="description" content="This page governs your use of and access to BluOne Ink's website(s) and other online properties." />
+    <link rel="canonical" href="https://www.bluone.ink/resources/policies/terms" />
   </Helmet>
 </HelmetProvider>
           {/* Page Container */}
