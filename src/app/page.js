@@ -81,18 +81,22 @@ export default function Home() {
     const authors = new Set(); // Use a Set to ensure uniqueness
 
     booksArray.forEach((book) => {
-      const authorsList = Array.isArray(book.author)
-        ? book.author
-        : [book.author];
-      authorsList.forEach((author) => {
-        if (
-          typeof author === "string" &&
-          author.trim() !== "" &&
-          author !== "author black"
-        ) {
-          authors.add(author);
+      if (book.author) {
+        if (typeof book.author === 'object' && book.author.author_name) {
+          // Handle the case where author is an object with author_name
+          authors.add(book.author.author_name);
+        } else if (Array.isArray(book.author)) {
+          // Handle the case where author is an array
+          book.author.forEach(author => {
+            if (typeof author === 'string' && author.trim() !== '' && author !== 'author black') {
+              authors.add(author);
+            }
+          });
+        } else if (typeof book.author === 'string' && book.author.trim() !== '' && book.author !== 'author black') {
+          // Handle the case where author is a string
+          authors.add(book.author);
         }
-      });
+      }
     });
 
     return authors.size;

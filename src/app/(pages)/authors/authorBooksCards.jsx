@@ -4,7 +4,7 @@ function AuthorBooksCards({
   title,
   bookPrice,
   authorName,
-  coverImage,
+  thumbnailUrl,
   publishYear,
   imageContainerClass
 }) {
@@ -15,7 +15,7 @@ function AuthorBooksCards({
       <div className="flex flex-col h-full">
         <div className={`h-full lg:h-[400px] object-cover ${imageContainerClass}`}>
           <img
-            src={coverImage || defaultImage}
+            src={thumbnailUrl || defaultImage}
             alt={title || "Book cover"}
             className="object-cover object-top w-full h-full"
           />

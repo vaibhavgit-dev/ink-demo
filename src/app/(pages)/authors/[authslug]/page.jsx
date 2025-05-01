@@ -196,7 +196,7 @@ const Page = ({ params }) => {
                     <Link href={`/books/${book.slug}`} style={{ textDecoration: "none" }}>
                       <AuthorBooksCards
                         title={book.title}
-                        coverImage={book.coverImageUrls?.[0]}
+                        thumbnailUrl={book.thumbnailUrl}
                         publishYear={book.publishYear}
                         authorName={authorInfo.author_name}
                         imageContainerClass="h-[400px] lg:h-[450px]"
