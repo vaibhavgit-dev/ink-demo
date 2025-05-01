@@ -75,7 +75,7 @@ export default function Home() {
   );
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 3000);
+    setTimeout(() => setLoading(false), 500);
   }, []);
 
   // Ensure the current page is within the valid range when filtered authors change
@@ -155,7 +155,7 @@ export default function Home() {
                 ))
               ) : (
                 <p className="text-center col-span-full mt-4">
-                  Loading..
+                  No results found
                 </p>
               )}
             </div>

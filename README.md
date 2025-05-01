@@ -1,1 +1,1 @@
-# BluOne-ink-demo
+# BluOneInk-V1
