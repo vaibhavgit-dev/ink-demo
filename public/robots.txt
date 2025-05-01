@@ -1,5 +1,3 @@
 User-agent: *
-Disallow: /events
-
-Sitemap: https://bluone.ink/sitemap.xml
+Disallow: /
 
