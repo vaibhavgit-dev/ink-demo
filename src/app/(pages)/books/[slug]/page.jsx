@@ -119,7 +119,7 @@ const Page = ({ params }) => {
   }
 
   // Data processing after early returns
-  const authorsArray = bookInfo.author ? [bookInfo.author.name] : ["Unknown Author"];
+  const authorsArray = bookInfo.author ? [{ name: bookInfo.author.name, slug: bookInfo.author.slug }] : ["Unknown Author"];
   const noImageUrl = "";
   const authorimgurl = "/author-defaultimages.png";
   
@@ -301,18 +301,21 @@ const Page = ({ params }) => {
               <h1 className="text-[28px] lg:text-4xl w-full lg:w-[75%] mx-auto font-medium mb-4">
                 {bookInfo.title}
               </h1>
-              <i className="flex justify-center">
+              <i>
+              <div className="flex justify-center font-ibm">
               {authorsArray.map((author, index) => (
                 <div key={index}>
                   <Link
                     href={`/authors/${bookInfo.author?.authslug || ""}`}
                     className="text-[20px] text-[#007DD7]"
-                  >
-                    {author}
-                  </Link>
+                  >  
+                  {bookInfo.author.author_name}
+                   
+                  </Link> 
                   {index < authorsArray.length - 1 && <span>{", "}</span>}
                 </div>
               ))}
+              </div>
               </i>
 
               <div className="flex w-[80%] justify-center lg:w-[35%] gap-6 lg:gap-10 mx-auto pt-6">
