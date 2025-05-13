@@ -511,61 +511,66 @@ const Page = ({ params }) => {
         </section>
 
         {/* About the Book Author */}
-        {bookInfo.author && (
-          <section
-            id="about-author"
-            className="container mx-auto text-center py-10 pt-0 p-0 lg:w-[70%] lg:mx-auto"
-          >
-            <div className="about-author author-details-container mx-auto p-10 pt-5 rounded-2xl w-full lg:w-[85%] bg-[#FF81001A]">
-              <div className="curve_img">
-                <Image src={CurveTop} alt="Curve Top" />
-              </div>
-              <div className="flex justify-center space-x-2 lg:space-x-4 mb-2">
-                <div className="cursor-pointer z-[10]">
-                  <img
-                    src={bookInfo.author.image || authorimgurl}
-                    alt={bookInfo.author.author_name}
-                    className="rounded-full w-[100px] h-[100px] lg:w-[150px] lg:h-[150px] object-cover transition duration-200 border-[#FF8100] border-4"
-                    onError={(e) => {
-                      e.currentTarget.src = authorimgurl;
-                    }}
-                  />
-                </div>
-              </div>
+       {bookInfo.author?.author_name !== "Bluone Ink" && (
+  <section
+    id="about-author"
+    className="container mx-auto text-center py-10 pt-0 p-0 lg:w-[70%] lg:mx-auto"
+  >
+    <div className="about-author author-details-container mx-auto p-10 pt-5 rounded-2xl w-full lg:w-[85%] bg-[#FF81001A]">
+      <div className="curve_img">
+        <Image src={CurveTop} alt="Curve Top" />
+      </div>
+      <div className="flex justify-center space-x-2 lg:space-x-4 mb-2">
+        <div className="cursor-pointer z-[10]">
+          <img
+            src={bookInfo.author.image || authorimgurl}
+            alt={bookInfo.author.author_name}
+            className="rounded-full w-[100px] h-[100px] lg:w-[150px] lg:h-[150px] object-cover transition duration-200 border-[#FF8100] border-4"
+            onError={(e) => {
+              e.currentTarget.src = authorimgurl;
+            }}
+          />
+        </div>
+      </div>
 
-              <div className="lg:p-8 pt-10 mx-auto">
-                <div className="relative z-[10]">
-                  <i>
-                    <h3 className="font-medium text-3xl mb-4">{bookInfo.author.author_name}</h3>
-                  </i>
-                  <p className="text-gray-700 text-start mb-4 text-lg leading-relaxed">
-                    {isAuthExpanded
-                      ? bookInfo.author.authorDescription || "Description not available."
-                      : `${bookInfo.author.authorDescription?.substring(0, 600)}`}
-                    {bookInfo.author.authorDescription && bookInfo.author.authorDescription.length > maxLength && (
-                      <button
-                        onClick={authortoggleExpand}
-                        className="text-[#0D1928] underline font-medium ml-2"
-                      >
-                        {isAuthExpanded ? "Read Less" : "Read More"}
-                      </button>
-                    )}
-                  </p>
-                  <div className="w-full">
-                    <h6 className="text-[#007DD7] text-md">
-                      <Link
-                        href={`/authors/${bookInfo.author.authslug}`}
-                        className="text-blue-500 underline"
-                      >
-                        Visit the Author Page
-                      </Link>
-                    </h6>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        )}
+      <div className="lg:p-8 pt-10 mx-auto">
+        <div className="relative z-[10]">
+          <i>
+            <h3 className="font-medium text-3xl mb-4">
+              {bookInfo.author.author_name}
+            </h3>
+          </i>
+          <p className="text-gray-700 text-start mb-4 text-lg leading-relaxed">
+            {isAuthExpanded
+              ? bookInfo.author.authorDescription || "Description not available."
+              : `${bookInfo.author.authorDescription?.substring(0, 600)}`}
+            {bookInfo.author.authorDescription &&
+              bookInfo.author.authorDescription.length > maxLength && (
+                <button
+                  onClick={authortoggleExpand}
+                  className="text-[#0D1928] underline font-medium ml-2"
+                >
+                  {isAuthExpanded ? "Read Less" : "Read More"}
+                </button>
+              )}
+          </p>
+          <div className="w-full">
+            <h6 className="text-[#007DD7] text-md">
+              <Link
+                href={`/authors/${bookInfo.author.authslug}`}
+                className="text-blue-500 underline"
+              >
+                Visit the Author Page
+              </Link>
+            </h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+)}
+
+
 
         {/* Endorsement section */}
         <section id="endorsements">
@@ -712,7 +717,7 @@ const Page = ({ params }) => {
           </div>
           <div
             className={`related_title_sec flex flex-wrap ${
-              relatedBooks.length < 6 ? "justify-between" : "justify-center"
+              relatedBooks.length < 1 ? "justify-between" : "justify-center"
             }`}
           >
             {relatedBooks.map((relatedBook, i) => (
