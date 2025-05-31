@@ -1,7 +1,7 @@
 'use client';
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from 'next/navigation';
 import navbarLogo from "../assests/image/navbarLogo.png";
 import { IoCloseSharp } from "react-icons/io5";
@@ -10,6 +10,8 @@ import { RxHamburgerMenu } from "react-icons/rx";
 
 function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [showSubMenu, setShowSubMenu] = useState(false);
   const pathname = usePathname();
 
   const toggleMenu = () => {
@@ -17,6 +19,19 @@ function NavBar() {
   };
 
   const isActive = (path) => pathname === path ? 'text-[#FFDE7C]' : 'text-white';
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await fetch("https://dashboard.bluone.ink/api/public/categories");
+        const data = await res.json();
+        setCategories(data || []);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+    fetchCategories();
+  }, []);
 
   return (
     <div id="navbar" className="navmain w-full fixed h-[60px] z-[11111]  bg-[#241b6d] bg-no-repeat bg-right bg-contain mx-auto flex justify-between items-center">
@@ -29,8 +44,21 @@ function NavBar() {
         <li className={`hover:text-[#FFDE7C] ${isActive('/authors')} `}>
           <a href="/authors"><i className="ifont">Authors</i></a>
         </li>
-        <li className={`hover:text-[#FFDE7C] ${isActive('/books')} `}>
-          <a href="/books"><i className="ifont">Books</i></a>
+        <li
+          className={`relative group hover:text-[#FFDE7C] ${isActive('/books')}`}
+          onMouseEnter={() => setShowSubMenu(true)}
+          onMouseLeave={() => setShowSubMenu(false)}
+        >
+          <Link href="/books"><i className="ifont">Books</i></Link>
+          {showSubMenu && categories.length > 0 && (
+            <ul className="absolute top-full left-0 w-48 bg-white text-[#000] shadow-lg mt-0 z-50">
+              {categories.map((cat) => (
+                <li key={cat.id} className="text-sm hover:bg-[#372f87] hover:text-[#fff] px-4 py-2 text-left">
+                  <Link href={`/books/${cat.slug || cat.id}`}>{cat.name}</Link>
+                </li>
+              ))}
+            </ul>
+          )}
         </li>
         <li>
           <a href="/"><Image src={navbarLogo} alt="Logo" width={0} height={40} className="hidden md:block lg:block" /></a>
@@ -54,8 +82,17 @@ function NavBar() {
             <li className={isActive('/authors')}>
               <Link href="/authors"><em>Authors</em></Link>
             </li>
-            <li className={isActive('/books')}>
-              <Link href="/books"><em>Books</em></Link>
+            <li>
+              <details className="group cursor-pointer">
+                <summary className="text-white"><em>Books</em></summary>
+                <ul className="ml-4 mt-2 space-y-1">
+                  {categories.map((cat) => (
+                    <li key={cat.id}>
+                      <Link href={`/books/${cat.slug || cat.id}`}>{cat.name}</Link>
+                    </li>
+                  ))}
+                </ul>
+              </details>
             </li>
             <li className={isActive('/resources')}>
               <Link href="/resources"><em>Resources</em></Link>
