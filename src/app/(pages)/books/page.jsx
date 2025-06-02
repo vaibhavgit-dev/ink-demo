@@ -16,8 +16,9 @@ import Link from "next/link";
 import Loader from "@/app/components/Loader";
 import { HelmetProvider } from "react-helmet-async";
 import { Helmet } from "react-helmet";
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
+import CategoryFilterHandler from '@/app/components/CategoryFilterHandler';
 
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -33,47 +34,15 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const filterRef = useRef(null);
-  const searchParams = useSearchParams();
-  const router = useRouter();
-
-  const limit = parseInt(searchParams.get('limit') || '15', 10);
 
   // Fetch all books on component mount
   useEffect(() => {
     async function fetchBooks() {
       try {
         setLoading(true);
-        const category = searchParams.get('category') || '';
-        const page = searchParams.get('page') || '1';
-        const limit = searchParams.get('limit') || '15';
-
-        let apiUrl = "https://dashboard.bluone.ink/api/public/books?";
-        const queryParams = [];
-
-        if (category) {
-          queryParams.push(`category=${encodeURIComponent(category)}`);
-        }
-        queryParams.push(`page=${page}`);
-        queryParams.push(`limit=${limit}`);
-
-        apiUrl += queryParams.join('&');
-
-        const res = await fetch(apiUrl);
-
-        if (!res.ok) {
-          throw new Error(`Failed to fetch books: ${res.status} ${res.statusText}`);
-        }
-
-        const data = await res.json();
-        // Assuming the API response structure includes the books array directly
-        // and potentially total count if the API supports it with these parameters.
-        // If the API response is different, this part might need adjustment.
-        const processedBooks = data.map(book => processBookData(book)); // Still process the data if needed
+        const booksData = await fetchAllBooks();
+        const processedBooks = booksData.map(book => processBookData(book));
         setBooks(processedBooks);
-        setCurrentPage(parseInt(page, 10));
-        // You might need to set totalPages here if the API provides total count in the response
-        // e.g., setTotalPages(data.totalPages) or similar
-
         setError(null);
       } catch (err) {
         console.error("Error fetching books:", err);
@@ -84,7 +53,7 @@ export default function Home() {
     }
 
     fetchBooks();
-  }, [searchParams]); // Re-run effect when search params change
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -104,6 +73,8 @@ export default function Home() {
     };
   }, [showFilters]);
 
+  const booksPerPage = 15;
+  
   // Extract unique values from books for filters
   const category = [...new Set(books.filter(book => book.category).map(book => book.category))];
   const language = [...new Set(books.filter(book => book.language).map(book => book.language))];
@@ -153,7 +124,8 @@ export default function Home() {
       book.title?.toLowerCase().includes(searchQuery.toLowerCase()) || 
       authorName?.toLowerCase().includes(searchQuery.toLowerCase());
 
-    const categoryCondition = true;
+    const categoryCondition =
+      categoryFilter.length === 0 || categoryFilter.includes(book.category);
 
     const genreCondition =
       genreFilter.length === 0 ||
@@ -197,7 +169,10 @@ export default function Home() {
     return 0;
   });
 
-  const currentBooks = books; // Use API result directly
+  const totalPages = Math.ceil(sortedBooks.length / booksPerPage);
+  const indexOfLastBook = currentPage * booksPerPage;
+  const indexOfFirstBook = indexOfLastBook - booksPerPage;
+  const currentBooks = sortedBooks.slice(indexOfFirstBook, indexOfLastBook);
 
   const getCountByCategory = (category) => {
     return books.filter((book) => book.category === category).length;
@@ -215,34 +190,6 @@ export default function Home() {
     return books.filter(
       (book) => book.price >= range[0] && book.price <= range[1]
     ).length;
-  };
-
-  // Advanced Pagination window logic
-  const pageWindow = 5;
-  let lastPage = currentBooks.length < limit ? currentPage : currentPage + pageWindow;
-  if (currentBooks.length < limit) lastPage = currentPage; // If last page, don't show more
-  let pageNumbers = [];
-  if (currentPage <= pageWindow + 1) {
-    for (let i = 1; i <= lastPage; i++) {
-      if (i > 0) pageNumbers.push(i);
-    }
-  } else {
-    pageNumbers = [1];
-    if (currentPage - pageWindow > 2) {
-      pageNumbers.push('ellipsis-start');
-    }
-    for (let i = currentPage - pageWindow; i <= lastPage; i++) {
-      if (i > 1) pageNumbers.push(i);
-    }
-  }
-  // Remove duplicates and sort
-  pageNumbers = [...new Set(pageNumbers)].sort((a, b) => (a === 'ellipsis-start' ? 1 : a) - (b === 'ellipsis-start' ? 1 : b));
-
-  const handlePageChange = (newPage) => {
-    let url = `/books?page=${newPage}&limit=${limit}`;
-    const category = searchParams.get('category');
-    if (category) url += `&category=${encodeURIComponent(category)}`;
-    router.push(url);
   };
 
   // Error state
@@ -689,7 +636,7 @@ export default function Home() {
                             coverImage={book.book_image}
                             bookPrice={`₹${book.price}`}
                             authorName={book.authorNames}
-                            imageContainerClass={`h-[200px] lg:h-[300px]`}
+                            imageContainerClass={`h-[200px] lg:h-[250px]`}
                             slug={book.slug}
                             language={book.language}
                             format={book.book_format === 'PAPERBACK' ? 'PB' : book.book_format === 'HARDBACK' ? 'HB' : book.book_format}
@@ -705,45 +652,69 @@ export default function Home() {
                 )}
               </div>
 
-              {/* Pagination Controls */}
               {currentBooks.length > 0 && (
                 <div className="w-full flex-wrap md:flex justify-center md:justify-between pt-4">
                   <div className="flex justify-center md:justify-between">
                     <i>
                       <p>
-                        Showing page {currentPage}
+                        Showing {indexOfFirstBook + 1}-{""}
+                        {Math.min(indexOfLastBook, sortedBooks.length)} of{" "}
+                        {sortedBooks.length} Books
                       </p>
                     </i>
                   </div>
-                  <div className="flex justify-center gap-2 items-center">
-                    {pageNumbers.map((pageNum, idx) => (
-                      pageNum === 'ellipsis-start' ? (
-                        <span key={"ellipsis-"+idx} className="px-2">...</span>
-                      ) : (
-                        <button
-                          key={pageNum}
-                          onClick={() => handlePageChange(pageNum)}
-                          className={`p-1 px-2.5 py-0 text-lg font-medium font-barlow text-[#8A8A8A] rounded-full  ${
-                            pageNum === currentPage
-                              ? "bg-[#8A8A8A66] text-black"
-                              : "bg-white hover:bg-[#241b6d] hover:text-white"
-                          }`}
-                          disabled={pageNum === currentPage}
-                        >
-                          {pageNum}
-                        </button>
-                      )
-                    ))}
-                    {currentBooks.length === limit && lastPage > currentPage && (
+
+                  {totalPages > 1 && (
+                    <div className="flex justify-center gap-2 items-center">
+                    {currentPage > 1 && (
                       <button
-                        onClick={() => handlePageChange(currentPage + 1)}
+                        onClick={() => {
+                          setCurrentPage((prev) => prev - 1);
+                          window.scrollTo({ top: 0, behavior: "smooth" });
+                        }}
                         className="p-2 mx-2 flex items-center text-[#241b6d] hover:rounded-md hover:text-[#241b6d]"
-                        aria-label="Next page"
                       >
-                        <span style={{fontSize: '1.2em', lineHeight: 1}}>▶</span>
+                        <MdOutlineArrowLeft className="w-6 h-6" />
+                      </button>
+                    )}
+
+                    {Array.from({ length: totalPages }).map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => {
+                          setCurrentPage(i + 1);
+                          window.scrollTo({ top: 0, behavior: "smooth" });
+                        }}
+                        className={`p-1 px-2.5 py-0 text-lg font-medium font-barlow text-[#8A8A8A] rounded-full  ${
+                          currentPage === i + 1
+                            ? "bg-[#8A8A8A66] text-black"
+                            : "bg-white hover:bg-[#241b6d] hover:text-white"
+                        }`}
+                      >
+                        {i + 1}
+                      </button>
+                    ))}
+
+                    {currentPage < totalPages && (
+                      <button
+                        onClick={() => {
+                          setCurrentPage((prev) => prev + 1);
+                          window.scrollTo({ top: 0, behavior: "smooth" });
+                        }}
+                        className="p-2 mx-2 flex items-center text-[#241b6d] hover:rounded-md hover:text-[#241b6d]"
+                      >
+                        <MdOutlineArrowRight className="text-[#241b6d] w-6 h-6" />
                       </button>
                     )}
                   </div>
+                  )}
+                </div>
+              )}
+
+              {currentBooks.length === 0 && currentPage > 1 && (
+                <div className="pt-4">
+                  <p>Redirecting to page 1...</p>
+                  {setCurrentPage(1)}
                 </div>
               )}
             </div>
