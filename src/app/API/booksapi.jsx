@@ -148,6 +148,12 @@ export function processBookData(book) {
     console.warn("Error parsing press coverage:", e);
   }
 
+  // Combine author and writer names
+  const allAuthorNames = [
+    book.author?.name,
+    ...(book.writers || []).map(writer => writer.name)
+  ].filter(Boolean).join(', ');
+
   // Return processed book data
   return {
     id: book.id,
@@ -185,6 +191,20 @@ export function processBookData(book) {
       authorDescription: book.author.description,
       authorSocial: authorSocial
     } : null,
+    authors: [
+      book.author,
+      ...(book.writers || [])
+    ].filter(Boolean).map(author => ({
+      id: author.id,
+      author_name: author.name,
+      authslug: author.slug,
+      image: author.imageUrl,
+      authorDescription: author.description,
+      authorSocial: author.socialMedia ? 
+        (typeof author.socialMedia === 'string' ? JSON.parse(author.socialMedia) : author.socialMedia) 
+        : {}
+    })), // Add all authors (author + writers)
+    authorNames: allAuthorNames, // Add combined author names
     category: book.category?.name,
     genre: book.genre?.name
   };

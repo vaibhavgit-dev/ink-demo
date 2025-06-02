@@ -14,7 +14,6 @@ const Page = ({ params }) => {
 
   const [authorInfo, setAuthorInfo] = useState(null);
   const [loading, setLoading] = useState(true);
-  // const [copied, setCopied] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
   const defaultImage = "/author-defaultimages.png";
@@ -25,33 +24,39 @@ const Page = ({ params }) => {
         const response = await fetch(
           `https://dashboard.bluone.ink/api/public/authors/${authslug}`
         );
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
         const data = await response.json();
+        console.log("Author data:", data); // Debug log
+        
+        if (!data || !data.name) {
+          throw new Error("Invalid author data received");
+        }
+
         setAuthorInfo({
           id: data.id,
           author_name: data.name,
           authslug: data.slug,
           image: data.imageUrl,
           authorDescription: data.description,
-          authorSocial: data.socialMedia ? Object.values(JSON.parse(data.socialMedia)) : [],
+          authorSocial: data.socialMedia ? Object.values(data.socialMedia) : [],
           books: data.books || [],
         });
       } catch (error) {
         console.error("Error fetching author data:", error);
+        setAuthorInfo(null);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchAuthorData();
+    if (authslug) {
+      fetchAuthorData();
+    }
   }, [authslug]);
-
-  // copy Link
-  // const copyLink = () => {
-  //   navigator.clipboard.writeText(window.location.href).then(() => {
-  //     setCopied(true);
-  //     setTimeout(() => setCopied(false), 2000);
-  //   });
-  // };
 
   if (loading) {
     return <Loader />;
@@ -174,8 +179,8 @@ const Page = ({ params }) => {
               <i>
                 <h3 className="font-semibold text-base md:text-3xl text-center">
                   {authorInfo.books.length >= 2
-                    ? `${authorInfo.author_name}’s books published by BluOne Ink`
-                    : `${authorInfo.author_name}’s book published by BluOne Ink`}
+                    ? `${authorInfo.author_name}'s books published by BluOne Ink`
+                    : `${authorInfo.author_name}'s book published by BluOne Ink`}
                 </h3>
               </i>
               <Image

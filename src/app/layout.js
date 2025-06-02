@@ -8,7 +8,7 @@ import Header from "./components/Header";
 import Script from "next/script";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { allEventList } from "@/app/API/allEventList";
+import { getAllEvents } from "@/app/API/allEventList";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -25,15 +25,24 @@ export default function RootLayout({ children }) {
   const [showPopup, setShowPopup] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [eventData, setEventData] = useState(null);
+  const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    // Fetch and set event data
-    if (allEventList && allEventList.length > 0) {
-      const sortedEvents = [...allEventList].sort(
-        (a, b) => new Date(b.eventdate) - new Date(a.eventdate)
-      );
-      setEventData(sortedEvents[0]);
-    }
+    const fetchEvents = async () => {
+      try {
+        const events = await getAllEvents();
+        if (events && events.length > 0) {
+          const sortedEvents = [...events].sort(
+            (a, b) => new Date(b.eventdate) - new Date(a.eventdate)
+          );
+          setEvents(sortedEvents);
+        }
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      }
+    };
+
+    fetchEvents();
 
     // Time in milliseconds (2 minutes = 120000ms)
     const popupReappearTime = 2 * 60 * 1000;

@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { fetchBookBySlug, processBookData } from "@/app/API/booksapi";
-import { AuthorsList } from "@/app/API/allAuthorList";
+import { getAllAuthors } from "@/app/API/allAuthorList";
 import Image from "next/image";
 import Link from "next/link";
 import inkdouble1 from "@/app/assests/image/inkdouble1.svg";
@@ -33,23 +33,84 @@ const Page = ({ params }) => {
   const [activeSection, setActiveSection] = useState("");
   const [isExpanded, setIsExpanded] = useState(false);
   const [isAuthExpanded, setIsAuthExpanded] = useState(false);
+  const [authors, setAuthors] = useState([]);
+  const [activeAuthor, setActiveAuthor] = useState(null);
+  const [activeAuthorDetails, setActiveAuthorDetails] = useState(null);
 
   // All effects
   useEffect(() => {
     async function fetchData() {
       try {
         setLoading(true);
-        const bookData = await fetchBookBySlug(decodedSlug);
+        // Remove ISBN from slug if present
+        const cleanSlug = decodedSlug.replace(/-\d{13}$/, '');
+        const bookData = await fetchBookBySlug(cleanSlug);
         console.log('Raw book data:', bookData); // Debug raw data
-        const processedBook = processBookData(bookData);
+        
+        if (!bookData) {
+          throw new Error("Book not found");
+        }
+
+        // Process authors and writers
+        const allAuthors = [
+          bookData.author,
+          ...(bookData.writers || [])
+        ].filter(Boolean).map(author => ({
+          id: author.id,
+          author_name: author.name,
+          authslug: author.slug,
+          image: author.imageUrl,
+          authorDescription: author.description,
+          authorSocial: author.socialMedia ? 
+            (typeof author.socialMedia === 'string' ? JSON.parse(author.socialMedia) : author.socialMedia) 
+            : {}
+        }));
+
+        // Process categories and genres into strings for backward compatibility
+        const categoryNames = [
+          bookData.category,
+          ...(bookData.additionalCategories || [])
+        ].filter(Boolean).map(cat => cat.name).join(', ');
+
+        const genreNames = [
+          bookData.genre,
+          ...(bookData.additionalGenres || [])
+        ].filter(Boolean).map(gen => gen.name).join(', ');
+
+        // Create processed book data with combined information
+        const processedBook = {
+          ...processBookData(bookData),
+          author: allAuthors[0] || null,
+          authors: allAuthors,
+          category: categoryNames,
+          genre: genreNames,
+          categories: bookData.category ? [bookData.category, ...(bookData.additionalCategories || [])] : [],
+          genres: bookData.genre ? [bookData.genre, ...(bookData.additionalGenres || [])] : []
+        };
+
         console.log('Processed book data:', processedBook); // Debug processed data
         setBookInfo(processedBook);
         
         // Set activeTab when book data is available
         if (processedBook.author) {
-          setActiveTab(processedBook.author.name);
+          setActiveTab(processedBook.author.author_name);
         }
         
+        // Set the initial active author details
+        if (processedBook.authors && processedBook.authors.length > 0) {
+          setActiveAuthorDetails(processedBook.authors[0]); // Set the first author as active initially
+        } else if (processedBook.author) {
+           setActiveAuthorDetails(processedBook.author); // Fallback to main author if authors array is empty
+        } else {
+           setActiveAuthorDetails(null); // No author data
+        }
+        
+        // Update the authorsArray to include all authors
+        const authorsArray = allAuthors.map(author => ({
+          name: author.author_name,
+          slug: author.authslug
+        }));
+
         // Fetch related books
         const relatedResponse = await fetch(`https://dashboard.bluone.ink/api/public/books`);
         if (relatedResponse.ok) {
@@ -103,6 +164,24 @@ const Page = ({ params }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const fetchAuthors = async () => {
+      try {
+        const authorsList = await getAllAuthors();
+        setAuthors(authorsList);
+        if (authorsList.length > 0) {
+          setActiveAuthor(authorsList.find(
+            (author) => author.author_name === activeTab
+          ) || authorsList[0]);
+        }
+      } catch (error) {
+        console.error("Error fetching authors:", error);
+      }
+    };
+
+    fetchAuthors();
+  }, [activeTab]);
+
   // Early returns
   if (loading) {
     return <Loader />;
@@ -119,7 +198,6 @@ const Page = ({ params }) => {
   }
 
   // Data processing after early returns
-  const authorsArray = bookInfo.author ? [{ name: bookInfo.author.name, slug: bookInfo.author.slug }] : ["Unknown Author"];
   const noImageUrl = "";
   const authorimgurl = "/author-defaultimages.png";
   
@@ -136,7 +214,18 @@ const Page = ({ params }) => {
       : [];
 
   const clonedThumbnails = [...thumbnails, ...thumbnails].filter(Boolean);
-  const pageTitle = `${bookInfo.title} by ${authorsArray.join(', ')} | BluOne Ink Book`;
+
+  // Process authors
+  let authorNames = [];
+  if (bookInfo.authors && Array.isArray(bookInfo.authors)) {
+    authorNames = bookInfo.authors.map(author => author.author_name);
+  } else if (bookInfo.author) {
+    authorNames = [bookInfo.author.author_name];
+  } else {
+    authorNames = ["Unknown Author"];
+  }
+
+  const pageTitle = `${bookInfo.title} by ${authorNames.join(', ')} | BluOne Ink Book`;
   const pageDescription = bookInfo.meta_description;
   const canonicalUrl = `https://www.bluone.ink/books/${slug}`;
 
@@ -167,9 +256,6 @@ const Page = ({ params }) => {
   };
 
   // read more read less
-  const activeAuthor = AuthorsList.find(
-    (author) => author.author_name === activeTab
-  );
   const maxLength = 500;
 
   const toggleExpand = () => {
@@ -303,16 +389,16 @@ const Page = ({ params }) => {
               </h1>
               <i>
               <div className="flex justify-center font-ibm">
-              {authorsArray.map((author, index) => (
+              {authorNames.map((author, index) => (
                 <div key={index}>
                   <Link
                     href={`/authors/${bookInfo.author?.authslug || ""}`}
                     className="text-[20px] text-[#007DD7]"
                   >  
-                  {bookInfo.author.author_name}
+                  {author}
                    
                   </Link> 
-                  {index < authorsArray.length - 1 && <span>{", "}</span>}
+                  {index < authorNames.length - 1 && <span>{", "}</span>}
                 </div>
               ))}
               </div>
@@ -511,7 +597,7 @@ const Page = ({ params }) => {
         </section>
 
         {/* About the Book Author */}
-       {bookInfo.author?.author_name !== "Bluone Ink" && (
+       {activeAuthorDetails && activeAuthorDetails.author_name !== "Bluone Ink" && bookInfo.authors && bookInfo.authors.length > 0 && (
   <section
     id="about-author"
     className="container mx-auto text-center py-10 pt-0 p-0 lg:w-[70%] lg:mx-auto"
@@ -520,48 +606,92 @@ const Page = ({ params }) => {
       <div className="curve_img">
         <Image src={CurveTop} alt="Curve Top" />
       </div>
+      {/* Display images for all authors */}
       <div className="flex justify-center space-x-2 lg:space-x-4 mb-2">
-        <div className="cursor-pointer z-[10]">
-          <img
-            src={bookInfo.author.image || authorimgurl}
-            alt={bookInfo.author.author_name}
-            className="rounded-full w-[100px] h-[100px] lg:w-[150px] lg:h-[150px] object-cover transition duration-200 border-[#FF8100] border-4"
-            onError={(e) => {
-              e.currentTarget.src = authorimgurl;
+        {bookInfo.authors.map((author, index) => (
+          <div 
+            key={index} 
+            className={`cursor-pointer z-[10] ${activeAuthorDetails?.id === author.id ? 'border-[#007DD7] border-4 rounded-full' : 'opacity-80 grayscale'}`}
+            onClick={() => {
+              setActiveAuthorDetails(author);
+              setIsAuthExpanded(false); // Collapse description when switching author
             }}
-          />
-        </div>
+          >
+            <img
+              src={author.image || authorimgurl}
+              alt={author.author_name}
+              className="rounded-full w-[100px] h-[100px] lg:w-[150px] lg:h-[150px] object-cover transition duration-200"
+              onError={(e) => {
+                e.currentTarget.src = authorimgurl;
+              }}
+            />
+          </div>
+        ))}
       </div>
 
       <div className="lg:p-8 pt-10 mx-auto">
         <div className="relative z-[10]">
           <i>
             <h3 className="font-medium text-3xl mb-4">
-              {bookInfo.author.author_name}
+              {/* Display active author name */}
+              {activeAuthorDetails?.author_name}
             </h3>
           </i>
           <p className="text-gray-700 text-start mb-4 text-lg leading-relaxed">
             {isAuthExpanded
-              ? bookInfo.author.authorDescription || "Description not available."
-              : `${bookInfo.author.authorDescription?.substring(0, 600)}`}
-            {bookInfo.author.authorDescription &&
-              bookInfo.author.authorDescription.length > maxLength && (
+              ? activeAuthorDetails?.authorDescription || "Description not available."
+              : `${activeAuthorDetails?.authorDescription?.substring(0, 600) || ""}`}
+            {activeAuthorDetails?.authorDescription &&
+              activeAuthorDetails.authorDescription.length > 600 && (
                 <button
-                  onClick={authortoggleExpand}
+                  onClick={() => setIsAuthExpanded(!isAuthExpanded)}
                   className="text-[#0D1928] underline font-medium ml-2"
                 >
                   {isAuthExpanded ? "Read Less" : "Read More"}
                 </button>
               )}
           </p>
+          {/* Author's Social Media Links for active author */}
+          {activeAuthorDetails?.authorSocial && Object.keys(activeAuthorDetails.authorSocial).length > 0 && (
+            <ul className="list-disc flex flex-wrap justify-center gap-6 pb-6">
+                {Object.entries(activeAuthorDetails.authorSocial).map(([platform, url], index) => {
+                  let platformName = platform;
+                  // Basic mapping for common platforms, you can expand this
+                  if (platform === 'x') platformName = 'X (Twitter)';
+                  else if (platform === 'linkedin') platformName = 'LinkedIn';
+                  else if (platform === 'facebook') platformName = 'Facebook';
+                  else if (platform === 'instagram') platformName = 'Instagram';
+                  else if (platform === 'youtube') platformName = 'YouTube';
+
+                  return (
+                    <li
+                      key={index}
+                      className="list-none hover:underline hover:text-[#007DD7]"
+                    >
+                      <a
+                        href={`${url}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {platformName.charAt(0).toUpperCase() + platformName.slice(1)}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+          )}
+
           <div className="w-full">
             <h6 className="text-[#007DD7] text-md">
-              <Link
-                href={`/authors/${bookInfo.author.authslug}`}
-                className="text-blue-500 underline"
-              >
-                Visit the Author Page
-              </Link>
+              {/* Link to active author's page */}
+              {activeAuthorDetails?.authslug && (
+                <Link
+                  href={`/authors/${activeAuthorDetails.authslug}`}
+                  className="text-blue-500 underline"
+                >
+                  Visit the Author Page
+                </Link>
+              )}
             </h6>
           </div>
         </div>

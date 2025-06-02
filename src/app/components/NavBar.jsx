@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import navbarLogo from "../assests/image/navbarLogo.png";
 import { IoCloseSharp } from "react-icons/io5";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { FaChevronDown } from "react-icons/fa";
 
 
 function NavBar() {
@@ -23,11 +24,21 @@ function NavBar() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
+        // Fetch categories from the correct endpoint
         const res = await fetch("https://dashboard.bluone.ink/api/public/categories");
+        
+        if (!res.ok) {
+          throw new Error(`Failed to fetch categories: ${res.status} ${res.statusText}`);
+        }
+
         const data = await res.json();
-        setCategories(data || []);
+        // Assuming the response is an array of category objects like: [{ id, name, slug }, ...]
+        // Update categories state with the fetched data
+        setCategories(data);
       } catch (error) {
         console.error("Error fetching categories:", error);
+        // Optionally set categories to an empty array or show an error message
+        setCategories([]); 
       }
     };
     fetchCategories();
@@ -49,12 +60,15 @@ function NavBar() {
           onMouseEnter={() => setShowSubMenu(true)}
           onMouseLeave={() => setShowSubMenu(false)}
         >
-          <Link href="/books"><i className="ifont">Books</i></Link>
+          <div className="flex items-center">
+            <Link href="/books" className="flex-1"><i className="ifont">Books</i></Link>
+            <FaChevronDown className="ml-1 transition-transform duration-300" />
+          </div>
           {showSubMenu && categories.length > 0 && (
-            <ul className="absolute top-full left-0 w-48 bg-white text-[#000] shadow-lg mt-0 z-50">
+            <ul className="absolute top-full left-0 w-48 bg-[#241b6d] text-[#fff] shadow-lg mt-0 z-50 rounded-b-md">
               {categories.map((cat) => (
-                <li key={cat.id} className="text-sm hover:bg-[#372f87] hover:text-[#fff] px-4 py-2 text-left">
-                  <Link href={`/books/${cat.slug || cat.id}`}>{cat.name}</Link>
+                <li key={cat.id} className="text-sm hover:bg-[#372f87] hover:text-[#FFDE7C] px-4 py-2 text-left font-ibm">
+                  <Link href={`/books?category=${cat.slug || cat.id}`}>{cat.name}</Link>
                 </li>
               ))}
             </ul>
@@ -84,11 +98,14 @@ function NavBar() {
             </li>
             <li>
               <details className="group cursor-pointer">
-                <summary className="text-white"><em>Books</em></summary>
-                <ul className="ml-4 mt-2 space-y-1">
+                <summary className="text-white flex items-center">
+                  <em>Books</em>
+                  <FaChevronDown className="ml-1 transition-transform duration-300 group-open:rotate-180" />
+                </summary>
+                <ul className="ml-4 mt-2 space-y-1 bg-[#241b6d] text-[#fff] rounded-md">
                   {categories.map((cat) => (
-                    <li key={cat.id}>
-                      <Link href={`/books/${cat.slug || cat.id}`}>{cat.name}</Link>
+                    <li key={cat.id} className="text-sm hover:bg-[#372f87] hover:text-[#FFDE7C] px-4 py-2 text-left font-ibm">
+                      <Link href={`/books?category=${cat.slug}`}>{cat.name}</Link>
                     </li>
                   ))}
                 </ul>

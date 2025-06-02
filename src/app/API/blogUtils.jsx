@@ -41,7 +41,7 @@ export function processBlogData(blog) {
     content: processBlogContent(blog.content),
     blogbanner: blog.blogBanner,
     blogimage: blog.blogImage,
-    Categories: blog.categories ? blog.categories.split(",") : [],
+    categories: blog.categories || "",
     publishedDate: blog.date,
     meta_description: blog.metaDescription,
     author: blog.author ? blog.author.name : "No author",

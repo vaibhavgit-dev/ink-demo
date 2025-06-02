@@ -9,6 +9,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Helmet } from "react-helmet";
 import { processBlogData } from "@/app/API/blogUtils";
+import { getAllBlogs } from "@/app/API/allBlogsList";
 
 const Page = ({ params }) => {
   const blogslug = decodeURIComponent(params.blogslug);
@@ -19,6 +20,7 @@ const Page = ({ params }) => {
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
   const [scrollPercentage, setScrollPercentage] = useState(0);
+  const [relatedBlogs, setRelatedBlogs] = useState([]);
 
   useEffect(() => {
     const fetchBlog = async () => {
@@ -28,6 +30,7 @@ const Page = ({ params }) => {
           throw new Error("Blog not found");
         }
         const data = await response.json();
+        console.log("Current blog data:", data); // Debug log
         setBlog(processBlogData(data));
       } catch (error) {
         console.error(error);
@@ -64,6 +67,32 @@ const Page = ({ params }) => {
     };
   }, [blogslug]);
 
+  useEffect(() => {
+    const fetchRelatedBlogs = async () => {
+      if (blog?.categories) {
+        console.log("Current blog categories:", blog.categories);
+        const allBlogs = await getAllBlogs();
+        console.log("All blogs:", allBlogs);
+        const filtered = allBlogs.filter(
+          (relatedBlog) => {
+            console.log("Comparing:", {
+              relatedBlogSlug: relatedBlog.slug,
+              currentSlug: blogslug,
+              relatedBlogCategory: relatedBlog.categories,
+              currentCategory: blog.categories
+            });
+            return relatedBlog.slug !== blogslug && 
+                   relatedBlog.categories === blog.categories;
+          }
+        );
+        console.log("Filtered related blogs:", filtered);
+        setRelatedBlogs(filtered);
+      }
+    };
+
+    fetchRelatedBlogs();
+  }, [blog, blogslug]);
+
   if (!blog && !loading) {
     return <div>Blog not found.</div>;
   }
@@ -78,17 +107,6 @@ const Page = ({ params }) => {
   const pageTitle = `${blog?.title} | BluOne Ink Publishing`;
   const pageDescription = blog?.meta_description;
   const canonicalUrl = `https://www.bluone.ink/resources/blogs/${blogslug}`;
-
-  // Related blogs based on categories (still using allBlogsList)
-  const relatedBlogs = blog?.Categories
-    ? allBlogsList.filter(
-        (relatedBlog) =>
-          relatedBlog.blogslug !== blogslug &&
-          relatedBlog.Categories?.some((category) =>
-            blog.Categories.includes(category)
-          )
-      )
-    : [];
 
   return (
     <>
@@ -140,9 +158,7 @@ const Page = ({ params }) => {
                     <h6 className="text-[16px] font-normal font-ibm">
                       Categories:{" "}
                       <span className="text-[16px] text-[#007DD7] font-normal font-ibm underline">
-                        {blog?.Categories?.length
-                          ? blog.Categories.join(", ")
-                          : "No categories"}
+                        {blog?.categories || "No categories"}
                       </span>
                     </h6>
                   </i>
@@ -202,13 +218,13 @@ const Page = ({ params }) => {
                       className="p-4 mb-4 hover:shadow-md input-border border-[#ffffff00] hover:border-[#BABABA] rounded-md"
                     >
                       <Link
-                        href={`./${relatedBlog.blogslug}`}
+                        href={`/resources/blogs/${relatedBlog.slug}`}
                         style={{ textDecoration: "none" }}
                       >
                         <BlogsCards
                           key={relatedBlog.id}
                           title={relatedBlog.title}
-                          blogimage={relatedBlog.blogimage || defaultimage}
+                          blogimage={relatedBlog.blogImage || defaultimage}
                           imageContainerClass="h-[200px] lg:h-[300px]"
                         />
                       </Link>

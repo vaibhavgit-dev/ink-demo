@@ -36,9 +36,9 @@ export default function Home() {
   function getUniqueTitlesCount(books) {
     const uniqueTitles = new Set();
     books.forEach((book) => {
-      // Normalize the title by removing (Paperback) or (Hardcover) from the end
+      // Normalize the title by removing (PAPERBACK) or (HARDCOVER) from the end
       const normalizedTitle = book.title
-        .replace(/\s\((Paperback|Hardback)\)$/i, "")
+        .replace(/\s\((PAPERBACK|Hardback)\)$/i, "")
         .trim();
       uniqueTitles.add(normalizedTitle);
     });
@@ -49,15 +49,15 @@ export default function Home() {
     const uniqueBooks = {};
 
     books.forEach((book) => {
-      // Normalize the title by removing (Paperback) or (Hardcover)
+      // Normalize the title by removing (PAPERBACK) or (HARDCOVER)
       const normalizedTitle = book.title
-        .replace(/\s\((Paperback|Hardback)\)$/i, "")
+        .replace(/\s\((PAPERBACK|Hardback)\)$/i, "")
         .trim();
 
       if (!uniqueBooks[normalizedTitle]) {
         uniqueBooks[normalizedTitle] = book;
       } else {
-        // If already present, replace it with the Hardcover version if current is Hardcover
+        // If already present, replace it with the HARDCOVER version if current is HARDCOVER
         if (/\(Hardback\)$/i.test(book.title)) {
           uniqueBooks[normalizedTitle] = book;
         }
