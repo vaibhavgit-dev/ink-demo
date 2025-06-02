@@ -80,15 +80,17 @@ function NavBar() {
           </div>
           {showSubMenu && categories.length > 0 && (
             <ul className="absolute top-full left-0 w-48 bg-[#241b6d] text-[#fff] shadow-lg mt-0 z-50 rounded-b-md">
-              {categories.map((cat) => (
-                <li 
-                  key={cat.id} 
-                  className="text-sm hover:bg-[#372f87] hover:text-[#FFDE7C] px-4 py-2 text-left font-ibm cursor-pointer"
-                  onClick={() => handleCategoryClick(cat.name)}
-                >
-                  {cat.name} ({totalBooks[cat.name] || 0})
-                </li>
-              ))}
+              {categories
+                .filter((cat) => totalBooks[cat.name] > 0)
+                .map((cat) => (
+                  <li
+                    key={cat.id}
+                    className="text-sm hover:bg-[#372f87] hover:text-[#FFDE7C] px-4 py-2 text-left font-ibm cursor-pointer"
+                    onClick={() => handleCategoryClick(cat.name)}
+                  >
+                    {cat.name} ({totalBooks[cat.name]})
+                  </li>
+                ))}
             </ul>
           )}
         </li>

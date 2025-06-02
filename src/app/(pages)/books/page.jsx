@@ -689,7 +689,7 @@ export default function Home() {
                             coverImage={book.book_image}
                             bookPrice={`₹${book.price}`}
                             authorName={book.authorNames}
-                            imageContainerClass={`h-[200px] lg:h-[250px]`}
+                            imageContainerClass={`h-[200px] lg:h-[300px]`}
                             slug={book.slug}
                             language={book.language}
                             format={book.book_format === 'PAPERBACK' ? 'PB' : book.book_format === 'HARDBACK' ? 'HB' : book.book_format}

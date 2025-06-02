@@ -611,7 +611,7 @@ const Page = ({ params }) => {
         {bookInfo.authors.map((author, index) => (
           <div 
             key={index} 
-            className={`cursor-pointer z-[10] ${activeAuthorDetails?.id === author.id ? 'border-[#007DD7] border-4 rounded-full' : 'opacity-80 grayscale'}`}
+            className={`cursor-pointer z-[10] ${activeAuthorDetails?.id === author.id ? 'border-[#FF8100] border-4 rounded-full' : 'opacity-80 grayscale'}`}
             onClick={() => {
               setActiveAuthorDetails(author);
               setIsAuthExpanded(false); // Collapse description when switching author
