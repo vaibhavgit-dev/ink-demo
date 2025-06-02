@@ -263,6 +263,7 @@ export default function Home() {
 
   return (
     <>
+    <Suspense fallback={<div>Loading filters...</div>}>
       {loading ? (
         <Loader />
       ) : (
@@ -274,7 +275,6 @@ export default function Home() {
                 <link rel="canonical" href="https://www.bluone.ink/books" />
               </Helmet>
             </HelmetProvider>
-            <Suspense fallback={<div>Loading filters...</div>}>
             <div className="container px-8  mx-auto">
               <div className="w-full flex justify-center">
                 <h1 className="text-[42px] font-medium pt-20 pb-20">All Books</h1>
@@ -747,9 +747,9 @@ export default function Home() {
                 </div>
               )}
             </div>
-            </Suspense>
           </main>
       )}
+      </Suspense>
     </>
   );
 }
