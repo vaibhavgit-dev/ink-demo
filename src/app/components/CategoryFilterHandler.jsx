@@ -13,14 +13,23 @@ export default function CategoryFilterHandler({
 
   useEffect(() => {
     if (initialCategory && books.length > 0) {
-      // Find the full category name from the fetched books data
-      const categoryObject = books.find(book => book.category?.toLowerCase() === initialCategory.toLowerCase());
-      if (categoryObject && categoryObject.category) {
-        setCategoryFilter([categoryObject.category]);
-        setShowFilters(true); // Optionally show filters when a category is applied
+      // Decode the category parameter
+      const decodedCategory = decodeURIComponent(initialCategory);
+      
+      // Find all unique categories from books
+      const uniqueCategories = [...new Set(books.map(book => book.category).filter(Boolean))];
+      
+      // Find the best matching category
+      const matchingCategory = uniqueCategories.find(cat => 
+        cat && cat.toLowerCase().includes(decodedCategory.toLowerCase())
+      );
+
+      if (matchingCategory) {
+        setCategoryFilter([matchingCategory]);
+        setShowFilters(true);
       }
     }
-  }, [initialCategory, books, setCategoryFilter, setShowFilters]); // Add dependencies
+  }, [initialCategory, books, setCategoryFilter, setShowFilters]);
 
   // This component doesn't render anything visible
   return null;

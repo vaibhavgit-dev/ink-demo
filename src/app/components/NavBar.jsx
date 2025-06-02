@@ -2,18 +2,19 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import navbarLogo from "../assests/image/navbarLogo.png";
 import { IoCloseSharp } from "react-icons/io5";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { FaChevronDown } from "react-icons/fa";
 
-
 function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [categories, setCategories] = useState([]);
   const [showSubMenu, setShowSubMenu] = useState(false);
+  const [totalBooks, setTotalBooks] = useState({});
   const pathname = usePathname();
+  const router = useRouter();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -24,7 +25,6 @@ function NavBar() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        // Fetch categories from the correct endpoint
         const res = await fetch("https://dashboard.bluone.ink/api/public/categories");
         
         if (!res.ok) {
@@ -32,17 +32,31 @@ function NavBar() {
         }
 
         const data = await res.json();
-        // Assuming the response is an array of category objects like: [{ id, name, slug }, ...]
-        // Update categories state with the fetched data
         setCategories(data);
+
+        // Fetch total books count for each category
+        const bookCounts = {};
+        for (const category of data) {
+          const booksRes = await fetch(`https://dashboard.bluone.ink/api/public/books?category=${encodeURIComponent(category.name)}`);
+          if (booksRes.ok) {
+            const booksData = await booksRes.json();
+            bookCounts[category.name] = booksData.length || 0;
+          }
+        }
+        setTotalBooks(bookCounts);
       } catch (error) {
         console.error("Error fetching categories:", error);
-        // Optionally set categories to an empty array or show an error message
-        setCategories([]); 
+        setCategories([]);
       }
     };
     fetchCategories();
   }, []);
+
+  const handleCategoryClick = (categoryName) => {
+    router.push(`/books?category=${encodeURIComponent(categoryName)}&page=1&limit=15`);
+    setShowSubMenu(false);
+    if (isOpen) setIsOpen(false);
+  };
 
   return (
     <div id="navbar" className="navmain w-full fixed h-[60px] z-[11111]  bg-[#241b6d] bg-no-repeat bg-right bg-contain mx-auto flex justify-between items-center">
@@ -67,8 +81,12 @@ function NavBar() {
           {showSubMenu && categories.length > 0 && (
             <ul className="absolute top-full left-0 w-48 bg-[#241b6d] text-[#fff] shadow-lg mt-0 z-50 rounded-b-md">
               {categories.map((cat) => (
-                <li key={cat.id} className="text-sm hover:bg-[#372f87] hover:text-[#FFDE7C] px-4 py-2 text-left font-ibm">
-                  <Link href={`/books?category=${cat.slug || cat.id}`}>{cat.name}</Link>
+                <li 
+                  key={cat.id} 
+                  className="text-sm hover:bg-[#372f87] hover:text-[#FFDE7C] px-4 py-2 text-left font-ibm cursor-pointer"
+                  onClick={() => handleCategoryClick(cat.name)}
+                >
+                  {cat.name} ({totalBooks[cat.name] || 0})
                 </li>
               ))}
             </ul>
@@ -104,8 +122,12 @@ function NavBar() {
                 </summary>
                 <ul className="ml-4 mt-2 space-y-1 bg-[#241b6d] text-[#fff] rounded-md">
                   {categories.map((cat) => (
-                    <li key={cat.id} className="text-sm hover:bg-[#372f87] hover:text-[#FFDE7C] px-4 py-2 text-left font-ibm">
-                      <Link href={`/books?category=${cat.slug}`}>{cat.name}</Link>
+                    <li 
+                      key={cat.id} 
+                      className="text-sm hover:bg-[#372f87] hover:text-[#FFDE7C] px-4 py-2 text-left font-ibm cursor-pointer"
+                      onClick={() => handleCategoryClick(cat.name)}
+                    >
+                      {cat.name} ({totalBooks[cat.name] || 0})
                     </li>
                   ))}
                 </ul>
@@ -120,7 +142,6 @@ function NavBar() {
           </ul>
         </div>
       )}
-
     </div>
   );
 }
