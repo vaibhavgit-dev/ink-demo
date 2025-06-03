@@ -46,11 +46,9 @@ export default function Page() {
   const indexOfLastBlog = currentPage * blogsPerPage;
   const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
 
-  // Sort blogs by publishedDate
+  // Sort blogs by id
   const sortedBlogs = [...blogs].sort((a, b) => {
-    const dateA = new Date(a.publishedDate);
-    const dateB = new Date(b.publishedDate);
-    return sortOrder === "newest" ? dateB - dateA : dateA - dateB;
+    return sortOrder === "newest" ? b.id - a.id : a.id - b.id;
   });
 
   // Filter blogs based on search query
