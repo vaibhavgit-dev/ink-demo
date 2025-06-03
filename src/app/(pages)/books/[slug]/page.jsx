@@ -826,56 +826,63 @@ const Page = ({ params }) => {
         </section>
 
         {/* Related Books */}
-        <section id="related-titles" className="container">
-          <div className="flex items-center gap-2 justify-center pb-2 pt-6">
-            <Image src={inkdouble1} width={55} height={55} alt="inkdouble1" />
-            <i>
-              <h3 className="font-medium text-2xl md:text-2xl text-center">
-                Related Titles
-              </h3>
-            </i>
-            <Image src={inkdouble2} width={55} height={55} alt="inkdouble2" />
-          </div>
-          <div className="flex items-center justify-center pb-6">
-            <Link href="/books">
-              <i>
-                <h4 className="text-[#007DD7] text-base underline font-medium">
-                  View All Titles
-                </h4>
-              </i>
-            </Link>
-          </div>
-          <div
-            className={`related_title_sec flex flex-wrap ${
-              relatedBooks.length < 1 ? "justify-between" : "justify-center"
-            }`}
-          >
-            {relatedBooks.map((relatedBook, i) => (
-              <div
-                key={i}
-                className="related_title_sec_card flex-1 p-4 mb-4 hover:shadow-md input-border border-[#ffffff00] hover:border-[#BABABA] rounded-md"
-                style={{ maxWidth: "200px" }}
-              >
-                <Link
-                  href={`/books/${relatedBook.slug}`}
-                  style={{ textDecoration: "none" }}
-                >
-                  <BooksCards
-                    title={relatedBook.title}
-                    coverImage={Array.isArray(relatedBook.book_image) 
-                      ? relatedBook.book_image[0]?.replace(/[\[\]"]/g, '') 
-                      : typeof relatedBook.book_image === 'string' 
-                        ? relatedBook.book_image.replace(/[\[\]"]/g, '')
-                        : ''} 
-                    bookPrice={`₹${relatedBook.price}`}
-                    authorName={relatedBook.author?.author_name || (Array.isArray(relatedBook.author) ? relatedBook.author.join(', ') : relatedBook.author)}
-                    imageContainerClass={`h-[200px] lg:h-[250px]`}
-                  />
+        {relatedBooks.length > 0 && (
+            <section id="related-titles" className="container">
+              <div className="flex items-center gap-2 justify-center pb-2 pt-6">
+                <Image src={inkdouble1} width={55} height={55} alt="inkdouble1" />
+                <i>
+                  <h3 className="font-medium text-2xl md:text-2xl text-center">
+                    Related Titles
+                  </h3>
+                </i>
+                <Image src={inkdouble2} width={55} height={55} alt="inkdouble2" />
+              </div>
+
+              <div className="flex items-center justify-center pb-6">
+                <Link href="/books">
+                  <i>
+                    <h4 className="text-[#007DD7] text-base underline font-medium">
+                      View All Titles
+                    </h4>
+                  </i>
                 </Link>
               </div>
-            ))}
-          </div>
-        </section>
+
+              <div
+                className={`related_title_sec flex flex-wrap justify-center`}
+              >
+                {relatedBooks.map((relatedBook, i) => (
+                  <div
+                    key={i}
+                    className="related_title_sec_card flex-1 p-4 mb-4 hover:shadow-md input-border border-[#ffffff00] hover:border-[#BABABA] rounded-md"
+                    style={{ maxWidth: "200px" }}
+                  >
+                    <Link
+                      href={`/books/${relatedBook.slug}`}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <BooksCards
+                        title={relatedBook.title}
+                        coverImage={Array.isArray(relatedBook.book_image)
+                          ? relatedBook.book_image[0]?.replace(/[\[\]"]/g, '')
+                          : typeof relatedBook.book_image === 'string'
+                            ? relatedBook.book_image.replace(/[\[\]"]/g, '')
+                            : ''}
+                        bookPrice={`₹${relatedBook.price}`}
+                        authorName={
+                          relatedBook.author?.author_name ||
+                          (Array.isArray(relatedBook.author)
+                            ? relatedBook.author.join(', ')
+                            : relatedBook.author)
+                        }
+                        imageContainerClass="h-[200px] lg:h-[250px]"
+                      />
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
         <div className="bg-[#FF81001A] pt-4 pb-4 mt-20 flex justify-center">
           <div className="container flex gap-4 justify-center items-center">
             <div className="w-[60%] md:w-full flex-wrap md:flex md:justify-center mx-auto gap-2">

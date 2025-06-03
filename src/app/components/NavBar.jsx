@@ -76,10 +76,10 @@ function NavBar() {
         >
           <div className="flex items-center">
             <Link href="/books" className="flex-1"><i className="ifont">Books</i></Link>
-            <FaChevronDown className="ml-1 transition-transform duration-300" />
+            <FaChevronDown className="ml-1 mt-2 transition-transform duration-300 cursor-pointer" />
           </div>
           {showSubMenu && categories.length > 0 && (
-            <ul className="absolute top-full left-0 w-48 bg-[#241b6d] text-[#fff] shadow-lg mt-0 z-50 rounded-b-md">
+            <ul className="absolute top-full left-0 w-36 bg-[#241b6d] text-[#fff] shadow-lg mt-0 z-50 rounded-b-md">
               {categories
                 .filter((cat) => totalBooks[cat.name] > 0)
                 .map((cat) => (
