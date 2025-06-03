@@ -36,6 +36,20 @@ const Page = ({ params }) => {
           throw new Error("Invalid author data received");
         }
 
+        // Fetch all books to find books where this author is either the main author or a writer
+        const booksResponse = await fetch("https://dashboard.bluone.ink/api/public/books?limit=100000");
+        if (!booksResponse.ok) {
+          throw new Error(`HTTP error! status: ${booksResponse.status}`);
+        }
+        const allBooks = await booksResponse.json();
+
+        // Filter books where this author is either the main author or a writer
+        const authorBooks = allBooks.filter(book => {
+          const isMainAuthor = book.author?.id === data.id;
+          const isWriter = book.writers?.some(writer => writer.id === data.id);
+          return isMainAuthor || isWriter;
+        });
+
         setAuthorInfo({
           id: data.id,
           author_name: data.name,
@@ -43,7 +57,7 @@ const Page = ({ params }) => {
           image: data.imageUrl,
           authorDescription: data.description,
           authorSocial: data.socialMedia ? Object.values(data.socialMedia) : [],
-          books: data.books || [],
+          books: authorBooks || [],
         });
       } catch (error) {
         console.error("Error fetching author data:", error);
@@ -193,22 +207,30 @@ const Page = ({ params }) => {
 
             <div className="wrapper mt-12 flex flex-wrap justify-center">
               {authorInfo.books.length > 0 ? (
-                authorInfo.books.map((book, i) => (
-                  <div
-                    key={i}
-                    className="p-4 mb-4 hover:shadow-md input-border border-[#ffffff00] hover:border-[#BABABA] rounded-md md:w-1/2 lg:w-1/4"
-                  >
-                    <Link href={`/books/${book.slug}`} style={{ textDecoration: "none" }}>
-                      <AuthorBooksCards
-                        title={book.title}
-                        thumbnailUrl={book.thumbnailUrl}
-                        publishYear={book.publishYear}
-                        authorName={authorInfo.author_name}
-                        imageContainerClass="h-[400px] lg:h-[450px]"
-                      />
-                    </Link>
-                  </div>
-                ))
+                authorInfo.books.map((book, i) => {
+                  // Get all authors for this book
+                  const allAuthors = [
+                    book.author,
+                    ...(book.writers || [])
+                  ].filter(Boolean).map(author => author.name).join(', ');
+
+                  return (
+                    <div
+                      key={i}
+                      className="p-4 mb-4 hover:shadow-md input-border border-[#ffffff00] hover:border-[#BABABA] rounded-md md:w-1/2 lg:w-1/4"
+                    >
+                      <Link href={`/books/${book.slug}`} style={{ textDecoration: "none" }}>
+                        <AuthorBooksCards
+                          title={book.title}
+                          thumbnailUrl={book.thumbnailUrl}
+                          publishYear={book.publishYear}
+                          authorName={allAuthors}
+                          imageContainerClass="h-[400px] lg:h-[450px]"
+                        />
+                      </Link>
+                    </div>
+                  );
+                })
               ) : (
                 <p>No related books found for this author.</p>
               )}

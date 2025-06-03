@@ -36,6 +36,7 @@ function BooksContent() {
   const [showFilters, setShowFilters] = useState(false);
   const [books, setBooks] = useState([]);
   const [allBooks, setAllBooks] = useState([]);
+  const [filteredBooks, setFilteredBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [totalPages, setTotalPages] = useState(1);
@@ -66,7 +67,17 @@ function BooksContent() {
     const limit = searchParams.get('limit');
 
     if (page) setCurrentPage(parseInt(page, 10));
-    if (category) setCategoryFilter([category]);
+    if (category) {
+      setCategoryFilter([category]);
+    } else {
+      // Clear all filters when no category is specified
+      setCategoryFilter([]);
+      setGenreFilter([]);
+      setLanguageFilter([]);
+      setFormatFilter([]);
+      setPriceRange([]);
+      setSortOption("");
+    }
     if (limit) setLimit(parseInt(limit, 10));
   }, [searchParams]);
 
@@ -137,17 +148,32 @@ function BooksContent() {
       );
     });
 
+    setFilteredBooks(filteredBooks);
+
     // Apply sorting
     const sortedBooks = [...filteredBooks].sort((a, b) => {
       if (sortOption === "Title: A to Z") return a.title.localeCompare(b.title);
       if (sortOption === "Title: Z to A") return b.title.localeCompare(a.title);
       if (sortOption === "Price: Lowest First") return a.price - b.price;
       if (sortOption === "Price: Highest First") return b.price - a.price;
-      if (sortOption === "Publish Year: Newest First")
-        return b.publish_year - a.publish_year;
-      if (sortOption === "Publish Year: Oldest First")
-        return a.publish_year - b.publish_year;
-      return 0;
+      if (sortOption === "Publish Year: Newest First") {
+        // First compare by year
+        const yearCompare = b.publish_year - a.publish_year;
+        if (yearCompare !== 0) return yearCompare;
+        // If years are equal, compare by month
+        return (b.publish_month || 0) - (a.publish_month || 0);
+      }
+      if (sortOption === "Publish Year: Oldest First") {
+        // First compare by year
+        const yearCompare = a.publish_year - b.publish_year;
+        if (yearCompare !== 0) return yearCompare;
+        // If years are equal, compare by month
+        return (a.publish_month || 0) - (b.publish_month || 0);
+      }
+      // Default sort by publish date (newest first)
+      const yearCompare = b.publish_year - a.publish_year;
+      if (yearCompare !== 0) return yearCompare;
+      return (b.publish_month || 0) - (a.publish_month || 0);
     });
 
     // Calculate pagination
@@ -158,6 +184,13 @@ function BooksContent() {
     setBooks(paginatedBooks);
     setTotalPages(Math.ceil(sortedBooks.length / limit));
   }, [allBooks, currentPage, limit, searchQuery, categoryFilter, genreFilter, languageFilter, formatFilter, priceRange, sortOption]);
+
+  // Calculate the range of books being displayed
+  const getDisplayRange = () => {
+    const start = (currentPage - 1) * limit + 1;
+    const end = Math.min(currentPage * limit, filteredBooks.length);
+    return { start, end, total: filteredBooks.length };
+  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -689,7 +722,7 @@ function BooksContent() {
                   <div className="flex justify-center md:justify-between">
                     <i>
                       <p>
-                        Showing page {currentPage} of {totalPages}
+                        Showing {getDisplayRange().start}-{getDisplayRange().end} of {getDisplayRange().total} Books
                       </p>
                     </i>
                   </div>

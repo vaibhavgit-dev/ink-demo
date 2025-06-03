@@ -12,6 +12,12 @@ export default function CategoryFilterHandler({
   const initialCategory = searchParams.get('category');
 
   useEffect(() => {
+    // If no category is specified, clear the filter
+    if (!initialCategory) {
+      setCategoryFilter([]);
+      return;
+    }
+
     if (initialCategory && books.length > 0) {
       // Decode the category parameter
       const decodedCategory = decodeURIComponent(initialCategory);

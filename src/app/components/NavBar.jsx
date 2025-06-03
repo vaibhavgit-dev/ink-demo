@@ -36,6 +36,14 @@ function NavBar() {
 
         // Fetch total books count for each category
         const bookCounts = {};
+        // First fetch all books to get total count
+        const allBooksRes = await fetch("https://dashboard.bluone.ink/api/public/books");
+        if (allBooksRes.ok) {
+          const allBooksData = await allBooksRes.json();
+          bookCounts["All Books"] = allBooksData.length || 0;
+        }
+
+        // Then fetch counts for each category
         for (const category of data) {
           const booksRes = await fetch(`https://dashboard.bluone.ink/api/public/books?category=${encodeURIComponent(category.name)}`);
           if (booksRes.ok) {
@@ -80,6 +88,16 @@ function NavBar() {
           </div>
           {showSubMenu && categories.length > 0 && (
             <ul className="absolute top-full left-0 w-36 bg-[#241b6d] text-[#fff] shadow-lg mt-0 z-50 rounded-b-md">
+              <li
+                className="text-sm hover:bg-[#372f87] hover:text-[#FFDE7C] px-4 py-2 text-left font-ibm cursor-pointer border-b border-[#372f87]"
+                onClick={() => {
+                  router.push('/books');
+                  setShowSubMenu(false);
+                  if (isOpen) setIsOpen(false);
+                }}
+              >
+                All Books ({totalBooks["All Books"] || 0})
+              </li>
               {categories
                 .filter((cat) => totalBooks[cat.name] > 0)
                 .map((cat) => (
@@ -123,6 +141,15 @@ function NavBar() {
                   <FaChevronDown className="ml-1 transition-transform duration-300 group-open:rotate-180" />
                 </summary>
                 <ul className="ml-4 mt-2 space-y-1 bg-[#241b6d] text-[#fff] rounded-md">
+                  <li 
+                    className="text-sm hover:bg-[#372f87] hover:text-[#FFDE7C] px-4 py-2 text-left font-ibm cursor-pointer border-b border-[#372f87]"
+                    onClick={() => {
+                      router.push('/books');
+                      if (isOpen) setIsOpen(false);
+                    }}
+                  >
+                    All Books ({totalBooks["All Books"] || 0})
+                  </li>
                   {categories.map((cat) => (
                     <li 
                       key={cat.id} 

@@ -389,18 +389,21 @@ const Page = ({ params }) => {
               </h1>
               <i>
               <div className="flex justify-center font-ibm">
-              {authorNames.map((author, index) => (
-                <div key={index}>
-                  <Link
-                    href={`/authors/${bookInfo.author?.authslug || ""}`}
-                    className="text-[20px] text-[#007DD7]"
-                  >  
-                  {author}
-                   
-                  </Link> 
-                  {index < authorNames.length - 1 && <span>{", "}</span>}
-                </div>
-              ))}
+              {authorNames.map((author, index) => {
+                // Find the corresponding author object from bookInfo.authors
+                const authorObj = bookInfo.authors?.find(a => a.author_name === author);
+                return (
+                  <div key={index}>
+                    <Link
+                      href={`/authors/${authorObj?.authslug || ""}`}
+                      className="text-[20px] text-[#007DD7]"
+                    >  
+                      {author}
+                    </Link> 
+                    {index < authorNames.length - 1 && <span>{", "}</span>}
+                  </div>
+                );
+              })}
               </div>
               </i>
 
