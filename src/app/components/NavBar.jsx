@@ -78,7 +78,7 @@ function NavBar() {
           <a href="/authors"><i className="ifont">Authors</i></a>
         </li>
         <li
-          className={`relative group hover:text-[#FFDE7C] ${isActive('/books')}`}
+          className={`relative group hover:text-[#FFDE7C] flex items-center h-[60px] ${isActive('/books')}`}
           onMouseEnter={() => setShowSubMenu(true)}
           onMouseLeave={() => setShowSubMenu(false)}
         >
@@ -87,7 +87,7 @@ function NavBar() {
             <FaChevronDown className="ml-1 mt-2 transition-transform duration-300 cursor-pointer" />
           </div>
           {showSubMenu && categories.length > 0 && (
-            <ul className="absolute top-full left-0 w-36 bg-[#241b6d] text-[#fff] shadow-lg mt-0 z-50 rounded-b-md">
+            <ul className="absolute top-full left-0 w-48 bg-[#241b6d] text-[#fff] shadow-lg mt-0 z-50 rounded-b-md">
               <li
                 className="text-sm hover:bg-[#372f87] hover:text-[#FFDE7C] px-4 py-2 text-left font-ibm cursor-pointer border-b border-[#372f87]"
                 onClick={() => {
