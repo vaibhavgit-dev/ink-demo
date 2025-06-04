@@ -78,24 +78,17 @@ export default function Home() {
 
   // Helper function to get the number of distinct authors for each year
   const getAuthorsCount = (booksArray) => {
-    const authors = new Set(); // Use a Set to ensure uniqueness
+    const authors = new Set();
 
     booksArray.forEach((book) => {
-      if (book.author) {
-        if (typeof book.author === 'object' && book.author.author_name) {
-          // Handle the case where author is an object with author_name
-          authors.add(book.author.author_name);
-        } else if (Array.isArray(book.author)) {
-          // Handle the case where author is an array
-          book.author.forEach(author => {
-            if (typeof author === 'string' && author.trim() !== '' && author !== 'author black') {
-              authors.add(author);
-            }
-          });
-        } else if (typeof book.author === 'string' && book.author.trim() !== '' && book.author !== 'author black') {
-          // Handle the case where author is a string
-          authors.add(book.author);
-        }
+      if (Array.isArray(book.authors)) {
+        book.authors.forEach(author => {
+          if (author && author.author_name && author.author_name.trim() !== '' && author.author_name !== 'author black') {
+            authors.add(author.author_name);
+          }
+        });
+      } else if (book.author && book.author.author_name && book.author.author_name.trim() !== '' && book.author.author_name !== 'author black') {
+        authors.add(book.author.author_name);
       }
     });
 
